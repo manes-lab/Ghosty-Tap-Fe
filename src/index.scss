@@ -1,0 +1,154 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+:root {
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424; */
+  background-color: #EBEBEB;
+  color: #111111;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin:0 auto;
+  max-width:750px;
+  min-height: 100vh;
+  word-wrap: break-word;
+  overflow: hidden;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+#root{
+  
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+@font-face {
+  font-family: 'SourceCodePro-Bold';  
+  src: url('./assets/fonts/SourceCodePro-Bold.ttf') 
+}
+
+@font-face {
+  font-family: 'SourceCodePro-Regular';  
+  src: url('./assets/fonts/SourceCodePro-Regular.ttf') 
+}
+
+@font-face {
+  font-family: 'SourceCodePro-Semibold';  
+  src: url('./assets/fonts/SourceCodePro-Semibold.ttf') 
+}
+
+@font-face {
+  font-family: 'SourceCodePro-Semibold-stroke';  
+  src: url('./assets/fonts/SourceCodePro-Semibold.ttf') 
+}
+
+@font-face {
+  font-family: 'SourceCodePro-Medium';  
+  src: url('./assets/fonts/SourceCodePro-Medium.ttf') 
+}
+
+@font-face {
+  font-family: 'SourceCodePro-Medium-stroke';  
+  src: url('./assets/fonts/SourceCodePro-Medium.ttf') 
+}
+
+@font-face {
+  font-family: 'SourceCodePro-BoldIt';  
+  src: url('./assets/fonts/SourceCodePro-BoldIt.ttf') 
+}
+
+@font-face {
+  font-family: 'D-DINExp';  
+  src: url('./assets/fonts/D-DINExp.ttf')          
+}
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+  font-family: 'Pixeloid Mono';  
+  src: url('./assets/font/PixeloidMono.ttf');
+}
+
+@font-face {
+  font-family: 'Pixeloid Sans-Bold';  
+  src: url('./assets/font/PixeloidSans-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Pixeloid Sans';  
+  src: url('./assets/font/PixeloidSans.ttf');          
+}
+
+@font-face {
+  font-family: 'Trigram-Light';  
+  src: url('./assets/font/Trigram-Light.ttf'); 
+}
+
+@font-face {
+  font-family: 'Trigram-Regular';  
+  src: url('./assets/font/Trigram-Regular.ttf');          
+}
+
+@font-face {
+  font-family: 'Grenze-SemiBold';  
+  src: url('./assets/font/Grenze-SemiBold.ttf'); 
+}
+
+@font-face {
+  font-family: 'Grenze-Medium';  
+  src: url('./assets/font/Grenze-Medium.ttf');          
+}
+
+@font-face {
+  font-family: 'Grenze';  
+  src: url('./assets/font/Grenze-Medium.ttf');          
+}
+
+
+@font-face {
+  font-family: 'Cambria';  
+  src: url('./assets/font/cambria.ttc'); 
+}
+
+@font-face {
+  font-family: 'Cambriab';  
+  src: url('./assets/font/cambriab.ttf');          
+}
+
+@font-face {
+  font-family: 'Cambriai';  
+  src: url('./assets/font/cambriai.ttf');          
+}
+
+@font-face {
+  font-family: 'Cambriaz';  
+  src: url('./assets/font/cambriaz.ttf');          
+}

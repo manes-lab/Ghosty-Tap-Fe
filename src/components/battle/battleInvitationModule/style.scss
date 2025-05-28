@@ -1,0 +1,243 @@
+.battle-invitation-mask{
+    z-index: 100;
+}
+.battle-invitation-module{
+    .close-btn{
+        position: absolute;
+        top:3rem;
+        right:2rem;
+        width:1.8rem;
+        height:1.8rem;
+        background: url('../../../assets/images/common/ic-close.png') no-repeat center center;
+        background-size: 1.8rem;
+        cursor: pointer;
+    }
+    .title{
+        padding-bottom:1.5rem;
+        font-family: SourceCodePro-Bold;
+        font-size: 1.7rem;
+        color: #FFFFFF;
+        line-height: 2.1rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        .rule-btn{
+            margin-left:0.2rem;
+            width:3.8rem;
+            height:1.8rem;
+            background:url('../../../assets/images/leaderboard/ic-rule.png') no-repeat center center;
+            background-size: 1.8rem;
+            cursor: pointer;
+        }
+    }
+
+
+    .invite-user{
+        margin-top:1.5rem;
+        .avatar{
+            margin: 0 auto;
+            width:5rem;
+            height:5rem;
+            background: url() no-repeat center center;
+            background-size: cover;
+            position: relative;
+            .user-status{
+                position: absolute;
+                right: -0.5rem;
+                bottom: 0;
+                width: 1.5rem;
+                height:1.5rem;
+                background: url() no-repeat center center;
+                background-size: cover;
+            }
+        }
+        .name{
+            margin-top:1.2rem;
+            width: 100%;
+            font-family: SourceCodePro-Bold;
+            font-size: 1.4rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            line-height: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        .battle-rewards{
+            margin-top:1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: SourceCodePro-Bold;
+            font-size: 1.8rem;
+            color: rgba(255,255,255,0.97);
+            line-height: 2.2rem;
+            font-weight: 700;
+            .coin{
+                margin-left:0.8rem;
+                width:1.5rem;
+                height: 1.5rem;
+                background: url('../../../assets/images/common/ic-coin.png') no-repeat right center;
+                background-size: 1.5rem;
+            }
+        }
+    }
+
+    .content{
+        margin-top:2.5rem;
+        padding-top:2.5rem;
+        border-top: 1px solid rgba(255,255,255,0.16);
+        .tabs{
+            display: flex;
+            align-items: center;
+            .tab-item{
+                width: 50%;
+                padding-bottom: 1rem;
+                font-family: SourceCodePro-Medium;
+                font-size: 1.4rem;
+                color: #FFFFFF;
+                letter-spacing: 0;
+                text-align: center;
+                font-weight: 500;
+                position: relative;
+                cursor: pointer;
+                &::after{
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left:50%;
+                    transform: translateX(-50%);
+                    width: 1.5rem;
+                    height:0.2rem;
+                    background: #51FFF0;
+                    display: none;
+                }
+                &.active{
+                    font-family: SourceCodePro-Semibold;
+                    color: #51FFF0;
+                    font-weight: 600;
+                    &::after{
+                        display: block;
+                    }
+                }
+            }
+        }
+        .info{
+            margin-top:1.8rem;
+            height:7.7rem;
+            background: rgba(255,255,255,0.08);
+            clip-path: polygon(0.5rem 0.5rem, 0.5rem 0, calc(100% - 0.5rem) 0, calc(100% - 0.5rem) 0.5rem, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) calc(100% - 0.5rem),calc(100% - 0.5rem) 100%,  0.5rem 100%, 0.5rem calc(100% - 0.5rem), 0 calc(100% - 0.5rem), 0 0.5rem);
+            &.battle-info{
+                padding: 1.5rem;
+                .key-value{
+                    margin-top:1.5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .value{
+                        font-family: SourceCodePro-Regular;
+                        font-size: 1.3rem;
+                        color: rgba(255,255,255,1);
+                        line-height: 1.6rem;
+                        font-weight: 400;
+                        display: flex;
+                        align-items: center;
+                        .ic-coin{
+                            margin-left:0.5rem;
+                            width:1.5rem;
+                            height:1.5rem;
+                            background: url("../../../assets/images/common/ic-coin.png") no-repeat center center;
+                            background-size: 100%;
+                        }
+                    }
+                    .key{
+                        font-family: SourceCodePro-Regular;
+                        font-size: 1.3rem;
+                        color: rgba(255,255,255,0.5);
+                        letter-spacing: 0;
+                        line-height: 1.6rem;
+                        font-weight: 400;
+                    }
+                    &:first-child{
+                        margin-top:0;
+                    }
+                }
+            }
+            &.tegen-info{
+                padding: 0.5rem 1.2rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .key-value{
+                    width:50%;
+                    .value{
+                        font-family: SourceCodePro-Semibold;
+                        font-size: 1.6rem;
+                        color: rgba(255,255,255,1);
+                        line-height: 2rem;
+                        font-weight: 700;
+                        text-align: center;
+                    }
+                    .key{
+                        margin-top:0.3rem;
+                        font-family: SourceCodePro-Regular;
+                        font-size: 1.2rem;
+                        color: rgba(255,255,255,0.5);
+                        letter-spacing: 0;
+                        line-height: 1.5rem;
+                        font-weight: 400;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+
+    .battle-btns{
+        margin-top:3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .battle-btn{
+            width:13rem;
+            height:5rem;
+            background: url('') no-repeat center bottom;
+            background-size: 100%;
+            font-family: SourceCodePro-Medium;
+            font-size: 1.4rem;
+            color: #000000;
+            letter-spacing: 0;
+            text-align: center;
+            font-weight: 500;
+            line-height:4.2rem;
+            cursor: pointer;
+            &.decline-btn{
+                -webkit-animation: SmallWhiteBtn 1s ease infinite;
+                animation: SmallWhiteBtn 1s ease infinite;
+            }
+            &.accept-btn{
+                -webkit-animation: SmallGreenBtn 1s ease infinite;
+                animation: SmallGreenBtn 1s ease infinite;
+            }
+        }
+    }
+
+
+    .block-invitation{
+        margin-top:1.2rem;
+        padding-left:2.7rem;
+        font-family: SourceCodePro-Regular;
+        font-size: 1.1rem;
+        color: rgba(255,255,255,0.5);
+        letter-spacing: 0;
+        line-height: 1.7rem;
+        font-weight: 400;
+        background: url('../../../assets/images/common/ic-radio.png') no-repeat left center;
+        background-size: 1.5rem;
+        cursor: pointer;
+        &.active{
+            background-image: url('../../../assets/images/common/ic-radio-active.png')
+        }
+    }
+    
+}

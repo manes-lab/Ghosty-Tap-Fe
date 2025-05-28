@@ -1,0 +1,68 @@
+{
+	"meta": {
+		"image": "battle-win.png",
+		"size": {"w":2680,"h":2240},
+		"scale": "1"
+	},
+	"frames": {
+		"battle-win-1.png":
+		{
+			"frame": {"x":0,"y":0,"w":1340,"h":560},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":560},
+			"sourceSize": {"w":1340,"h":560}
+		},
+		"battle-win-2.png":
+		{
+			"frame": {"x":0,"y":560,"w":1340,"h":560},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":560},
+			"sourceSize": {"w":1340,"h":560}
+		},
+		"battle-win-3.png":
+		{
+			"frame": {"x":1340,"y":0,"w":1340,"h":560},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":560},
+			"sourceSize": {"w":1340,"h":560}
+		},
+		"battle-win-4.png":
+		{
+			"frame": {"x":1340,"y":560,"w":1340,"h":560},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":560},
+			"sourceSize": {"w":1340,"h":560}
+		},
+		"battle-win-5.png":
+		{
+			"frame": {"x":0,"y":1120,"w":1340,"h":560},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":560},
+			"sourceSize": {"w":1340,"h":560}
+		},
+		"battle-win-6.png":
+		{
+			"frame": {"x":1340,"y":1120,"w":1340,"h":560},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":560},
+			"sourceSize": {"w":1340,"h":560}
+		},
+		"battle-win-7.png":
+		{
+			"frame": {"x":0,"y":1680,"w":1340,"h":560},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":560},
+			"sourceSize": {"w":1340,"h":560}
+		}
+	},
+	"animations": {
+        "run": ["battle-win-7.png","battle-win-6.png","battle-win-5.png","battle-win-4.png","battle-win-3.png","battle-win-2.png","battle-win-1.png"]
+    }
+}

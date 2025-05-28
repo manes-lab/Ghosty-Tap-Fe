@@ -1,0 +1,33 @@
+.leaderboard-mask{
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    cursor: pointer;
+    -webkit-animation:  MaskShow2 0.6s ease both;
+    animation:  MaskShow2 0.6s ease both;
+    &.hide{
+        -webkit-animation:  MaskHide2 0.6s ease both;
+        animation:  MaskHide2 0.6s ease both;
+    }
+    &.zen-leaderboard-mask{
+        background: rgba(0,0,0,0.3);
+        -webkit-animation:  MaskShow3 0.6s ease both;
+        animation:  MaskShow3 0.6s ease both;
+        &.hide{
+            -webkit-animation:  MaskHide3 0.6s ease both;
+            animation:  MaskHide3 0.6s ease both;
+        }
+    }
+}
+
+// .leaderboard-module{
+//     padding: 3rem 0 0!important;
+//     clip-path: polygon(0 0.6rem, 0.6rem 0.6rem, 0.6rem 0, calc(100% - 0.6rem) 0, calc(100% - 0.6rem) 0.6rem, 100% 0.6rem, 100% 100%, 0 100%);
+//     -webkit-animation:  Show2 0.6s ease;
+//     animation:  Show2 0.6s ease;
+//     &.hide{
+//         -webkit-animation:  Hide2 0.6s ease;
+//         animation:  Hide2 0.6s ease;
+//     }
+// }
+
+

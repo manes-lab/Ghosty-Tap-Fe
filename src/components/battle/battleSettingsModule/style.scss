@@ -1,0 +1,304 @@
+.battle-settings-module{
+    font-size:0;
+    padding-left:0!important;
+    .close-btn{
+        position: absolute;
+        top:3rem;
+        right:2rem;
+        width:1.8rem;
+        height:1.8rem;
+        background: url('../../../assets/images/common/ic-close.png') no-repeat center center;
+        background-size: 1.8rem;
+        cursor: pointer;
+    }
+    .title{
+        padding-left:3rem;
+        padding-bottom:1.5rem;
+        font-family: SourceCodePro-Bold;
+        font-size: 1.7rem;
+        color: #FFFFFF;
+        line-height: 2.1rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        .rule-btn{
+            margin-left:0.2rem;
+            width:3.8rem;
+            height:1.8rem;
+            background:url('../../../assets/images/leaderboard/ic-rule.png') no-repeat center center;
+            background-size: 1.8rem;
+            cursor: pointer;
+        }
+    }
+    .module-content{
+        padding-left:3rem;
+    }
+    .mini-title{
+        margin-top:3rem;
+        font-family: SourceCodePro-Regular;
+        font-size: 1.3rem;
+        color: #FFFFFF;
+        letter-spacing: 0;
+        line-height: 1.6rem;
+        font-weight: 400;
+        &:first-child{
+            margin-top:1.5rem;
+        }
+    }
+    .current-tab{
+        margin-top:1.5rem;
+        height:5.5rem;
+        padding: 0 1.2rem 0 5.6rem;
+        
+
+        // background: rgba(255,255,255,0.08) url('') no-repeat 2rem center;
+        background: #2E2E2E url('') no-repeat 2rem center;
+        background-size: 2.4rem;
+        clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+
+        font-family: SourceCodePro-Semibold;
+        font-size: 1.4rem;
+        color: #FFFFFF;
+        letter-spacing: 0;
+        line-height: 2.8rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+
+        cursor: pointer;
+        position: relative;
+
+        span{
+            margin-left:1.2rem;
+            font-family: SourceCodePro-Regular;
+            font-size: 1.3rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            line-height: 1.6rem;
+            font-weight: 400;
+        }
+        &::after{
+            content: "";
+            position: absolute;
+            top:50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            width:0.8rem;
+            height:0.8rem;
+            background: url('../../../assets/images/leaderboard/ic-open.png') no-repeat center center;
+            background-size: 0.8rem;
+        }
+        &.bitcoin{
+            background-image: url('../../../assets/images/common/logo-btc.png');
+        }
+        &.ethererum{
+            background-image: url('../../../assets/images/common/logo-eth.png');
+        }
+        &.ant-dropdown-open{
+            &::after{
+                background-image: url('../../../assets/images/leaderboard/ic-close.png');
+            }
+        }
+    }
+
+
+    .rewards-input{
+        margin-top:1.5rem;
+        width:100%;
+        border:0;
+        background: #2E2E2E;
+        clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+        &::before{
+            content:"";
+            position: absolute;
+            z-index: 1;
+            top:1px;
+            left:1px;
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+            background: #2E2E2E;
+            clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+        }
+        div{
+            padding:0!important;
+        }
+        input{
+            position: relative;
+            z-index: 2;
+            width:100%;
+            height:5.5rem;
+            padding:0!important;
+            outline: 0;
+            box-shadow: none!important;
+            font-family: SourceCodePro-Semibold;
+            font-size: 1.4rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            font-weight: 600;
+            text-align: center;
+            line-height:5.5rem;
+            &:focus{
+
+            }
+            &::placeholder {
+                font-family: SourceCodePro-Medium;
+                font-size: 1.4rem;
+                color: rgba(255,255,255,0.5);
+                letter-spacing: 0;
+                font-weight: 500;
+            }
+        }
+        :has(input:focus) {
+            background: rgba(255,255,255,1);
+        }
+    }
+
+    .rewards-slider{
+        margin: 2.2rem 0.7rem 0;
+        height:1.5rem;
+        padding: 0.7rem 0;
+        .ant-slider-rail{
+            height:0.1rem;
+            background: rgba(255,255,255,0.2);
+        }
+        .ant-slider-track{
+            height:0.1rem;
+            background: #FFE715;
+        }
+        .ant-slider-handle{
+            width:1.5rem;
+            height:1.5rem;
+            inset-block-start: 0;
+            border:0;
+            background: url('../../../assets/images/common/ic-coin.png') no-repeat center center;
+            background-size: cover;
+            &::before,&::after{
+                display: none;
+            }
+        }
+        .ant-slider-step{
+            top:0;
+            height: 1.5rem;
+            .ant-slider-dot{
+                width:1.5rem;
+                height:1.5rem;
+                inset-block-start: 0;
+                border:0;
+                background: url('../../../assets/images/common/ic-coin-gray.png') no-repeat center center;
+                background-size: cover;
+                &.ant-slider-dot-active{
+                    background-image: url('../../../assets/images/common/ic-coin.png')
+                }
+            }
+            
+        }
+    }
+
+    .confirm-btn{
+        margin-top:5.9rem;
+        width:27.5rem;
+        height:5rem;
+        background: url('../../../assets/images/common/btn-2.png') no-repeat center bottom;
+        background-size: 100%;
+        -webkit-animation: Btn 1s ease infinite;
+        animation: Btn 1s ease infinite;
+        font-family: SourceCodePro-Medium;
+        font-size: 1.4rem;
+        color: #000000;
+        letter-spacing: 0;
+        text-align: center;
+        font-weight: 500;
+        line-height:4.2rem;
+        cursor: pointer;
+        &.disabled{
+            background-image: url('../../../assets/images/common/btn-gray.png');
+            -webkit-animation: none;
+            animation: none;
+            color:rgba(255,255,255,0.4);
+        }
+    }
+    .tip{
+        margin-top:1rem;
+        font-family: SourceCodePro-Medium;
+        font-size: 1.2rem;
+        color: rgba(255,255,255,0.7);
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 1.7rem;
+        font-weight: 500;
+    }
+}
+
+
+.trading-pair-dropdown-list{
+    // transform: translateY(-0.4rem);
+    .ant-dropdown-arrow{
+        display: none;
+    }
+    .ant-dropdown-menu{
+        padding:0;
+        background: #2E2E2E;
+        clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+        .ant-dropdown-menu-item{
+            padding: 0;
+            
+            .trading-pair-dropdown-item{
+                padding: 0 1.2rem 0 5.6rem;
+                background: url('') no-repeat 2rem center;
+                background-size: 2.4rem;
+                font-family: SourceCodePro-Semibold;
+                font-size: 1.4rem;
+                color: #FFFFFF;
+                letter-spacing: 0;
+                line-height: 5.5rem;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                span{
+                    margin-left:1.2rem;
+                    font-family: SourceCodePro-Regular;
+                    font-size: 1.3rem;
+                    color: #FFFFFF;
+                    letter-spacing: 0;
+                    line-height: 1.6rem;
+                    font-weight: 400;
+                }
+                &.bitcoin{
+                    background-image: url('../../../assets/images/common/logo-btc.png');
+                }
+                &.ethererum{
+                    background-image: url('../../../assets/images/common/logo-eth.png');
+                }
+                &:hover,&.active{
+                    background-color: rgba(255,255,255,0.1);
+                    clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+                }
+            }
+        }
+    }
+}
+
+
+.rewards-slider-tooltip{
+    z-index: 99!important;
+    transform: translateY(0.2rem);
+    .rewards-slider-tooltip-arrow{
+        display: none;
+    }
+    .rewards-slider-tooltip-inner{
+        width:4.5rem;
+        height:2.3rem;
+        padding:0;
+        background: #474747;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: SourceCodePro-Medium;
+        font-size: 1.2rem;
+        color: #FFE715;
+        letter-spacing: 0;
+        text-align: center;
+        font-weight: 500;
+        clip-path: polygon(0.3rem 0.3rem, 0.3rem 0, calc(100% - 0.3rem) 0, calc(100% - 0.3rem) 0.3rem, 100% 0.3rem, 100% calc(100% - 0.3rem), calc(100% - 0.3rem) calc(100% - 0.3rem),calc(100% - 0.3rem) 100%,  0.3rem 100%, 0.3rem calc(100% - 0.3rem), 0 calc(100% - 0.3rem), 0 0.3rem);
+    }
+}

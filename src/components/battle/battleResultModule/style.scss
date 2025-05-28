@@ -1,0 +1,254 @@
+.battle-result-module{
+    background: transparent!important;
+    clip-path:none!important;
+    &::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height:100%;
+        background: #1D1D1D;
+        clip-path: polygon(0.6rem 0.6rem, 0.6rem 0, calc(100% - 0.6rem) 0, calc(100% - 0.6rem) 0.6rem, 100% 0.6rem, 100% calc(100% - 0.6rem), calc(100% - 0.6rem) calc(100% - 0.6rem), calc(100% - 0.6rem) 100%, 0.6rem 100%, 0.6rem calc(100% - 0.6rem), 0 calc(100% - 0.6rem), 0 0.6rem);
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        top: -6.9rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 21rem;
+        height:10.9rem;
+        background: url('') no-repeat center center;
+        background-size: cover;
+    }
+    &.battle-result-success{
+        &::after{
+            background-image: url('../../../assets/images/battle/result/win-img.png')
+        }
+    }
+    &.battle-result-fail{
+        &::after{
+            background-image: url('../../../assets/images/battle/result/lose-img.png')
+        }
+    }
+    &.battle-result-draw{
+        &::after{
+            background-image: url('../../../assets/images/battle/result/draw-img.png')
+        }
+    }
+    .close-btn{
+        position: absolute;
+        top:3rem;
+        right:2rem;
+        width:1.8rem;
+        height:1.8rem;
+        background: url('../../../assets/images/common/ic-close.png') no-repeat center center;
+        background-size: 1.8rem;
+        cursor: pointer;
+    }
+    .battle-result-module-content{
+        position: relative;
+        z-index: 1;
+        .result-title{
+            margin: 1.8rem auto 0;
+            width: 14rem;
+            height:1.8rem;
+            background: url('') no-repeat center center;
+            background-size: cover;
+            &.success{
+                background-image: url('../../../assets/images/battle/result/win.png')
+            }
+            &.fail{
+                background-image: url('../../../assets/images/battle/result/lose.png')
+            }
+            &.draw{
+                background-image: url('../../../assets/images/battle/result/draw.png')
+            }
+        }
+
+        .result-rewards{
+            margin-top:1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: SourceCodePro-Bold;
+            font-size: 1.8rem;
+            color: rgba(255,255,255,0.97);
+            line-height: 2.2rem;
+            font-weight: 700;
+            .coin{
+                margin-left:0.8rem;
+                width:1.5rem;
+                height:1.5rem;
+                background: url('../../../assets/images/common/ic-coin-gray.png') no-repeat right center;
+                background-size: 1.5rem;
+            }
+        }
+
+        .battle-result{
+            margin:3rem 0;
+            height: 13.6rem;
+            padding: 2rem 1.5rem;
+            background: rgba(255,255,255,0.08);
+            clip-path: polygon(0.5rem 0.5rem, 0.5rem 0, calc(100% - 0.5rem) 0, calc(100% - 0.5rem) 0.5rem, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) calc(100% - 0.5rem),calc(100% - 0.5rem) 100%,  0.5rem 100%, 0.5rem calc(100% - 0.5rem), 0 calc(100% - 0.5rem), 0 0.5rem);
+
+            .battle-user{
+                margin-top:2.5rem;
+                display: flex;
+                align-items: center;
+                position: relative;
+                &:first-child{
+                    margin-top:0;
+                }
+                .avatar{
+                    width:3.5rem;
+                    height:3.5rem;
+                    background: url() no-repeat center center;
+                    background-size: cover;
+                    position: relative;
+                }
+                .userinfo{
+                    margin-left:1.2rem;
+                    color: #FFFFFF;
+                    .name{
+                        font-family: SourceCodePro-Bold;
+                        font-size: 1.4rem;
+                        letter-spacing: 0;
+                        line-height: 1.8rem;
+                        font-weight: 700;
+                    }
+                    .score{
+                        margin-top:0.2rem;
+                        font-family: SourceCodePro-Medium;
+                        font-size: 1.2rem;
+                        letter-spacing: 0;
+                        line-height: 1.5rem;
+                        font-weight: 500;
+                    }
+                }
+
+                .battle-list{
+                    position: absolute;
+                    right:0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    display: flex;
+                    align-items: center;
+                    .battle-item{
+                        margin-left:0.2rem;
+                        width: 0.5rem;
+                        height:0.5rem;
+                        background: rgba(0,0,0,0.3);
+                        // background: #61D642;
+                        clip-path: polygon(0.1rem 0.1rem, 0.1rem 0, calc(100% - 0.1rem) 0, calc(100% - 0.1rem) 0.1rem, 100% 0.1rem, 100% calc(100% - 0.1rem), calc(100% - 0.1rem) calc(100% - 0.1rem),calc(100% - 0.1rem) 100%,  0.1rem 100%, 0.1rem calc(100% - 0.1rem), 0 calc(100% - 0.1rem), 0 0.1rem);
+                        //0 - fail, 1 - win, 2 - draw, 3 - no bet
+                        &.battle-item-0{
+                            background: #FF3A66
+                        }
+                        &.battle-item-1{
+                            background: #61D642;
+                        }
+                        &.battle-item-2{
+                            background: #A9A9A9;
+                        }
+                        &.battle-item-3{
+                            background: rgba(0,0,0,0.3);
+                        }
+                    }
+                }
+            }
+        }
+
+        .leave-game{
+            margin:3rem 0;
+            height: 13.6rem;
+            padding-top:8.7rem;
+            background:#DAC5A3 url('../../../assets/images/battle/result/flee.png') no-repeat center 3.2rem;
+            background-size: 4.5rem;
+            clip-path: polygon(0.5rem 0.5rem, 0.5rem 0, calc(100% - 0.5rem) 0, calc(100% - 0.5rem) 0.5rem, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) calc(100% - 0.5rem),calc(100% - 0.5rem) 100%,  0.5rem 100%, 0.5rem calc(100% - 0.5rem), 0 calc(100% - 0.5rem), 0 0.5rem);
+            font-family: SourceCodePro-Medium;
+            font-size: 1.2rem;
+            color: rgba(17,17,17,0.50);
+            letter-spacing: 0;
+            text-align: center;
+            line-height: 1.7rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            .name{
+                margin-right: 0.6rem;
+                max-width: 8rem;
+                color: rgba(17,17,17,1);
+                
+            }
+        }
+
+        .battle-result-btn{
+            margin-top:1rem;
+            height:5rem;
+            background: url('') no-repeat center bottom;
+            background-size: 100%;
+            font-family: SourceCodePro-Medium;
+            font-size: 1.4rem;
+            color: #000000;
+            letter-spacing: 0;
+            text-align: center;
+            font-weight: 500;
+            line-height:4.2rem;
+            cursor: pointer;
+            &.share-btn{
+                -webkit-animation: GreenBtn 1s ease infinite;
+                animation: GreenBtn 1s ease infinite;
+            }
+            &.start-btn{
+                -webkit-animation: Btn 1s ease infinite;
+                animation: Btn 1s ease infinite;
+            }
+        }
+
+
+        .tip{
+            margin-top:1rem;
+            font-family: SourceCodePro-Medium;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 0;
+            line-height: 1.7rem;
+            font-weight: 500;
+            text-align: center;
+        }
+    }
+
+
+    &.battle-result-success{
+        &::before{
+            background: #E5D2B2;
+        }
+        .close-btn{
+            background-image: url('../../../assets/images/common/ic-close-black.png')
+        }
+        .battle-result-module-content{
+            .result-rewards{
+                color: #111111;
+                .coin{
+                    background-image: url('../../../assets/images/common/ic-coin.png');
+                }
+            }
+            .battle-result{
+                background: #DAC5A3;
+                .battle-user{
+                    .userinfo{
+                        color: #111111;
+                    }
+                }
+            }
+            .tip{
+                color: rgba(17,17,17,0.5);
+            }
+        }
+    }
+    
+}

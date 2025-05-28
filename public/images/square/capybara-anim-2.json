@@ -1,0 +1,84 @@
+{
+	"meta": {
+		"image": "capybara-anim-2.png",
+		"size": {"w":3840,"h":3660},
+		"scale": "1"
+	},
+	"frames": {
+		"capybara-1.jpg":
+		{
+			"frame": {"x":0,"y":0,"w":1280,"h":1220},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":1220},
+			"sourceSize": {"w":1280,"h":1220}
+		},
+		"capybara-2.jpg":
+		{
+			"frame": {"x":1280,"y":0,"w":1280,"h":1220},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":1220},
+			"sourceSize": {"w":1280,"h":1220}
+		},
+		"capybara-3.jpg":
+		{
+			"frame": {"x":0,"y":1220,"w":1280,"h":1220},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":1220},
+			"sourceSize": {"w":1280,"h":1220}
+		},
+		"capybara-4.jpg":
+		{
+			"frame": {"x":1280,"y":1220,"w":1280,"h":1220},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":1220},
+			"sourceSize": {"w":1280,"h":1220}
+		},
+		"capybara-5.jpg":
+		{
+			"frame": {"x":2560,"y":0,"w":1280,"h":1220},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":1220},
+			"sourceSize": {"w":1280,"h":1220}
+		},
+		"capybara-6.jpg":
+		{
+			"frame": {"x":2560,"y":1220,"w":1280,"h":1220},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":1220},
+			"sourceSize": {"w":1280,"h":1220}
+		},
+		"capybara-7.jpg":
+		{
+			"frame": {"x":0,"y":2440,"w":1280,"h":1220},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":1220},
+			"sourceSize": {"w":1280,"h":1220}
+		},
+		"capybara-8.jpg":
+		{
+			"frame": {"x":1280,"y":2440,"w":1280,"h":1220},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":1220},
+			"sourceSize": {"w":1280,"h":1220}
+		},
+		"capybara-9.jpg":
+		{
+			"frame": {"x":2560,"y":2440,"w":1280,"h":1220},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":1220},
+			"sourceSize": {"w":1280,"h":1220}
+		}
+	},
+	"animations": {
+        "run": ["capybara-1.jpg", "capybara-2.jpg", "capybara-3.jpg","capybara-4.jpg", "capybara-5.jpg", "capybara-6.jpg", "capybara-7.jpg", "capybara-8.jpg", "capybara-9.jpg"]
+    }
+}

@@ -1,0 +1,84 @@
+{
+	"meta": {
+		"image": "square.png",
+		"size": {"w":6144,"h":6144},
+		"scale": "1"
+	},
+	"frames": {
+		"square-1.png":
+		{
+			"frame": {"x":0,"y":0,"w":2048,"h":2048},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
+			"sourceSize": {"w":2048,"h":2048}
+		},
+		"square-2.png":
+		{
+			"frame": {"x":2048,"y":0,"w":2048,"h":2048},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
+			"sourceSize": {"w":2048,"h":2048}
+		},
+		"square-3.png":
+		{
+			"frame": {"x":0,"y":2048,"w":2048,"h":2048},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
+			"sourceSize": {"w":2048,"h":2048}
+		},
+		"square-4.png":
+		{
+			"frame": {"x":2048,"y":2048,"w":2048,"h":2048},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
+			"sourceSize": {"w":2048,"h":2048}
+		},
+		"square-5.png":
+		{
+			"frame": {"x":4096,"y":0,"w":2048,"h":2048},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
+			"sourceSize": {"w":2048,"h":2048}
+		},
+		"square-6.png":
+		{
+			"frame": {"x":4096,"y":2048,"w":2048,"h":2048},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
+			"sourceSize": {"w":2048,"h":2048}
+		},
+		"square-7.png":
+		{
+			"frame": {"x":0,"y":4096,"w":2048,"h":2048},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
+			"sourceSize": {"w":2048,"h":2048}
+		},
+		"square-8.png":
+		{
+			"frame": {"x":2048,"y":4096,"w":2048,"h":2048},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
+			"sourceSize": {"w":2048,"h":2048}
+		},
+		"square-9.png":
+		{
+			"frame": {"x":4096,"y":4096,"w":2048,"h":2048},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":2048,"h":2048},
+			"sourceSize": {"w":2048,"h":2048}
+		}
+	},
+	"animations": {
+        "run": ["square-1.png","square-2.png","square-3.png","square-4.png","square-5.png","square-6.png","square-7.png","square-8.png","square-9.png"]
+    }
+}

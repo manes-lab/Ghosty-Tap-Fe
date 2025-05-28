@@ -1,0 +1,48 @@
+.insufficient-balance-module{
+    padding: 3rem !important;
+    .close-btn{
+        position: absolute;
+        top:3rem;
+        right:2rem;
+        width:1.8rem;
+        height:1.8rem;
+        background: url('../../assets/images/common/ic-close.png') no-repeat center center;
+        background-size: 1.8rem;
+        cursor: pointer;
+    }
+    .title{
+        font-family: SourceCodePro-Bold;
+        font-size: 1.7rem;
+        color: #FFFFFF;
+        line-height: 2.1rem;
+        font-weight: 700;
+    }
+    .intro{
+        margin-top:3rem;
+        font-family: SourceCodePro-Regular;
+        font-size: 1.3rem;
+        color: #FFFFFF;
+        letter-spacing: 0;
+        line-height: 2rem;
+        font-weight: 400;
+        span{
+            color: #51FFF0;
+        }
+    }
+    .confirm-btn{
+        margin-top:3rem;
+        width:27.5rem;
+        height:5rem;
+        background: url('../../assets/images/common/btn-2.png') no-repeat center bottom;
+        background-size: 100%;
+        -webkit-animation: Btn 1s ease infinite;
+        animation: Btn 1s ease infinite;
+        font-family: SourceCodePro-Medium;
+        font-size: 1.4rem;
+        color: #000000;
+        letter-spacing: 0;
+        text-align: center;
+        font-weight: 500;
+        line-height:4.2rem;
+    }
+}

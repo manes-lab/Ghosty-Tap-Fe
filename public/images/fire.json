@@ -1,0 +1,44 @@
+{
+	"meta": {
+		"image": "fire.png",
+		"size": {"w":1340,"h":1264},
+		"scale": "1"
+	},
+	"frames": {
+		"fire1.png":
+		{
+			"frame": {"x":0,"y":0,"w":1340,"h":316},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":316},
+			"sourceSize": {"w":1340,"h":316}
+		},
+		"fire2.png":
+		{
+			"frame": {"x":0,"y":316,"w":1340,"h":316},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":316},
+			"sourceSize": {"w":1340,"h":316}
+		},
+		"fire3.png":
+		{
+			"frame": {"x":0,"y":632,"w":1340,"h":316},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":316},
+			"sourceSize": {"w":1340,"h":316}
+		},
+		"fire4.png":
+		{
+			"frame": {"x":0,"y":948,"w":1340,"h":316},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":1340,"h":316},
+			"sourceSize": {"w":1340,"h":316}
+		}
+	},
+	"animations": {
+        "run": ["fire1.png","fire2.png","fire3.png","fire4.png"]
+    }
+}

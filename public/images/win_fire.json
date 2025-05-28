@@ -1,0 +1,44 @@
+{
+	"meta": {
+		"image": "win_fire.png",
+		"size": {"w":480,"h":360},
+		"scale": "1"
+	},
+	"frames": {
+		"win_fire1.png":
+		{
+			"frame": {"x":0,"y":0,"w":240,"h":180},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":240,"h":180},
+			"sourceSize": {"w":240,"h":180}
+		},
+		"win_fire2.png":
+		{
+			"frame": {"x":240,"y":0,"w":240,"h":180},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":240,"h":180},
+			"sourceSize": {"w":240,"h":180}
+		},
+		"win_fire3.png":
+		{
+			"frame": {"x":0,"y":180,"w":240,"h":180},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":240,"h":180},
+			"sourceSize": {"w":240,"h":180}
+		},
+		"win_fire4.png":
+		{
+			"frame": {"x":240,"y":180,"w":240,"h":180},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":240,"h":180},
+			"sourceSize": {"w":240,"h":180}
+		}
+	},
+	"animations": {
+        "run": ["win_fire1.png","win_fire2.png","win_fire3.png","win_fire4.png","win_fire3.png","win_fire2.png"]
+    }
+}

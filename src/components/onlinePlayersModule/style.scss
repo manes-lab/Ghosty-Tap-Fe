@@ -1,0 +1,244 @@
+.online-players-mask{
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    cursor: pointer;
+    -webkit-animation:  MaskShow2 0.6s ease both;
+    animation:  MaskShow2 0.6s ease both;
+    &.hide{
+        -webkit-animation:  MaskHide2 0.6s ease both;
+        animation:  MaskHide2 0.6s ease both;
+    }
+    &.zen-online-players-mask{
+        background: rgba(0,0,0,0.3);
+        -webkit-animation:  MaskShow3 0.6s ease both;
+        animation:  MaskShow3 0.6s ease both;
+        &.hide{
+            -webkit-animation:  MaskHide3 0.6s ease both;
+            animation:  MaskHide3 0.6s ease both;
+        }
+        .online-players-module{
+            background: #FFFFFF;
+            .head{
+                border-bottom: 1px solid rgba(0,0,0,0.2);
+                .head-left{
+                    color: #000000;
+                    .tip-btn{
+                        background-image:url('../../assets/images/leaderboard/ic-rule.png');
+                    }
+                }
+                .head-right{
+                    .refresh-btn{
+                        background-image:url('../../assets/images/leaderboard/ic-refresh.png');
+                    }
+                }
+
+            }
+            .list{
+                .item, .self{
+                    .num{
+                        color:rgba(0,0,0,0.4);
+                        &.num1{
+                            color: #FFC12E;
+                        }
+                        &.num2{
+                            color: #B9B8F0;
+                        }
+                        &.num3{
+                            color: #B48872;
+                        }
+                    }
+                    .user .name,.points{
+                        color: #000000;
+                    }
+                    &:hover{
+                        background: #EBEBEB;
+                    }
+                }
+                .self{
+                    background: #EBEBEB;
+                }
+            }
+        }
+    }
+
+    .online-players-module{
+        position: absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        height: 35rem;
+        padding: 3.8rem 0 0!important;
+        background: url("../../assets/img/adventure/online-players-bg.png") no-repeat top center;
+        background-size: 100% auto;
+        -webkit-animation:  Show2 0.6s ease both;
+        animation:  Show2 0.6s ease both;
+        &.hide{
+            -webkit-animation:  Hide2 0.6s ease both;
+            animation:  Hide2 0.6s ease both;
+        }
+        .head{
+            margin: 0 2.9rem;
+            padding:0 1.2rem 1.9rem;
+            border-bottom: 5px solid rgba(0,0,0,1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .head-left{
+                display: flex;
+                align-items: center;
+                color: #000;
+                font-family: "Pixeloid Sans";
+                font-size: 2.1rem;
+                letter-spacing: 0;
+                font-weight: 700;
+                .tip-btn{
+                    margin-left:0.6rem;
+                    width:2rem;
+                    height:2rem;
+                    background:url('../../assets/img/common/ic-tip.png') no-repeat center center;
+                    background-size: 2rem;
+                    cursor: pointer;
+                }
+            }
+            .head-right{
+                display: flex;
+                align-items: center;
+                .refresh-btn{
+                    width:2rem;
+                    height:2rem;
+                    background:url('../../assets/img/common/ic-refresh.png') no-repeat center center;
+                    background-size: 2rem;
+                    cursor: pointer;
+                }
+            }
+        }
+        .list{
+            margin: 0 2.9rem;
+            // height: 27.5rem;
+            // overflow-y: auto;
+            .infinite-scroll-component{
+                padding-bottom:6.2rem;
+            }
+            .self{
+                position: fixed;
+                left:1.5rem;
+                right: 1.5rem;
+                bottom:0;
+                background: #C0A373;
+            }
+            .self, .item{
+                padding: 0.6rem 1.6rem;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                .num{
+                    width:4.6rem;
+                    color: #5B5B5B;
+                    -webkit-text-stroke-width: 1px;
+                    -webkit-text-stroke-color: #272622;
+                    font-family: "Pixeloid PixeloidSans-Bold";
+                    font-size: 1.6rem;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 2rem;
+                    // letter-spacing: -0.58px;
+                    &.num1{
+                        color: #FED000;
+                    }
+                    &.num2{
+                        color: #AE7BCE;
+                    }
+                    &.num3{
+                        color: #E18B3F;
+                    }
+                }
+                .user{
+                    display: flex;
+                    align-items: center;
+                    
+                    .avatar{
+                        width:3.6rem;
+                        height:3.6rem;
+                        background: url() no-repeat center center;
+                        background-size: cover;
+                    }
+                    .name{
+                        margin-left:1.4rem;
+                        width: 9.3rem;
+                        color: #191919;
+                        font-family: "Pixeloid Sans";
+                        font-size: 2rem;
+                        font-style: normal;
+                        font-weight: 400;
+                        letter-spacing: -0.8px;
+                    }
+                }
+                .points{
+                    width:16rem;
+                    padding-right:2.5rem;
+                    background: url("../../assets/img/adventure/coin.png") no-repeat right center;
+                    background-size: 2.2rem;
+                    color: #191919;
+                    font-family: "Pixeloid Sans";
+                    font-size: 2rem;
+                    font-style: normal;
+                    font-weight: 400;
+                    text-align: right;
+                    letter-spacing: -0.66px;
+                }
+                // &:hover{
+                //     background: #303030;
+                // }
+            }
+            .no-more, .scroll-loading{
+                padding:1.7rem 0;
+                font-family: "Pixeloid Sans";
+                font-size: 1.2rem;
+                color: #191919;
+                letter-spacing: 0;
+                text-align: center;
+                line-height: 1.6rem;
+                font-weight: 400;
+                .icon{
+                    margin: 0 auto 0.4rem;
+                    width:1.6rem;
+                    height: 1.6rem;
+                    background: url("../../assets/images/common/icon-loading.png") no-repeat center center;
+                    background-size: cover;
+                    -webkit-animation: Rotate 1.1s linear infinite;
+                    animation: Rotate 1.1s linear infinite;
+                }
+            }
+
+            .infinite-scroll-component {
+                &:has(.no-data){
+                    .no-more{
+                        display: none;
+                    }
+                }
+            }
+
+            @-webkit-keyframes Rotate{
+            0%{ -webkit-transform: rotate(0deg);}
+            100%{ -webkit-transform: rotate(360deg);}
+            }
+            @keyframes Rotate{
+                0%{ -webkit-transform: rotate(0deg);}
+                100%{ -webkit-transform: rotate(360deg);}
+            }
+        }
+        .no-data{
+            padding: 10.4rem 0 3.6rem;
+            background: url('../../assets/images/common/no-data.png') no-repeat center 3.6rem;
+            background-size: 6rem;
+            border-radius: 24px;
+            font-family: "Pixeloid Sans";
+            font-size: 1.2rem;
+            color: #191919;
+            letter-spacing: 0;
+            text-align: center;
+            line-height: 1.6rem;
+            font-weight: 400;
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+	"meta": {
+		"image": "particles.png",
+		"size": {"w":1056,"h":736},
+		"scale": "1"
+	},
+	"frames": {
+		"particle-1.png":
+		{
+			"frame": {"x":0,"y":0,"w":352,"h":368},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":352,"h":368},
+			"sourceSize": {"w":352,"h":368}
+		},
+		"particle-2.png":
+		{
+			"frame": {"x":352,"y":0,"w":352,"h":368},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":352,"h":368},
+			"sourceSize": {"w":352,"h":368}
+		},
+		"particle-3.png":
+		{
+			"frame": {"x":704,"y":0,"w":352,"h":368},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":352,"h":368},
+			"sourceSize": {"w":352,"h":368}
+		},
+		"particle-4.png":
+		{
+			"frame": {"x":0,"y":368,"w":352,"h":368},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":352,"h":368},
+			"sourceSize": {"w":352,"h":368}
+		}
+	},
+	"animations": {
+        "run": ["particle-1.png","particle-2.png","particle-3.png","particle-4.png"]
+    }
+}

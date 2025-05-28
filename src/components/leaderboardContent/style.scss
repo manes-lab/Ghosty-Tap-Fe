@@ -1,0 +1,345 @@
+.leaderboard{
+    background: #0D0E27;
+    padding-top: 3rem;
+    &.leaderboard-module{
+        position: absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        height: 35rem;
+        padding: 3rem 0 0!important;
+        clip-path: polygon(0 0.6rem, 0.6rem 0.6rem, 0.6rem 0, calc(100% - 0.6rem) 0, calc(100% - 0.6rem) 0.6rem, 100% 0.6rem, 100% 100%, 0 100%);
+        -webkit-animation:  Show2 0.6s ease both;
+        animation:  Show2 0.6s ease both;
+        &.hide{
+            -webkit-animation:  Hide2 0.6s ease both;
+            animation:  Hide2 0.6s ease both;
+        }
+        .list{
+            .infinite-scroll-component{
+                padding-bottom:8rem;
+            }
+        }
+    }
+    &.page{
+        // min-height: calc(100vh - 18rem);
+    }
+    .head{
+        margin: 0 2rem;
+        padding-bottom: 2.3rem;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .head-left{
+            display: flex;
+            align-items: center;
+            font-family: SourceCodePro-Bold;
+            font-size: 1.7rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            font-weight: 700;
+            .tip-btn{
+                margin-left:0.2rem;
+                width:2.8rem;
+                height:2.8rem;
+                background:url('../../assets/images/leaderboard/ic-rule.png') no-repeat center center;
+                background-size: 1.8rem;
+                cursor: pointer;
+            }
+        }
+        .head-right{
+            display: flex;
+            align-items: center;
+            .current-tab{
+                width:9.5rem;
+                height:2.8rem;
+                padding: 0 1.2rem;
+                background: rgba(255,255,255,0.1) url('../../assets/images/leaderboard/ic-open.png') no-repeat 7.5rem center;
+                background-size: 0.8rem;
+                clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+
+                font-family: SourceCodePro-Medium;
+                font-size: 1.2rem;
+                color: #FFFFFF;
+                letter-spacing: 0;
+                line-height: 2.8rem;
+                font-weight: 500;
+
+                cursor: pointer;
+                &.current-tab-page{
+                    background-color: #25263D;
+                }
+                &.ant-dropdown-open{
+                    background-image: url('../../assets/images/leaderboard/ic-close.png');
+                }
+            }
+            // .tabs{
+            //     display: flex;
+            //     align-items: center;
+            //     width: 11.4rem;
+            //     background: rgba(255,255,255,0.1);
+            //     clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+            //     .tab-item{
+            //         width: 11.4rem;
+            //         text-align: center;
+            //         font-family: SourceCodePro-Medium;
+            //         font-size: 1.1rem;
+            //         color: #FFFFFF;
+            //         letter-spacing: 0;
+            //         text-align: center;
+            //         font-weight: 500;
+            //         line-height: 2.8rem;
+            //         cursor: pointer;
+            //         &.active{
+            //             background: #FFFFFF;
+            //             color: #000000;
+            //             clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+            //         }
+            //     }
+            // }
+            .refresh-btn{
+                margin-left:0.9rem;
+                width:2.8rem;
+                height:2.8rem;
+                background:url('../../assets/images/leaderboard/ic-refresh-light.png') no-repeat center center;
+                background-size: 1.8rem;
+                cursor: pointer;
+            }
+        }
+    }
+    .list{
+        .self{
+            position: fixed;
+            left:0;
+            bottom:0;
+            width:100%;
+            background: #25263D;
+        }
+        .list-head{
+            padding: 2rem 2rem 0.6rem  7.1rem;
+            font-family: SourceCodePro-Regular;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0;
+            line-height: 1.5rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .self, .item{
+            padding: 1.8rem 2rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            .num{
+                width:4.6rem;
+                font-family: SourceCodePro-BoldIt;
+                font-size: 1.4rem;
+                color: #747474;
+                letter-spacing: 0;
+                font-weight: 700;
+                &.num1{
+                    color: #FFE879;
+                }
+                &.num2{
+                    color: #B9B8F0;
+                }
+                &.num3{
+                    color: #B48872;
+                }
+            }
+            .user{
+                display: flex;
+                align-items: center;
+                
+                .avatar{
+                    width:2.4rem;
+                    height:2.4rem;
+                    background: url() no-repeat center center;
+                    background-size: cover;
+                }
+                .name{
+                    margin-left:1.2rem;
+                    width: 9.3rem;
+                    font-family: SourceCodePro-Regular;
+                    font-size: 1.3rem;
+                    color: #FFFFFF;
+                    letter-spacing: 0;
+                    line-height: 32px;
+                    font-weight: 400;
+                }
+            }
+            .points{
+                width:16rem;
+                padding-right:2rem;
+                background: url("../../assets/images/common/ic-coin.png") no-repeat right center;
+                background-size: 1.5rem;
+                font-family: SourceCodePro-Regular;
+                font-size: 1.3rem;
+                color: #FFFFFF;
+                letter-spacing: 0;
+                text-align: right;
+                line-height: 1.6rem;
+                font-weight: 400;
+            }
+            &:hover{
+                background: #25263D;
+            }
+        }
+        .no-more, .scroll-loading{
+            padding:1.7rem 0;
+            font-family: SourceCodePro-Regular;
+            font-size: 1.2rem;
+            color: #666666;
+            letter-spacing: 0;
+            text-align: center;
+            line-height: 1.6rem;
+            font-weight: 400;
+            .icon{
+                margin: 0 auto 0.4rem;
+                width:1.6rem;
+                height: 1.6rem;
+                background: url("../../assets/images/common/icon-loading-white.png") no-repeat center center;
+                background-size: cover;
+                -webkit-animation: Rotate 1.1s linear infinite;
+                animation: Rotate 1.1s linear infinite;
+            }
+        }
+
+        .infinite-scroll-component {
+            &:has(.no-data){
+                .no-more{
+                    display: none;
+                }
+            }
+        }
+
+        @-webkit-keyframes Rotate{
+        0%{ -webkit-transform: rotate(0deg);}
+        100%{ -webkit-transform: rotate(360deg);}
+        }
+        @keyframes Rotate{
+            0%{ -webkit-transform: rotate(0deg);}
+            100%{ -webkit-transform: rotate(360deg);}
+        }
+    }
+    .no-data{
+        padding: 10.4rem 0 3.6rem;
+        background: url('../../assets/images/common/no-data.png') no-repeat center 3.6rem;
+        background-size: 6rem;
+        border-radius: 24px;
+        font-family: SourceCodePro-Regular;
+        font-size: 1.2rem;
+        color: #666666;
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 1.6rem;
+        font-weight: 400;
+    }
+}
+
+.leaderboard-page-content{
+    .infinite-scroll-component {
+        padding-bottom:6rem;
+    }
+    .leaderboard-page-banner{
+        width:100%;
+        height:18rem;
+        background:url('../../assets/images/leaderboard/banner.png') no-repeat left top;
+        background-size: 100%;
+        position: relative;
+        &::after{
+            content: "";
+            position: absolute;
+            bottom:0;
+            left:0;
+            width:100%;
+            height:7.4rem;
+            background:url('../../assets/images/leaderboard/mask.png') no-repeat left top;
+            background-size: cover;
+            z-index: 2;
+        }
+    }
+    
+    
+    .no-more, .scroll-loading{
+        padding:1.7rem 0;
+        font-family: SourceCodePro-Regular;
+        font-size: 1.2rem;
+        color: #666666;
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 1.6rem;
+        font-weight: 400;
+        .icon{
+            margin: 0 auto 0.4rem;
+            width:1.6rem;
+            height: 1.6rem;
+            background: url("../../assets/images/common/icon-loading-white.png") no-repeat center center;
+            background-size: cover;
+            -webkit-animation: Rotate 1.1s linear infinite;
+            animation: Rotate 1.1s linear infinite;
+        }
+    }
+    
+    .infinite-scroll-component {
+        &:has(.no-data){
+            .no-more{
+                display: none;
+            }
+        }
+    }
+    
+    @-webkit-keyframes Rotate{
+    0%{ -webkit-transform: rotate(0deg);}
+    100%{ -webkit-transform: rotate(360deg);}
+    }
+    @keyframes Rotate{
+        0%{ -webkit-transform: rotate(0deg);}
+        100%{ -webkit-transform: rotate(360deg);}
+    }
+
+}
+
+.leaderboard-munu-list{
+    // transform: translateY(-0.4rem);
+    .ant-dropdown-arrow{
+        display: none;
+    }
+    .ant-dropdown-menu{
+        padding:0;
+        background: rgba(255,255,255,0.1);
+        clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+        .ant-dropdown-menu-item{
+            padding: 0;
+            height:2.8rem;
+            font-family: SourceCodePro-Medium;
+            font-size: 1.2rem;
+            color: #FFFFFF;
+            letter-spacing: 0;
+            line-height: 2.8rem;
+            font-weight: 500;
+            .leaderboard-menu-item{
+                padding: 0 1.2rem;
+                &:hover,&.active{
+                    background: rgba(255,255,255,0.1);
+                    clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+                }
+            }
+        }
+    }
+    &.leaderboard-munu-list-page{
+        .ant-dropdown-menu{
+            background: #25263D;
+            .ant-dropdown-menu-item{
+                .leaderboard-menu-item{
+                    &:hover,&.active{
+                        background: #30314B;
+                    }
+                }
+            }
+        }
+    }
+}
