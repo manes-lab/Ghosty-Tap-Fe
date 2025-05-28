@@ -275,7 +275,7 @@ export class BattleStageUI extends Stage {
 
 
         //my avatar
-        const myAvatarImg = await Assets.load(`${window.location.origin}/images/avatar${this.data.myAvatarIndex}.png`);
+        const myAvatarImg = await Assets.load(`${window.location.origin}/img/avatar${this.data.myAvatarIndex}.png`);
         const myAvatar = Sprite.from(myAvatarImg);
         myAvatar.width = this.calcLength(80);
         myAvatar.height = this.calcLength(80);
@@ -299,7 +299,7 @@ export class BattleStageUI extends Stage {
 
 
         //antagonist avatar
-        // const antagonistAvatarImg = await Assets.load(`${window.location.origin}/images/avatar1.png`);
+        // const antagonistAvatarImg = await Assets.load(`${window.location.origin}/img/avatar1.png`);
         // const antagonistAvatar = Sprite.from(antagonistAvatarImg);
         // antagonistAvatar.width = this.calcLength(80);
         // antagonistAvatar.height = this.calcLength(80);

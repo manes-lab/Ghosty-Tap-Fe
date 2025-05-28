@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { toggleConnectModal, show, close, updateModule, updateNewInvitation, updateAddress } from '../redux/slice';
-import { init } from '../utils/init.ts';
+import { initUser } from '../utils/init.ts';
 import * as Pomelo from '../utils/pomelo';
 import api from '../axios';
 import axios from 'axios';
@@ -160,18 +160,6 @@ export const MainLayout : React.FC<propsType> = (props) => {
                 const isValid = await verifyPersonalMessageSignature(new TextEncoder().encode(message), signedResult.signature, {
                     address:  account
                 });
-
-                // const res = await axios.post(`/api/v1/user/registerOrLogin`, {
-                //     address: account,
-                //     signature: signedResult.signature,
-                //     message: message,
-                //     publicKey:isValid
-                // });
-                // if(res?.success){
-                //     token = res.data?.token || ''
-                //     localStorage.setItem("ghosty-tap-"+account, token);
-                // }
-
                 const res = await api.get_user_token({
                     address: account,
                     signature: signedResult.signature,
@@ -185,7 +173,7 @@ export const MainLayout : React.FC<propsType> = (props) => {
             })()
         }
 
-        init(account, token);
+        initUser(account, token);
     },[currentAccount])
 
 

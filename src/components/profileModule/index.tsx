@@ -114,7 +114,7 @@ const Profile: React.FC<{
         <div className="close-btn" onClick={close}></div>
         <div className="module-content">
           {curUser && <div className="user">
-            <div className="avatar" style={{backgroundImage: `url(/images/avatar${curUser.avatar || 1}.png)`}}>
+            <div className="avatar" style={{backgroundImage: `url(/img/avatar${curUser.avatar || 1}.png)`}}>
               <div className={["user-status", curUser.status?.toLowerCase()].join(" ")}></div>
             </div>
             <div className="name">{curUser.user_id?.slice(-6)}</div>

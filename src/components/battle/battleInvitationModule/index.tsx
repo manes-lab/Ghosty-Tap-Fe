@@ -139,7 +139,7 @@ const BattleInvitation: React.FC<{
         </div>
         <div className="module-content">
           <div className="invite-user">
-            <div className="avatar" style={{backgroundImage: `url(/images/avatar${battleUser?.avatar || 1}.png)`}}>
+            <div className="avatar" style={{backgroundImage: `url(/img/avatar${battleUser?.avatar || 1}.png)`}}>
               <div className={["user-status", battleUser?.status].join(" ")}></div>
             </div>
             <div className="name txt-wrap">{battleUser?.user_id?.slice(-6)}</div>

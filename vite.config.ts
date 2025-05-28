@@ -5,6 +5,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), basicSsl()],
+  // plugins: [react()],
   build: {
     outDir: './build'
   },
@@ -16,7 +17,7 @@ export default defineConfig({
     host: "0.0.0.0", 
     proxy: {
       "^/api": {
-        target: "http://ghostytap.com",
+        target: "https://ghostytap.com",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, "/api"),
       },

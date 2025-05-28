@@ -220,7 +220,7 @@ export class AdventureStageUI extends Stage {
         // this.initFlyingCoins()
 
         await super.load(elementId, preference)
-        await this.app.init({ background: '#C0A373', resizeTo: document.body, preference })
+        await this.app.init({ background: '#C0A373', resizeTo: document.getElementById("root"), preference })
         this.app.ticker.maxFPS = 120
         document.getElementById(elementId)!.appendChild(this.app.canvas);
         this.initTop();
@@ -228,10 +228,11 @@ export class AdventureStageUI extends Stage {
         this.initMain();
         this.initBottomLine();
         this.initBottom();
-        this.initEarlyBouns();
-        this.initInfoCard();
         this.initStrikeChannelContainer()
+        this.initInfoCard();
+        this.initEarlyBouns();
         this.initFlyingCoins();
+        this.initFireWall();
     }
     
 
@@ -931,7 +932,8 @@ export class AdventureStageUI extends Stage {
     //连胜甬道
     initStrikeChannelContainer = async () => {
         this.strikeChannelContainer.x = this.calcLength(40)
-        this.strikeChannelContainer.y = this.app.screen.height - this.calcLength(433);
+        this.strikeChannelContainer.y = this.app.screen.height - this.calcLength(433 + 20);
+        this.strikeChannelContainer.zIndex = 1;
         this.winFireAsset = await Assets.load(`${window.location.origin}/images/win_fire.json`)
         this.particlesAsset = await Assets.load(`${window.location.origin}/images/particles.json`)
 

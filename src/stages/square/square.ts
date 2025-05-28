@@ -88,7 +88,7 @@ export class SquareStage extends SquareStageUI {
             const avatarBg = new Graphics().circle(this.calcLength(24), this.calcLength(24), this.calcLength(24)).fill('black');
             avatarContainer.addChild(avatarBg);
         
-            const imgAvatar = await Assets.load(`${window.location.origin}/images/avatar${user.avatar || 1}.png`);
+            const imgAvatar = await Assets.load(`${window.location.origin}/img/avatar${user.avatar || 1}.png`);
             const avatar = Sprite.from(imgAvatar);
             avatar.width = this.calcLength(44);
             avatar.height = this.calcLength(44);

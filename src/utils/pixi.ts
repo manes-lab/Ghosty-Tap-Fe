@@ -180,16 +180,18 @@ export class Block extends PIXI.Container{
         this.strike += 1
         const graphics = this.getChildByLabel("graphics")
         const anim = this.getChildByLabel("anim") as PIXI.AnimatedSprite
-        const text = this.getChildByLabel("text") as PIXI.Text
+        const text = this.getChildByLabel("text") as PIXI.Text;
+        
         graphics!.visible = false;
         anim!.visible = true;
+        graphics!.fill("#E18B3F");
         anim.play();
         text.text = "Winx" + this.strike
         text.x = this.calcLength(40);
         text.style = {
-            fill: "#FFFFFF",
+            fill: "#282722",
             fontSize: this.calcLength(24),
-            fontFamily: 'SourceCodePro-Medium',
+            fontFamily: 'Pixelify Sans',
             align: "center"
         }
     }
@@ -205,15 +207,15 @@ export class Block extends PIXI.Container{
 
         graphics!.visible = true;
         anim!.visible = false;
-        graphics.fill("#FEAA1E");
+        graphics.fill("#E18B3F");
         anim.stop();
         if (this.strike > 1) {
-            text.style.fill = "#000000"
+            text.style.fill = "#282722"
             text.x = this.calcLength(100/ 2);
             text.style = {
-                fill: "#000000",
+                fill: "#282722",
                 fontSize: this.calcLength(24),
-                fontFamily: 'SourceCodePro-Medium',
+                fontFamily: 'Pixelify Sans',
                 align: "center"
             }
         }

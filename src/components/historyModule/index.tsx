@@ -92,7 +92,7 @@ const Start: React.FC<{
         <div className="list-box">
           <div className="list">
             <InfiniteScroll
-              height = {'50vh'}
+              height = {'35rem'}
               dataLength={list.length}
               next={fetchData}
               hasMore={!isEnd}

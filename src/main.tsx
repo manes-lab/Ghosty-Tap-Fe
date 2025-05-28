@@ -29,7 +29,7 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 preloadFonts();
-// init()
+init()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider store={store}>

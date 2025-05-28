@@ -197,7 +197,7 @@ export class ZenStage extends ZenStageUI {
             const avatarBg = new Graphics().circle(this.calcLength(24), this.calcLength(24), this.calcLength(24)).fill(0x94D3F3);
             avatarContainer.addChild(avatarBg);
 
-            const imgAvatar = await Assets.load(`${window.location.origin}/images/avatar${user.avatar}.png`);
+            const imgAvatar = await Assets.load(`${window.location.origin}/img/avatar${user.avatar}.png`);
             const avatar = Sprite.from(imgAvatar);
             avatar.width = this.calcLength(44);
             avatar.height = this.calcLength(44);

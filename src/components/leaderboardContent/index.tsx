@@ -140,8 +140,8 @@ const LeaderboardContent: React.FC<{
             <div className="item" key={index} onClick={() => {onShowUser(item.user)}}>
               <div className={["num", "num"+(index+1)].join(" ")}>{index + 1}</div>
               <div className="user">
-                {/* <img className="avatar" src={`/images/avatar${item.user.avatar}.png`}></img> */}
-                <div className="avatar" style={item.user.avatar ? {backgroundImage: `url(/images/avatar${item.user.avatar}.png)`} : {}}></div>
+                {/* <img className="avatar" src={`/img/avatar${item.user.avatar}.png`}></img> */}
+                <div className="avatar" style={item.user.avatar ? {backgroundImage: `url(/img/avatar${item.user.avatar}.png)`} : {}}></div>
                 <div className="name txt-wrap">{item.user?.user_id?.slice(-6)}</div>
               </div>
               <div className="points">{formatNumber(item.coins)}</div>
@@ -200,8 +200,8 @@ const LeaderboardContent: React.FC<{
         {self && <div className="self" onClick={() => {onShowUser(self)}}>
           <div className="num">{self.position || '99+'}</div>
           <div className="user">
-            {/* <img className="avatar" src={`/images/avatar${self.avatar}.png`}></img> */}
-            <div className="avatar" style={self.avatar ? {backgroundImage: `url(/images/avatar${self.avatar}.png)`} : {}}></div>
+            {/* <img className="avatar" src={`/img/avatar${self.avatar}.png`}></img> */}
+            <div className="avatar" style={self.avatar ? {backgroundImage: `url(/img/avatar${self.avatar}.png)`} : {}}></div>
 
             <div className="name txt-wrap">{self.user_id?.slice(-6)}</div>
           </div>

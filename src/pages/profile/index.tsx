@@ -163,7 +163,7 @@ const ProfilePage = () => {
   return <div className="profile-page">
     <div className="share-btn" onClick={share}></div>
     {curUser && <div className={["user", isSelf ? 'self' : ''].join(" ")}>
-      <div className="avatar" style={curUser.avatar ? {backgroundImage: `url(/images/avatar${curUser.avatar}.png)`} : {backgroundImage: `url(/images/avatar1.png)`}}>
+      <div className="avatar" style={curUser.avatar ? {backgroundImage: `url(/img/avatar${curUser.avatar}.png)`} : {backgroundImage: `url(/img/avatar1.png)`}}>
         <div className={["user-status", curUser.status?.toLowerCase()].join(" ")}></div>
       </div>
       <div className="name">{curUser.user_id?.slice(-6)}</div>

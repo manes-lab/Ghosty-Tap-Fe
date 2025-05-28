@@ -104,7 +104,7 @@ const MailBox: React.FC<{
         return (
           <div className="item" key={index}>
             <div className="user" onClick={() => {onShowUser(item.send_user)}}>
-              <div className="avatar" style={{backgroundImage: `url(/images/avatar${item.send_user?.avatar || 1}.png)`}}></div>
+              <div className="avatar" style={{backgroundImage: `url(/img/avatar${item.send_user?.avatar || 1}.png)`}}></div>
               <div className="name txt-wrap">{item.send_user?.user_id?.slice(-6)}</div>
             </div>
             <div className="date">{formatDate(item.create_at).date} {formatDate(item.create_at).time}</div>

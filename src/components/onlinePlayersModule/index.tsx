@@ -96,7 +96,7 @@ const LeaderboardContent: React.FC<{
     //   <div className="item">
     //     <div className="num num1">1</div>
     //     <div className="user">
-    //       <img className="avatar" src="/images/avatar.png"></img>
+    //       <img className="avatar" src="/img/avatar.png"></img>
     //       <div className="name">hhhhhh</div>
     //     </div>
     //     <div className="points">67</div>
@@ -108,8 +108,8 @@ const LeaderboardContent: React.FC<{
           <div className="item" key={index} onClick={() => {onShowUser(item)}}>
             <div className={["num", "num"+(index+1)].join(" ")}>{index + 1}</div>
             <div className="user">
-              {/* <img className="avatar" src={`/images/avatar${item.avatar}.png`}></img> */}
-              <div className="avatar" style={item.avatar ? {backgroundImage: `url(/images/avatar${item.avatar}.png)`} : {}}></div>
+              {/* <img className="avatar" src={`/img/avatar${item.avatar}.png`}></img> */}
+              <div className="avatar" style={item.avatar ? {backgroundImage: `url(/img/avatar${item.avatar}.png)`} : {}}></div>
               <div className="name txt-wrap">{item.user_id?.slice(-6)} </div>
             </div>
             <div className="points">{formatNumber(item.coins)}</div>
@@ -161,8 +161,8 @@ const LeaderboardContent: React.FC<{
         {self && <div className="self" onClick={() => {onShowUser(self)}}>
           <div className="num">{self.position || '99+'}</div>
           <div className="user">
-            {/* <img className="avatar" src={`/images/avatar${self.avatar}.png`}></img> */}
-            <div className="avatar" style={self.avatar ? {backgroundImage: `url(/images/avatar${self.avatar}.png)`} : {}}></div>
+            {/* <img className="avatar" src={`/img/avatar${self.avatar}.png`}></img> */}
+            <div className="avatar" style={self.avatar ? {backgroundImage: `url(/img/avatar${self.avatar}.png)`} : {}}></div>
             <div className="name txt-wrap">{self.user_id?.slice(-6)}</div>
           </div>
           <div className="points">{formatNumber(self.coins)}</div>

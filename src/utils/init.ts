@@ -3,8 +3,15 @@ import api from '../axios';
 // import { useDispatch } from 'react-redux';
 import store from '../redux/store';
 import { setProfile } from '../redux/slice';
+import { registerSW  } from './register-service-worker'
 
-export async function init(account:string, token:string) {
+
+export async function init() {
+    registerSW()
+}
+
+
+export async function initUser(account:string, token:string) {
     if (account && token) {
         console.log("----enterSquare----")
         await Pomelo.enterSquare({

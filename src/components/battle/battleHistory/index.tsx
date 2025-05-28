@@ -64,7 +64,7 @@ const BattleHistory: React.FC<{
     // return (
     //   <div className="item">
     //     <div className="user">
-    //       <img className="avatar" src="/images/avatar.png"></img>
+    //       <img className="avatar" src="/img/avatar.png"></img>
     //       <div className="name">hhhhhh</div>
     //     </div>
     //     <div className="date">Jul 16 20:00</div>
@@ -76,7 +76,7 @@ const BattleHistory: React.FC<{
         return (
           <div className="item" key={index} onClick={() => {onShowResult(item)}}>
             <div className="user">
-              <div className="avatar" style={{backgroundImage: `url(/images/avatar${item.battle_user?.avatar || 1}.png)`}}></div>
+              <div className="avatar" style={{backgroundImage: `url(/img/avatar${item.battle_user?.avatar || 1}.png)`}}></div>
               <div className="name txt-wrap">{item.battle_user?.user_id?.slice(-6)}</div>
             </div>
             <div className="date">{formatDate(item.update_at).date} {formatDate(item.update_at).time}</div>

@@ -107,7 +107,7 @@ const LeaderboardPage: React.FC = () => {
         return (
           <div className="item" key={index} onClick={() => {showUser(item.user)}}>
             <div className="user">
-              <div className="avatar" style={item.user.avatar ? {backgroundImage: `url(/images/avatar${item.user.avatar}.png)`} : {}}></div>
+              <div className="avatar" style={item.user.avatar ? {backgroundImage: `url(/img/avatar${item.user.avatar}.png)`} : {}}></div>
               <div className="name txt-wrap">{item.user?.user_id?.slice(-6)}</div>
             </div>
             <div className="date">{ timestampToUTCString(item.create_at)}</div>

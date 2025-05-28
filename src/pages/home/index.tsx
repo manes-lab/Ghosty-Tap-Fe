@@ -167,7 +167,7 @@ const Home: React.FC = () => {
               <div className="item" key={index}>
                 <div className={["num", "num"+(index+1)].join(" ")}>{index + 1}</div>
                 <div className="user">
-                  {/* <img className="avatar" src={`/images/avatar${item.user?.avatar}.png`}></img> */}
+                  {/* <img className="avatar" src={`/img/avatar${item.user?.avatar}.png`}></img> */}
                   <div className="name txt-wrap">{item.user?.user_id?.slice(-6)}</div>
                 </div>
                 <div className="points">{formatNumber(item.coins)}</div>

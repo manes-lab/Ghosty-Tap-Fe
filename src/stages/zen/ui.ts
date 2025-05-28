@@ -77,7 +77,7 @@ export class ZenStageUI extends Stage {
     }
 
     public async load(elementId: string, preference: "webgl" | "webgpu" | undefined) {
-        await this.app.init({ background: '#94D3F3', resizeTo: document.body, preference })
+        await this.app.init({ background: '#94D3F3', resizeTo: document.getElementById("root"), preference })
         this.app.ticker.maxFPS = 120
         document.getElementById(elementId)!.appendChild(this.app.canvas);
         this.app.stage.addChild(this.background)

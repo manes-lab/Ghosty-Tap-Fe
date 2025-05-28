@@ -9,7 +9,7 @@ const RejectBattle: React.FC<{
     <div className="module  reject-battle-module">
       <div className="close-btn" onClick={onClose}></div>
       <div className="invite-user">
-        <div className="avatar" style={props.data.user?.avatar ? {backgroundImage: `url(/images/avatar${props.data.user?.avatar}.png)`} : {backgroundImage: `url(/images/avatar1.png)`}}>
+        <div className="avatar" style={props.data.user?.avatar ? {backgroundImage: `url(/img/avatar${props.data.user?.avatar}.png)`} : {backgroundImage: `url(/img/avatar1.png)`}}>
           <div className="user-status available"></div>
         </div>
         <div className="name txt-wrap">{props.data.user?.user_id?.slice(-6)}</div>

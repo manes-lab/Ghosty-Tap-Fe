@@ -1,7 +1,9 @@
 .index-page{
+    margin: 0 auto;
     width:100%;
     height:100vh;
     background: #D2A975;
+    position: relative;
     .banner-box{
         position: absolute;
         left: 5rem;
@@ -222,9 +224,11 @@
     }
 
     .btns{
-        position: fixed;
+        position: absolute;
         bottom: 0.3rem;
-        left:0;
+        left:50%;
+        transform: translateX(-50%);
+        max-width: 500px;
         width: 100%;
         height: 12.1rem;
         padding-top: 1rem;
@@ -293,5 +297,31 @@
         animation:Rotate 1.1s linear infinite;
         background: url("../../assets/images/common/icon-loading-white.png") no-repeat center center;
         background-size: cover;
+    }
+}
+
+
+@media screen and (min-width: 540px) {
+    #root, .index-page{
+        // width: 540px;
+        // height: 778px;
+        // position: relative;
+        width: 375px;
+        height: 778px;
+        position: relative;
+    }
+    html{
+        font-size: 14.4px !important;
+    }
+}
+
+@media screen and (min-height: 778px) {
+    #root, .index-page{
+        width: 375px;
+        height: 778px;
+        position: relative;
+    }
+    html{
+        font-size: 10px !important;
     }
 }

@@ -93,7 +93,7 @@ const BattleResult: React.FC<{
             <div className="name txt-wrap">{antagonistBattleRecord.user?.user_id?.slice(-6)}</div> left the game, you win
           </div> : <div className={"battle-result"}>
             {battleRecord && <div className="battle-user">
-              <div className="avatar" style={{backgroundImage: `url(/images/avatar${battleRecord.user?.avatar}.png)`}}></div>
+              <div className="avatar" style={{backgroundImage: `url(/img/avatar${battleRecord.user?.avatar}.png)`}}></div>
               <div className="userinfo">
                 <div className="name txt-wrap">You</div>
                 <div className="score">Score: {formatNumber(score)}</div>
@@ -109,7 +109,7 @@ const BattleResult: React.FC<{
 
 
             {antagonistBattleRecord && <div className="battle-user">
-              <div className="avatar" style={{backgroundImage: `url(/images/avatar${antagonistBattleRecord.user?.avatar}.png)`}}></div>
+              <div className="avatar" style={{backgroundImage: `url(/img/avatar${antagonistBattleRecord.user?.avatar}.png)`}}></div>
               <div className="userinfo">
                 <div className="name txt-wrap">{antagonistBattleRecord.user?.user_id?.slice(-6)}</div>
                 <div className="score">Score: {formatNumber(antagonistScore)}</div>

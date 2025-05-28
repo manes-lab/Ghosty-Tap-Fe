@@ -457,7 +457,7 @@ export class AdventureStage extends AdventureStageUI {
         this.playerAvatarContainer.x = this.calcLength(43 * (3 - arr.length));
         for(let i = arr.length - 1; i >= 0; i--){
             const user = arr[i];
-            const imgAvatar = await Assets.load(`${window.location.origin}/images/avatar${user.avatar || 1}.png`);
+            const imgAvatar = await Assets.load(`${window.location.origin}/img/avatar${user.avatar || 1}.png`);
             const avatar = Sprite.from(imgAvatar);
             avatar.width = this.calcLength(72);
             avatar.height = this.calcLength(72);
