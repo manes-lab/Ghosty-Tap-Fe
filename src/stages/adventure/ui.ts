@@ -886,7 +886,7 @@ export class AdventureStageUI extends Stage {
         bottomContainer.y = this.app.screen.height - this.calcLength(302);
         bottomContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(302));
 
-        // await this.initStrikeContainer();
+        await this.initStrikeContainer();
         await this.initBeforeChoose();
         bottomContainer.addChild(this.beforeChooseContainer);
 
@@ -934,7 +934,7 @@ export class AdventureStageUI extends Stage {
         this.strikeChannelContainer.x = this.calcLength(40)
         this.strikeChannelContainer.y = this.app.screen.height - this.calcLength(433 + 20);
         this.strikeChannelContainer.zIndex = 1;
-        this.winFireAsset = await Assets.load(`${window.location.origin}/images/win_fire.json`)
+        this.winFireAsset = await Assets.load(`${window.location.origin}/img/win_fire.json`)
         this.particlesAsset = await Assets.load(`${window.location.origin}/images/particles.json`)
 
         this.app.stage.addChild(this.strikeChannelContainer)
@@ -949,8 +949,8 @@ export class AdventureStageUI extends Stage {
         anim.animationSpeed = 0.1666;
         anim.stop()
         anim.scale = this.app.screen.width / 1500;
-        anim.x = 0
-        anim.y = this.calcLength(102);
+        anim.x = this.calcLength(34);
+        anim.y = this.calcLength(96);
         this.strikeContainer.addChild(anim);
 
 
@@ -965,13 +965,13 @@ export class AdventureStageUI extends Stage {
         this.fireWallContainer.zIndex = -1
         this.fireWallContainer.boundsArea = new Rectangle(0, 0, this.app.stage.width, Math.min(this.calcLength(1624), this.app.stage.height));
 
-        const firewallLeft = await Assets.load(`${window.location.origin}/images/firewall-left.json`);
-        const firewallRight = await Assets.load(`${window.location.origin}/images/firewall-right.json`);
+        const firewallLeft = await Assets.load(`${window.location.origin}/img/firewall-left.json`);
+        const firewallRight = await Assets.load(`${window.location.origin}/img/firewall-right.json`);
         const firewallLeftAnim = new AnimatedSprite(firewallLeft.animations['run']);
         firewallLeftAnim.label = "left"
         firewallLeftAnim.animationSpeed = 0.15;
         firewallLeftAnim.stop();
-        firewallLeftAnim.scale = this.app.screen.width / 1500;
+        firewallLeftAnim.scale = this.app.screen.width / 750;
         firewallLeftAnim.x = 0
         firewallLeftAnim.y = 0;
         this.fireWallContainer.addChild(firewallLeftAnim);
@@ -981,7 +981,7 @@ export class AdventureStageUI extends Stage {
         firewallRightAnim.animationSpeed = 0.15;
         firewallRightAnim.stop();
         firewallRightAnim.anchor.set(1, 0)
-        firewallRightAnim.scale = this.app.screen.width / 1500;
+        firewallRightAnim.scale = this.app.screen.width / 750;
         firewallRightAnim.x = this.app.screen.width
         firewallRightAnim.y = 0;
         this.fireWallContainer.addChild(firewallRightAnim);

@@ -1,11 +1,11 @@
 import {Container, Assets, Sprite, Graphics, Text, Rectangle, AnimatedSprite, TilingSprite, BitmapText } from 'pixi.js';
 import { Stage } from '../base';
 
-import img_home from '../../assets/images/adventure/ic-home.png';
-import img_leaderboard from '../../assets/images/adventure/ic-leaderboard.png';
-import img_coin from '../../assets/images/common/ic-coin.png';
-import bg_coin from '../../assets/images/zen/bg-coin.png';
-import ic_open from '../../assets/images/zen/ic-open.png';
+// import img_home from '../../assets/images/adventure/ic-home.png';
+// import img_leaderboard from '../../assets/images/adventure/ic-leaderboard.png';
+// import img_coin from '../../assets/images/common/ic-coin.png';
+// import bg_coin from '../../assets/images/zen/bg-coin.png';
+// import ic_open from '../../assets/images/zen/ic-open.png';
 import img_mail from '../../assets/images/battle/ic-mail.png';
 import img_mail_message from '../../assets/images/battle/ic-mail-message.png';
 
@@ -23,6 +23,14 @@ import progress_cover from '../../assets/img/zen/progress-cover.png'
 import progress_head from '../../assets/img/zen/progress-head.png'
 import digits_bottom from '../../assets/img/zen/digits.png'
 import recharging_coin from '../../assets/img/zen/progress-head.png'
+
+
+
+
+import img_head from '../../assets/img/zen/head.png';
+import img_coin from '../../assets/img/common/coin.png';
+import img_leaderboard from '../../assets/img/adventure/leaderboard.png';
+
 
 const LIMIT = 5
 const MAX_COIN = 3000
@@ -77,7 +85,7 @@ export class ZenStageUI extends Stage {
     }
 
     public async load(elementId: string, preference: "webgl" | "webgpu" | undefined) {
-        await this.app.init({ background: '#94D3F3', resizeTo: document.getElementById("root"), preference })
+        await this.app.init({ background: '#5B98AA', resizeTo: document.getElementById("root"), preference })
         this.app.ticker.maxFPS = 120
         document.getElementById(elementId)!.appendChild(this.app.canvas);
         this.app.stage.addChild(this.background)
@@ -90,7 +98,7 @@ export class ZenStageUI extends Stage {
         this.initMark();
         this.initProgress()
         
-        const bg = await Assets.load(`${window.location.origin}/images/background.png`)
+        const bg = await Assets.load(`${window.location.origin}/img/background.png`)
         for (let i = 0; i < 2; i ++) {
             let bgSprite = new Sprite(bg)
             bgSprite.width = this.app.screen.width
@@ -119,7 +127,7 @@ export class ZenStageUI extends Stage {
         this.anim.play();
         this.anim.scale = 0.3
         this.anim.x = this.barGraphics[2].x - this.data.barWidth / 4
-        this.anim.y = this.app.screen.height - this.calcLength(206 + 148)
+        this.anim.y = this.app.screen.height - this.calcLength(259 + 154)
         this.app.stage.addChild(this.anim);
 
         this.jumpSprite = new AnimatedSprite(sheet.animations['jump']);
@@ -141,8 +149,8 @@ export class ZenStageUI extends Stage {
     }
 
     initButtonMask = async () => {
-        const h = this.app.screen.height - this.calcLength(40+124+50+14);
-        this.buttonMask.rect(0, this.calcLength(40+124+50+14), this.app.screen.width, h).fill({ r: 0, g: 0, b: 0, a: 0 })
+        const h = this.app.screen.height - this.calcLength(300);
+        this.buttonMask.rect(0, this.calcLength(300), this.app.screen.width, h).fill({ r: 0, g: 0, b: 0, a: 0 })
         this.buttonMask.zIndex = 2
         this.buttonMask.eventMode = 'static';
         this.buttonMask.on('pointerdown', () => {
@@ -154,98 +162,139 @@ export class ZenStageUI extends Stage {
     initMenu = async () => {
         const menuContainer: Container = new Container({isRenderGroup: true})
         menuContainer.x = this.calcLength(0);
-        menuContainer.y = this.calcLength(40);
-        menuContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(124));
+        menuContainer.y = this.calcLength(0);
+        menuContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(300));
 
-        //Home icon
-        const imgHome = await Assets.load(img_home);
-        const home = Sprite.from(imgHome);
-        home.width = this.calcLength(48);
-        home.height = this.calcLength(48);
-        home.x = this.calcLength(40);
-        home.y = this.calcLength(6);
-        home.eventMode = 'static';
-        home.cursor = 'pointer';
-        home.on('pointerdown', () => {
+        //Head-title
+        const imgHead = await Assets.load(img_head);
+        const head = Sprite.from(imgHead);
+        head.width = this.calcLength(248);
+        head.height = this.calcLength(44);
+        head.x = this.calcLength(251);
+        head.y = this.calcLength(32);
+        menuContainer.addChild(head);
+
+
+        //Back
+        const backBtn = new BitmapText({
+            text: `Back`,
+            style:{
+                fill: '#CAAD95',
+                fontSize: this.calcLength(32),
+                fontFamily: 'LogoSC LongZhuTi',
+                align: 'center'
+            }
+        })
+        backBtn.x = this.calcLength(31);
+        backBtn.y = this.calcLength(60);
+        backBtn.anchor.set(0, 0.5);
+        backBtn.eventMode = 'static';
+        backBtn.cursor = 'pointer';
+        backBtn.on('pointerdown', () => {
             this.events["changeRouter"]("/");
         });
-        menuContainer.addChild(home);
+        menuContainer.addChild(backBtn);
 
 
         //Trading Pair select
         const select = new Container();
-        select.boundsArea = new Rectangle(0, 0, this.calcLength(210), this.calcLength(60));
-        select.x = this.calcLength(112);
+        select.boundsArea = new Rectangle(0, 0, this.calcLength(236), this.calcLength(60));
+        select.x = this.calcLength(31);
+        select.y = this.calcLength(127);
         // select.eventMode = 'static';
         // select.cursor = 'pointer';
         // select.on('pointerdown', () => {
         //     this.events["changeModule"]("trading-pair");
         // });
+
+        const selectBg = new Graphics();
+        selectBg.beginFill(0xCAAD95);
+        selectBg.drawRoundedRect(0, 0, this.calcLength(236), this.calcLength(60), this.calcLength(30));
+        selectBg.endFill();
+        select.addChild(selectBg);
+
+
         //select text
         const selectText = new BitmapText({
             text: `${this.data.instId.replace('-', '/')}`,
             style:{
-                fill: '#000000',
-                fontSize: this.calcLength(30),
-                fontFamily: 'SourceCodePro-Medium',
+                fill: '#282722',
+                fontSize: this.calcLength(32),
+                fontFamily: 'LogoSC LongZhuTi',
                 align: 'center'
             }
         })
+        selectText.x = this.calcLength(118)
         selectText.y = this.calcLength(30)
-        selectText.anchor.set(0, 0.5);
+        selectText.anchor.set(0.5, 0.5);
         select.addChild(selectText);
-        //select icon
-        const icOpen = await Assets.load(ic_open);
-        const selectIcon = Sprite.from(icOpen);
-        selectIcon.width = this.calcLength(16);
-        selectIcon.height = this.calcLength(16);
-        selectIcon.x = this.calcLength(177);
-        selectIcon.y = this.calcLength(22);
-        select.addChild(selectIcon);
 
-        const selectBox = new Graphics().rect(0, 0, this.calcLength(220), this.calcLength(60)).fill(0x000000, 0);
-        selectBox.eventMode = 'static';
-        selectBox.cursor = 'pointer';
-        selectBox.on('pointerdown', () => {
-            this.events["changeModule"]("trading-pair");
-        });
-        select.addChild(selectBox);
+
+        //select icon
+        // const icOpen = await Assets.load(ic_open);
+        // const selectIcon = Sprite.from(icOpen);
+        // selectIcon.width = this.calcLength(16);
+        // selectIcon.height = this.calcLength(16);
+        // selectIcon.x = this.calcLength(177);
+        // selectIcon.y = this.calcLength(22);
+        // select.addChild(selectIcon);
+
+
+        //select icon
+        // const icOpen = await Assets.load(ic_open);
+        // const selectIcon = Sprite.from(icOpen);
+        // selectIcon.width = this.calcLength(16);
+        // selectIcon.height = this.calcLength(16);
+        // selectIcon.x = this.calcLength(177);
+        // selectIcon.y = this.calcLength(22);
+        // select.addChild(selectIcon);
+
+        // const selectBox = new Graphics().rect(0, 0, this.calcLength(220), this.calcLength(60)).fill(0x000000, 0);
+        // selectBox.eventMode = 'static';
+        // selectBox.cursor = 'pointer';
+        // selectBox.on('pointerdown', () => {
+        //     this.events["changeModule"]("trading-pair");
+        // });
+        // select.addChild(selectBox);
         //add select
         menuContainer.addChild(select);
 
 
         //coin
         const coin = new Container();
-        coin.width = this.calcLength(180);
+        coin.width = this.calcLength(236);
         coin.height = this.calcLength(60);
-        coin.x = this.calcLength(382);
+        coin.x = this.calcLength(416);
+        coin.y = this.calcLength(127);
         coin.eventMode = 'static';
         coin.cursor = 'pointer';
         coin.on('pointerdown', () => {
             this.events["changeModule"]("profile", {coin: this.data.coin});
         });
         //coin-bg
-        const bgCoin = await Assets.load(bg_coin);
-        const coinBg = Sprite.from(bgCoin);
-        coinBg.width = this.calcLength(180);
-        coinBg.height = this.calcLength(60);
+        const coinBg = new Graphics();
+        coinBg.beginFill(0xCAAD95);
+        coinBg.drawRoundedRect(0, 0, this.calcLength(236), this.calcLength(60), this.calcLength(30));
+        coinBg.endFill();
         coin.addChild(coinBg);
+
         //coin-icon
         const imgCoin = await Assets.load(img_coin);
         this.coinIcon = Sprite.from(imgCoin);
-        this.coinIcon.width = this.calcLength(30);
-        this.coinIcon.height = this.calcLength(30);
-        this.coinIcon.x = this.calcLength(132);
-        this.coinIcon.y = this.calcLength(15);
+        this.coinIcon.width = this.calcLength(40);
+        this.coinIcon.height = this.calcLength(40);
+        this.coinIcon.x = this.calcLength(185);
+        this.coinIcon.y = this.calcLength(10);
         coin.addChild(this.coinIcon);
+
         //coin-text
-        this.coinGraph.x = this.calcLength(60);
+        this.coinGraph.x = this.calcLength(92);
         this.coinGraph.y = this.calcLength(30);
         this.coinGraph.anchor.set(0.5, 0.5);
         this.coinGraph.style = {
-            fill: '#111111',
-            fontSize: this.calcLength(24),
-            fontFamily: 'SourceCodePro-Medium',
+            fill: '#282722',
+            fontSize: this.calcLength(32),
+            fontFamily: 'LogoSC LongZhuTi',
             align: 'center'
         }
         coin.addChild(this.coinGraph);
@@ -267,24 +316,22 @@ export class ZenStageUI extends Stage {
         this.addCoinGraph.y = this.calcLength(300);
         this.addCoinGraph.anchor.set(0.5, 0.5);
         this.addCoinGraph.style = {
-            fill: '#FC7817',
-            stroke: '#000000',
-            strokeThickness: 1,
-            fontSize: this.calcLength(34),
-            fontFamily: 'SourceCodePro-Semibold-stroke',
+            fill: '#BB4F23',
+            fontSize: this.calcLength(28),
+            fontFamily: 'LogoSC LongZhuTi',
             align: 'center'
         }
         this.addCoinGraph.visible = false;
         this.app.stage.addChild(this.addCoinGraph);
 
 
-        //leaderboard
+        // leaderboard
         const imgLeaderboard = await Assets.load(img_leaderboard);
         const leaderboardBtn = Sprite.from(imgLeaderboard);
-        leaderboardBtn.width = this.calcLength(48);
-        leaderboardBtn.height = this.calcLength(48);
-        leaderboardBtn.x = this.calcLength(598);
-        leaderboardBtn.y = this.calcLength(6);
+        leaderboardBtn.width = this.calcLength(60);
+        leaderboardBtn.height = this.calcLength(63);
+        leaderboardBtn.x = this.calcLength(660);
+        leaderboardBtn.y = this.calcLength(123);
         leaderboardBtn.eventMode = 'static';
         leaderboardBtn.cursor = 'pointer';
         leaderboardBtn.on('pointerdown', () => {
@@ -294,60 +341,61 @@ export class ZenStageUI extends Stage {
 
 
         //mail
-        this.initMail();
-        menuContainer.addChild(this.mailContainer);
+        // this.initMail();
+        // menuContainer.addChild(this.mailContainer);
 
 
         //date
-        this.dateGraph.x = this.calcLength(40);
-        this.dateGraph.y = this.calcLength(110);
+        this.dateGraph.x = this.calcLength(52);
+        this.dateGraph.y = this.calcLength(256);
         this.dateGraph.style = {
-            fill: '#000000',
+            fill: '#E0C5AF',
             fontSize: this.calcLength(24),
-            fontFamily: 'SourceCodePro-Medium',
+            fontFamily: 'LogoSC LongZhuTi',
         }
         menuContainer.addChild(this.dateGraph);
 
         //players list
         const players = new Container();
-        players.boundsArea = new Rectangle(0, 0, this.calcLength(264), this.calcLength(48));
-        players.x = this.calcLength(446);
-        players.y = this.calcLength(86);
+        players.boundsArea = new Rectangle(0, 0, this.calcLength(310), this.calcLength(50));
+        players.x = this.calcLength(404);
+        players.y = this.calcLength(246);
         players.eventMode = 'static';
         players.cursor = 'pointer';
         players.on('pointerdown', () => {
             this.events["changeModule"]("online-players");
         });
-        
 
-        //players count bg
-        const playersCountBg = new Graphics();
-        playersCountBg.beginFill(0x7DB4D1); // 设置填充颜色为黑色
-        playersCountBg.drawRoundedRect(0, 0, this.calcLength(84), this.calcLength(48), this.calcLength(48)); // 绘制圆角矩形
-        playersCountBg.endFill();
-        playersCountBg.x = this.calcLength(180);
-        playersCountBg.y = this.calcLength(0);
-        players.addChild(playersCountBg);
-        
-
-        //players count text
-        this.playerGraph.style = {
-            fill: '#FFFFFF',
-            fontSize: this.calcLength(24),
-            fontFamily: 'SourceCodePro-Medium',
-            align: 'center'
-        }
-        this.playerGraph.x = this.calcLength(222);
-        this.playerGraph.y = this.calcLength(24);
-        this.playerGraph.anchor.set(0.5, 0.5);
-        players.addChild(this.playerGraph);
 
         //players avatar
         players.addChild(this.playerAvatarContainer);
         menuContainer.addChild(players);
         
 
+        //players count bg
+        const playersCountBg = new Graphics();
+        playersCountBg.beginFill(0xCAAD95); 
+        playersCountBg.lineStyle(2, 0x5B97AA); 
+        playersCountBg.drawRoundedRect(0, 0, this.calcLength(84), this.calcLength(38), this.calcLength(38)); // 绘制圆角矩形
+        playersCountBg.endFill();
+        playersCountBg.x = this.calcLength(226);
+        playersCountBg.y = this.calcLength(0);
+        players.addChild(playersCountBg);
+        
 
+        //players count text
+        this.playerGraph.style = {
+            fill: '#282722',
+            fontSize: this.calcLength(32),
+            fontFamily: 'LogoSC LongZhuTi',
+            align: 'center'
+        }
+        this.playerGraph.x = this.calcLength(268);
+        this.playerGraph.y = this.calcLength(19);
+        this.playerGraph.anchor.set(0.5, 0.5);
+        players.addChild(this.playerGraph);
+
+        
         this.app.stage.addChild(menuContainer);
     }
 
@@ -377,17 +425,16 @@ export class ZenStageUI extends Stage {
     }
 
     initMark = () => {
-        const h = this.app.screen.height - this.calcLength(40+124+50+40+280+40);
-        const lineH = this.calcLength(28);
+        const h = this.app.screen.height - this.calcLength(375 + 501);
         const markContainer: Container = new Container({isRenderGroup: true})
         markContainer.x = this.calcLength(0);
-        markContainer.y = this.calcLength(40+124+50);
+        markContainer.y = this.calcLength(375);
         markContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), h);
 
         //Mark-line
         for (let i = 0; i < 10; i ++) {
-            const graphic = new Graphics().rect(0, 0, this.calcLength(560), 1).fill(0x000000, 0.16);
-            graphic.x = this.calcLength(40);
+            const graphic = new Graphics().rect(0, 0, this.calcLength(560), 1).fill(0xCAAD95, 1);
+            graphic.x = this.calcLength(30);
             graphic.y = this.calcLength(14) + this.klineContainer.height / 9 * i;
             markContainer.addChild(graphic)
         }
@@ -398,12 +445,12 @@ export class ZenStageUI extends Stage {
             const graphic = new BitmapText({
                 text: '',
                 style:{
-                    fill: `rgba(0,0,0,0.4)`,
-                    fontSize: this.calcLength(24),
-                    fontFamily: 'SourceCodePro-Medium',
+                    fill: `#CAAD95`,
+                    fontSize: this.calcLength(22),
+                    fontFamily: 'LogoSC LongZhuTi',
                     letterSpacing: 1
                 },
-                x:  this.calcLength(610),
+                x:  this.calcLength(600),
                 y:  this.calcLength(14) + this.klineContainer.height / 9 * i
             })
             graphic.anchor.set(0, 0.5);
@@ -416,9 +463,9 @@ export class ZenStageUI extends Stage {
     }
 
     initTopContainer = () => {
-        const h = this.app.screen.height - this.calcLength(40+124+50+40+280+40);
-        this.topContainer.x = this.calcLength(30);
-        this.topContainer.y = this.calcLength(40+124+50+14);
+        const h = this.app.screen.height - this.calcLength(375 + 501);
+        this.topContainer.x = this.calcLength(20);
+        this.topContainer.y = this.calcLength(375);
         this.topContainer.boundsArea = new Rectangle(0, 0, this.calcLength(558), h);
         this.topContainer.zIndex = 10;
         this.klineContainer.boundsArea = new Rectangle(0, 0, this.calcLength(558), h);
@@ -435,12 +482,12 @@ export class ZenStageUI extends Stage {
     initProgress = async () => {
         this.app.stage.addChild(this.progressContainer)
         this.progressContainer.x = this.calcLength(52)
-        this.progressContainer.y = this.app.screen.height - this.calcLength(118 + 60)
+        this.progressContainer.y = this.app.screen.height - this.calcLength(215 + 36)
         
         const progressBottomAsset = await Assets.load(progress_bottom)
         const progressBottom = Sprite.from(progressBottomAsset)
-        progressBottom.width = this.calcLength(465)
-        progressBottom.height = this.calcLength(37)
+        progressBottom.width = this.calcLength(455)
+        progressBottom.height = this.calcLength(36)
         this.progressContainer.addChild(progressBottom)
 
 
@@ -516,18 +563,18 @@ export class ZenStageUI extends Stage {
 
         const digitsContainer = new Container({isRenderGroup: true})
         digitsContainer.x = this.calcLength(505)
-        digitsContainer.y = -this.calcLength(5)
+        digitsContainer.y = -this.calcLength(14)
         const digitsBottomAsset = await Assets.load(digits_bottom)
         const digitsBottom = Sprite.from(digitsBottomAsset)
-        digitsBottom.width = this.calcLength(124)
-        digitsBottom.height = this.calcLength(46)
+        digitsBottom.width = this.calcLength(137)
+        digitsBottom.height = this.calcLength(64)
         this.digits.anchor = 0.5
         this.digits.x = digitsBottom.width / 2
         this.digits.y = digitsBottom.height / 2
         this.digits.style = {
             fill: '#E0C5AF',
             fontSize: this.calcLength(24),
-            fontFamily: 'SourceCodePro-Medium',
+            fontFamily: 'LogoSC LongZhuTi',
         }
 
         
@@ -543,8 +590,8 @@ export class ZenStageUI extends Stage {
         this.rechargingContainer.x = this.calcLength(52)
         this.rechargingContainer.y = this.app.screen.height - this.calcLength(118 + 60)
         const rechargingBottom = Sprite.from(progressBottomAsset)
-        rechargingBottom.width = this.calcLength(465)
-        rechargingBottom.height = this.calcLength(37)
+        rechargingBottom.width = this.calcLength(455)
+        rechargingBottom.height = this.calcLength(36)
         this.rechargingContainer.addChild(rechargingBottom)
 
         const rechargingCoinAsset = await Assets.load(recharging_coin)
@@ -560,27 +607,27 @@ export class ZenStageUI extends Stage {
         this.rechargingText.style = {
             fill: '#FFFFFF',
             fontSize: this.calcLength(24),
-            fontFamily: 'SourceCodePro-Medium',
+            fontFamily: 'LogoSC LongZhuTi',
         }
         this.rechargingContainer.addChild(rechargingCoin)
 
 
         const digitsBottom2 = Sprite.from(digitsBottomAsset)
-        digitsBottom2.width = this.calcLength(124)
-        digitsBottom2.height = this.calcLength(46)
+        digitsBottom2.width = this.calcLength(137)
+        digitsBottom2.height = this.calcLength(64)
         digitsBottom2.x = this.calcLength(505);
-        digitsBottom2.y = -this.calcLength(5);
+        digitsBottom2.y = -this.calcLength(14);
 
         const digits2 = new BitmapText({
             text: '0'
         });
-        digits2.x = this.calcLength(62 + 505)
+        digits2.x = this.calcLength(68 + 505)
         digits2.y = this.calcLength(18)
         digits2.anchor.set(0.5, 0.5);
         digits2.style = {
             fill: '#E0C5AF',
             fontSize: this.calcLength(24),
-            fontFamily: 'SourceCodePro-Medium',
+            fontFamily: 'LogoSC LongZhuTi',
         }
         this.rechargingContainer.addChild(digitsBottom2)
         this.rechargingContainer.addChild(digits2)

@@ -191,18 +191,21 @@ const Home: React.FC = () => {
 
       {currentAccount?.address && <div className="entry entry-sign-out" onClick={logout}>Sign out</div>}
 
+
     </div>
+
+    
 
     <div className="btns" ref={btnsRef}>
       {
         currentAccount?.address ? <>
           <div className="start-btn zen-mode" onClick={() => {onStart('zen')}}></div>
           <div className="start-btn adventure-mode" onClick={() => {onStart('adventure')}}></div>
-        </> : <div className="login-btn" onClick={login}></div>
+        </> : <>
+          <div className="login-btn" onClick={login}></div>
+          <ConnectButton/>
+        </>
       }
-
-
-      
     </div>
 
     {isLoading && <LoadingModule  onClose={() => {}}/>}

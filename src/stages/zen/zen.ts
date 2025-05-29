@@ -184,25 +184,25 @@ export class ZenStage extends ZenStageUI {
     updatePlayersPanel = async (arr:Array<any>, count:number) => {
         this.playerGraph.text = count;
         this.playerAvatarContainer.removeChildren();
-        this.playerAvatarContainer.boundsArea = new Rectangle(0, 0, this.calcLength(48 + 36 * (arr.length - 1)), this.calcLength(48));
-        this.playerAvatarContainer.x = this.calcLength(36 * (5 - arr.length));
+        this.playerAvatarContainer.boundsArea = new Rectangle(0, 0, this.calcLength(50 * arr.length), this.calcLength(50));
+        this.playerAvatarContainer.x = this.calcLength(50 * (5 - arr.length));
         for(let i = 0; i< arr.length; i++){
             const user = arr[i];
 
             const avatarContainer = new Container();
-            avatarContainer.boundsArea = new Rectangle(0, 0,  this.calcLength(48),  this.calcLength(48));
-            avatarContainer.x = this.calcLength(36 * i);
+            avatarContainer.boundsArea = new Rectangle(0, 0,  this.calcLength(50),  this.calcLength(50));
+            avatarContainer.x = this.calcLength(50 * i);
             avatarContainer.zIndex = 5 - i;
 
-            const avatarBg = new Graphics().circle(this.calcLength(24), this.calcLength(24), this.calcLength(24)).fill(0x94D3F3);
-            avatarContainer.addChild(avatarBg);
+            // const avatarBg = new Graphics().circle(this.calcLength(24), this.calcLength(24), this.calcLength(24)).fill(0x94D3F3);
+            // avatarContainer.addChild(avatarBg);
 
             const imgAvatar = await Assets.load(`${window.location.origin}/img/avatar${user.avatar}.png`);
             const avatar = Sprite.from(imgAvatar);
-            avatar.width = this.calcLength(44);
-            avatar.height = this.calcLength(44);
-            avatar.x = this.calcLength(2);
-            avatar.y = this.calcLength(2);
+            avatar.width = this.calcLength(50);
+            avatar.height = this.calcLength(50);
+            avatar.x = this.calcLength(0);
+            avatar.y = this.calcLength(0);
             avatarContainer.addChild(avatar);
 
             this.playerAvatarContainer.addChild(avatarContainer);
@@ -229,11 +229,11 @@ export class ZenStage extends ZenStageUI {
 
             let w = this.data.barWidth
             let h = Math.floor(this.klineContainer.height * per)
-            let color = 0xff3a66;
+            let color = 0xBB4F23;
             let offsetX = 0
             let offsetY = 0
             if (curPrice > lastPrice) { 
-                color = 0x1FBE24;
+                color = 0xA9A100;
                 offsetY = -h
             }
 
@@ -256,7 +256,19 @@ export class ZenStage extends ZenStageUI {
             } catch (e) {
                 console.log(e)
             }
+
+            this.barGraphics[i].x = lastX
+            this.barGraphics[i].y = lastY
             
+
+
+            this.barGraphics[i].clear();
+            this.barGraphics[i]
+            .beginFill(color)
+            .lineStyle(2, 0x60483A)
+            .drawRoundedRect(offsetX, offsetY, w, h, 6)
+            .endFill();
+
 
             if (h >= 11) {
                 const cutSize = 5;
@@ -276,16 +288,17 @@ export class ZenStage extends ZenStageUI {
                     { x: x, y: y - cutSize },
                 ];
                 
-                this.barGraphics[i].context.poly(points).fill(color)
+                
+                // this.barGraphics[i].context.poly(points).fill(color)
             } else {
-                this.barGraphics[i].context.rect(offsetX, offsetY, w, Math.max(1, h)).fill(color)
+
+                // this.barGraphics[i].context.rect(offsetX, offsetY, w, Math.max(1, h)).fill(color)
                 
                 // this.barGraphics[i].context = barContext
                 
                 
             }
-            this.barGraphics[i].x = lastX
-            this.barGraphics[i].y = lastY
+            
 
             if(this.data.barsData[i]['collision']){
                 const top = 15;
@@ -310,6 +323,7 @@ export class ZenStage extends ZenStageUI {
                 }
                 this.data.flyingCoinY = this.data.collisionY - h
             }
+
             lastX = lastX + w + this.calcLength(2);
             if (curPrice < lastPrice) {
                 lastY = lastY + h
@@ -378,9 +392,9 @@ export class ZenStage extends ZenStageUI {
             totalTime,
             {
                 fromX: this.flyingCoin!.x,
-                toX: this.calcLength(382 + 140),
+                toX: this.calcLength(621),
                 fromY: this.flyingCoin!.y,
-                toY: this.calcLength(40 + 30)
+                toY: this.calcLength(157)
             }
         )
         this.flyingCoin!.alpha = 0
