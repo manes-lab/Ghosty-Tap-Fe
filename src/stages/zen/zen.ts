@@ -257,60 +257,33 @@ export class ZenStage extends ZenStageUI {
                 console.log(e)
             }
 
+            
+            
             this.barGraphics[i].x = lastX
             this.barGraphics[i].y = lastY
-            
-
-
             this.barGraphics[i]
             .beginFill(color)
             .lineStyle(2, 0x60483A)
             .drawRoundedRect(offsetX, offsetY, w, h, 6)
             .endFill();
 
-
-            // if (h >= 11) {
-            //     const cutSize = 5;
-            //     const points = [
-            //         { x: x, y: y - cutSize },
-            //         { x: x, y: y - h + cutSize },
-            //         { x: x + cutSize, y: y - h + cutSize },
-            //         { x: x + cutSize, y: y - h },
-            //         { x: x + w - cutSize, y: y - h },
-            //         { x: x + w - cutSize, y: y - h + cutSize },
-            //         { x: x + w, y: y - h + cutSize },
-            //         { x: x + w, y: y - cutSize },
-            //         { x: x + w - cutSize, y: y - cutSize },
-            //         { x: x + w - cutSize, y: y },
-            //         { x: x + cutSize, y: y },
-            //         { x: x + cutSize, y: y - cutSize },
-            //         { x: x, y: y - cutSize },
-            //     ];
-                
-            //     this.barGraphics[i].context.poly(points).fill(color)
-            // } else {
-
-            //     this.barGraphics[i].context.rect(offsetX, offsetY, w, Math.max(1, h)).fill(color)
-                
-            //     // this.barGraphics[i].context = barContext
-            // }
             
 
             if(this.data.barsData[i]['collision']){
                 const top = 15;
                 if(h > top){
-                    const height = Math.min(h-top, this.calcLength(340));
-                    const crack = TilingSprite.from(this.crackAsset)
-                    crack.tileScale = this.calcLength(90 / 180)
-                    crack.x = this.calcLength(10)
-
-                    // crack.y = h - height;
+                    const height = Math.min(h-top, this.calcLength(238));
+                    // const crack = TilingSprite.from(this.crackAsset)
+                    let crack ;
+                    if (curPrice < lastPrice) {
+                        crack = TilingSprite.from(this.crackAsset2)
+                    }else{
+                        crack = TilingSprite.from(this.crackAsset1)
+                    }
+                    crack.tileScale = this.calcLength(1)
+                    crack.x = this.calcLength(38)
                     crack.y = Math.max(y - (h - top), y - height)
-
-                    // if (curPrice < lastPrice) {
-                    //     crack.y = Math.max(y - (h - top), y - height)
-                    // }
-                    crack.width = this.calcLength(90)
+                    crack.width = this.calcLength(34)
                     crack.height = height;
                     this.barGraphics[i].addChild(crack);
                 }
@@ -456,15 +429,23 @@ export class ZenStage extends ZenStageUI {
                         
                         const w = this.barGraphics[collisionBarIndex].width;
                         const h = this.barGraphics[collisionBarIndex].height;
-                        const y = this.barGraphics[collisionBarIndex]['fillStyle']['color'] == 16726630 ? h : 0;
+
+                        const y = this.barGraphics[collisionBarIndex]['fillStyle']['color'] == 12275491 ? h : 0;
                         const top = 15;
                         if(h > top){
-                            const height = Math.min(h-top, this.calcLength(340));
-                            const crack = TilingSprite.from(this.crackAsset)
-                            crack.tileScale = this.calcLength(90 / 180)
-                            crack.x = this.calcLength(10)
+                            const height = Math.min(h-top, this.calcLength(238));
+                            let crack;
+                            if (this.barGraphics[collisionBarIndex]['fillStyle']['color'] == 11116800) {
+                                crack = TilingSprite.from(this.crackAsset1)
+                            }else{
+                                crack = TilingSprite.from(this.crackAsset2)
+                            }
+       
+
+                            crack.tileScale = this.calcLength(1)
+                            crack.x = this.calcLength(38)
                             crack.y = Math.max(y - (h - top), y - height)
-                            crack.width = this.calcLength(90)
+                            crack.width = this.calcLength(34)
                             crack.height = height;
                             this.barGraphics[collisionBarIndex].addChild(crack);
                         }

@@ -30,6 +30,8 @@ import recharging_coin from '../../assets/img/zen/progress-head.png'
 import img_head from '../../assets/img/zen/head.png';
 import img_coin from '../../assets/img/common/coin.png';
 import img_leaderboard from '../../assets/img/adventure/leaderboard.png';
+import img_crack1 from '../../assets/img/zen/crack-1.png'
+import img_crack2 from '../../assets/img/zen/crack-2.png'
 
 
 const LIMIT = 5
@@ -73,7 +75,8 @@ export class ZenStageUI extends Stage {
         text: "+50",
     })
 
-    crackAsset: any
+    crackAsset1: any
+    crackAsset2: any
 
     //markContainer
     markGraphics: Text[] = [];
@@ -382,7 +385,7 @@ export class ZenStageUI extends Stage {
         playersCountBg.drawRoundedRect(0, 0, this.calcLength(84), this.calcLength(38), this.calcLength(38)); // 绘制圆角矩形
         playersCountBg.endFill();
         playersCountBg.x = this.calcLength(226);
-        playersCountBg.y = this.calcLength(0);
+        playersCountBg.y = this.calcLength(6);
         players.addChild(playersCountBg);
         
 
@@ -394,7 +397,7 @@ export class ZenStageUI extends Stage {
             align: 'center'
         }
         this.playerGraph.x = this.calcLength(268);
-        this.playerGraph.y = this.calcLength(19);
+        this.playerGraph.y = this.calcLength(25);
         this.playerGraph.anchor.set(0.5, 0.5);
         players.addChild(this.playerGraph);
 
@@ -639,7 +642,8 @@ export class ZenStageUI extends Stage {
     }
 
     initBarsGraph = async () => {
-        this.crackAsset = await Assets.load(img_crack)
+        this.crackAsset1 = await Assets.load(img_crack1)
+        this.crackAsset2 = await Assets.load(img_crack2)
         this.data.barWidth = this.calcLength(110)
         let bars = []
         let lastX = this.klineContainer.width - (LIMIT - 1) * this.data.barWidth
