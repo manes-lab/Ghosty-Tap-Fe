@@ -220,7 +220,7 @@ export class AdventureStageUI extends Stage {
         // this.initFlyingCoins()
 
         await super.load(elementId, preference)
-        await this.app.init({ background: '#C0A373', resizeTo: document.getElementById("root"), preference })
+        await this.app.init({ background: '#C0A373', resizeTo: document.getElementById("ghosty-page"), preference })
         this.app.ticker.maxFPS = 120
         document.getElementById(elementId)!.appendChild(this.app.canvas);
         this.initTop();
@@ -307,7 +307,7 @@ export class AdventureStageUI extends Stage {
         players.eventMode = 'static';
         players.cursor = 'pointer';
         players.on('pointerdown', () => {
-            this.events["changeModule"]("online-players");
+            this.events["changeModule"]("adventure-online-players");
         });
     
         //players count bg
@@ -503,7 +503,7 @@ export class AdventureStageUI extends Stage {
     //     players.eventMode = 'static';
     //     players.cursor = 'pointer';
     //     players.on('pointerdown', () => {
-    //         this.events["changeModule"]("online-players");
+    //         this.events["changeModule"]("adventure-online-players");
     //     });
         
 

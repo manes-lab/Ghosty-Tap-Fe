@@ -8,7 +8,7 @@ import { formatNumber } from '../../utils/util';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { message } from 'antd';
 
-const LeaderboardContent: React.FC<{
+const ZenOnlinePlayersModule: React.FC<{
   props: any,
   onClose: () => void,
   onShowUser: (user:any) => void,
@@ -24,8 +24,12 @@ const LeaderboardContent: React.FC<{
   const limit = 20;
   const [refreshFlag, setRefreshFlag] = useState(1); 
 
+  const [canClose, setCanClose] = useState(false);
+
   useEffect(() => {
-  },[])
+    const timer = setTimeout(() => setCanClose(true), 600); 
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -33,12 +37,14 @@ const LeaderboardContent: React.FC<{
     })();
   },[refreshFlag])
 
+
   const refresh = () => {
     setList([]);
     setPage(0);
     setEndStatus(false);
     setRefreshFlag(-refreshFlag);
   }
+
 
 
   const tip = async (tab:string) => {
@@ -83,8 +89,10 @@ const LeaderboardContent: React.FC<{
   }
 
   const close = () => {
-    document.getElementById('online-players-mask')?.classList.add('hide');
-    document.getElementById('online-players-module')?.classList.add('hide');
+    if (!canClose) return; 
+
+    document.getElementById('zen-online-players-mask')?.classList.add('hide');
+    document.getElementById('zen-online-players-module')?.classList.add('hide');
     setTimeout(()=>{
       onClose()
     }, 600)
@@ -92,16 +100,6 @@ const LeaderboardContent: React.FC<{
 
 
   function List(){
-    // return (
-    //   <div className="item">
-    //     <div className="num num1">1</div>
-    //     <div className="user">
-    //       <img className="avatar" src="/img/avatar.png"></img>
-    //       <div className="name">hhhhhh</div>
-    //     </div>
-    //     <div className="points">67</div>
-    //   </div>
-    // )
     if(list.length>0){
       return <>{list.map((item:any, index) => {
         return (
@@ -122,8 +120,8 @@ const LeaderboardContent: React.FC<{
     }
   }
 
-  return <div className={["mask online-players-mask", props.stage+'-online-players-mask'].join(" ")} id="online-players-mask" onClick={close}>
-    <div className={["online-players-module", props.from].join(" ")} id="online-players-module" onClick={onClick}>
+  return <div className={["mask zen-online-players-mask"].join(" ")} id="zen-online-players-mask" onClick={close} onPointerDown={(e) => e.stopPropagation()}>
+    <div className={["zen-online-players-module", props.from].join(" ")} id="zen-online-players-module" onClick={onClick}>
       <div className="head">
         <div className="head-left">
           Ghosts({total})
@@ -146,7 +144,6 @@ const LeaderboardContent: React.FC<{
           </div>}
           endMessage={list.length>limit && <p className="no-more">No more</p>}
         >
-
           {/* <div className="item">
             <div className={["num", "num1"].join(" ")}>1</div>
             <div className="user">
@@ -173,4 +170,4 @@ const LeaderboardContent: React.FC<{
   </div>
 };
 
-export default LeaderboardContent;
+export default ZenOnlinePlayersModule;

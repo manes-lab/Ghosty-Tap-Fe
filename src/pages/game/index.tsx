@@ -20,7 +20,8 @@ import ReconnectionModule from '../../components/reconnectionModule';
 import HistoryModule from '../../components/historyModule';
 import ProfileModule from '../../components/profileModule';
 import LeaderboardModule from '../../components/leaderboardModule';
-import OnlinePlayersModule from '../../components/onlinePlayersModule';
+import AdventureOnlinePlayersModule from '../../components/adventureOnlinePlayersModule';
+import ZenOnlinePlayersModule from '../../components/zenOnlinePlayersModule';
 
 import StartBattleModule from '../../components/battle/startBattleModule';
 import BattleResultModule from '../../components/battle/battleResultModule';
@@ -193,6 +194,13 @@ const Game: React.FC = () => {
   }
 
   const showUser = (user:any) => {
+    message.open({
+      type: 'info',
+      content: 'Coming soon ',
+      className: 'q-toast-message',
+      duration: 5,
+    });
+    return;
     setCurUser(user);
     setProfileModuleStatus(true);
   }
@@ -228,7 +236,8 @@ const Game: React.FC = () => {
       {curModule == 'adventure-history' && <HistoryModule props={{}} onClose={() => {setCurModule('')}}/>}
       {curModule == 'reconnection' &&  <ReconnectionModule onClose={backHome} onConnect={()=>{changeStage()}}/>}
       {curModule == 'leaderboard' && <LeaderboardModule props={{stage: location.state?.mode}} onClose={() => {setCurModule('')}} onShowUser={showUser}/>}
-      {curModule == 'online-players' && <OnlinePlayersModule props={{stage: location.state?.mode}} onClose={() => {setCurModule('')}} onShowUser={showUser}/>}
+      {curModule == 'adventure-online-players' && <AdventureOnlinePlayersModule props={{stage: location.state?.mode}} onClose={() => {setCurModule('')}} onShowUser={showUser}/>}
+      {curModule == 'zen-online-players' && <ZenOnlinePlayersModule props={{stage: location.state?.mode}} onClose={() => {console.log('close zen online');setCurModule('')}} onShowUser={showUser}/>}
 
       
       

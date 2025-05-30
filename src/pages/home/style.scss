@@ -302,10 +302,7 @@
 
 
 @media screen and (min-width: 540px) {
-    #root, .index-page{
-        // width: 540px;
-        // height: 778px;
-        // position: relative;
+    .ghosty-page, .index-page{
         width: 375px;
         height: 778px;
         position: relative;
@@ -316,7 +313,7 @@
 }
 
 @media screen and (min-height: 778px) {
-    #root, .index-page{
+    .ghosty-page, .index-page{
         width: 375px;
         height: 778px;
         position: relative;
@@ -325,3 +322,19 @@
         font-size: 10px !important;
     }
 }
+
+
+.ghosty-page{
+    margin: 0 auto;
+    &.mobile-ghosty-page{
+        width: 100%!important;
+        height: 100vh!important;
+        position: relative;
+        .index-page{
+            width: 100%!important;
+            height: 100vh!important;
+            position: relative;
+        }
+    }
+}
+

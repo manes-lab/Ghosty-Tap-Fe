@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ConnectButton, useCurrentAccount, useDisconnectWallet  } from '@mysten/dapp-kit';
+import { useWallets, ConnectButton, useCurrentAccount, useDisconnectWallet  } from '@mysten/dapp-kit';
 import './style.scss';
 import { useNavigate } from 'react-router-dom';
 import { toggleConnectModal, show, updateModule } from '../../redux/slice';
 import { message } from 'antd';
 import api from '../../axios';
-import { formatNumber } from '../../utils/util';
+import { Base64 } from 'js-base64';
+import { formatNumber, isMobile } from '../../utils/util';
 import LoadingModule from '../../components/loadingModule';
 // import InviteSuccessModule from '../../components/inviteSuccessModule';
 
@@ -31,6 +32,7 @@ import stick2 from '../../assets/images/index/stick-2.png';
 
 
 const Home: React.FC = () => {
+  const wallets = useWallets();
   const currentAccount = useCurrentAccount();
   const { mutate: disconnect } = useDisconnectWallet({
     onSuccess: () => {
@@ -56,6 +58,10 @@ const Home: React.FC = () => {
   const [list, setList] = useState([]);
   const [totalCoin, setTotalCoin] = useState(0);
   let init = true;
+
+  useEffect(() => {
+    console.log(currentAccount, '------currentAccount----');
+  },[currentAccount])
   
 
   useEffect(() => {
@@ -142,7 +148,42 @@ const Home: React.FC = () => {
   }
 
   const login = () => {
-    dispatch(toggleConnectModal(null))
+    const slush = wallets.find(w => w.name === 'Slush');
+    if(slush){
+      dispatch(toggleConnectModal(null))
+    }else{
+      const payload = {
+        "version": "1",
+        "requestId": crypto.randomUUID(),
+        "appUrl": window.location.href,
+        "appName": "Ghosty Tap",
+        "payload": {
+          "type": "connect"
+        },
+        "metadata": {
+          "originUrl": window.location.href,
+          "userAgent": navigator.userAgent,
+          "screenResolution": `${window.screen.width}x${window.screen.height}`,
+          "language": navigator.language,
+          "platform": navigator.platform,
+          "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+          "timestamp": Date.now(),
+        }
+      }
+
+      const slushUrl = `https://my.slush.app/approve-connection?requestId=${payload.requestId}&appUrl=${encodeURIComponent(payload.appUrl)}&appName=${encodeURIComponent(payload.appName)}&hash=${Base64.encode(JSON.stringify(payload))}`;
+
+      // window.location.href = `https://my.slush.app/dapp-request#${Base64.encode(JSON.stringify(payload))}`
+      window.open(slushUrl, '_blank');
+    }
+
+    window.addEventListener('message', (event) => {
+      // 👇 验证来源，确保安全
+      // if (event.origin !== 'https://my.slush.app') return;
+  
+      // 👇 接收回传数据（钱包地址、签名等）
+      console.log('Connected wallet info:', event.data);
+    }, { once: true });
   };
 
   const logout = () => {
@@ -190,8 +231,6 @@ const Home: React.FC = () => {
       <div className="entry entry-invite" onClick={() => {jumpPage('/invite')}}>Invite</div>
 
       {currentAccount?.address && <div className="entry entry-sign-out" onClick={logout}>Sign out</div>}
-
-
     </div>
 
     
@@ -203,7 +242,7 @@ const Home: React.FC = () => {
           <div className="start-btn adventure-mode" onClick={() => {onStart('adventure')}}></div>
         </> : <>
           <div className="login-btn" onClick={login}></div>
-          <ConnectButton/>
+          {/* <ConnectButton/> */}
         </>
       }
     </div>

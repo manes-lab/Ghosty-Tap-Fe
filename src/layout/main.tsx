@@ -9,6 +9,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { toggleConnectModal, show, close, updateModule, updateNewInvitation, updateAddress } from '../redux/slice';
 import { initUser } from '../utils/init.ts';
 import * as Pomelo from '../utils/pomelo';
+import { isMobile } from '../utils/util.ts';
 import api from '../axios';
 import axios from 'axios';
 import BattleSettings from "../components/battle/battleSettingsModule";
@@ -34,6 +35,7 @@ interface  propsType{
 export const MainLayout : React.FC<propsType> = (props) => {
     const currentAccount = useCurrentAccount();
     const signPersonalMessage = useSignPersonalMessage();
+    // const connectWalletMutation = useConnectWallet();
     const { mutate: connectWallet } = useConnectWallet({
         onSuccess: (result) => {
             console.log('连接成功:', result);
@@ -160,6 +162,7 @@ export const MainLayout : React.FC<propsType> = (props) => {
                 const isValid = await verifyPersonalMessageSignature(new TextEncoder().encode(message), signedResult.signature, {
                     address:  account
                 });
+
                 const res = await api.get_user_token({
                     address: account,
                     signature: signedResult.signature,
@@ -225,7 +228,7 @@ export const MainLayout : React.FC<propsType> = (props) => {
 
 
     return (
-        <>
+        <div className={['ghosty-page', isMobile() ? 'mobile-ghosty-page' : ''].join(" ")} id="ghosty-page">
             <div>
                 {props.children}
             </div>
@@ -254,6 +257,6 @@ export const MainLayout : React.FC<propsType> = (props) => {
                 onOpenChange={() => {dispatch(toggleConnectModal(null));}}
                 trigger={null} 
             />
-        </>
+        </div>
     )
 }

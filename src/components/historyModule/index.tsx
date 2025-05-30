@@ -15,6 +15,14 @@ const Start: React.FC<{
   const [page, setPage] = useState(0); 
   const [isEnd, setEndStatus] = useState(false); 
   const limit = 20;
+
+  const [canClose, setCanClose] = useState(false);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => setCanClose(true), 600); 
+    return () => clearTimeout(timer);
+  }, []);
+
   let isInit = true;
   useEffect(() => {
     if(isInit){
@@ -52,6 +60,8 @@ const Start: React.FC<{
   }
 
   const close = () => {
+    if (!canClose) return; 
+    
     document.getElementById('history-mask')?.classList.add('hide');
     document.getElementById('history-module')?.classList.add('hide');
     setTimeout(()=>{
@@ -84,7 +94,7 @@ const Start: React.FC<{
 
   
   return <div className="mask history-mask" id="history-mask">
-    <div className="history-module" id="history-module" onClick={(event) => {event.stopPropagation();}}>
+    <div className="history-module" id="history-module" onClick={(event) => {event.stopPropagation();close()}}>
       <div className="close-btn" onClick={close}></div>
       <div className="module-content">
         <div className="title">Bet History</div>

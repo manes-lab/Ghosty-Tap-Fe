@@ -262,7 +262,6 @@ export class ZenStage extends ZenStageUI {
             
 
 
-            this.barGraphics[i].clear();
             this.barGraphics[i]
             .beginFill(color)
             .lineStyle(2, 0x60483A)
@@ -270,34 +269,31 @@ export class ZenStage extends ZenStageUI {
             .endFill();
 
 
-            if (h >= 11) {
-                const cutSize = 5;
-                const points = [
-                    { x: x, y: y - cutSize },
-                    { x: x, y: y - h + cutSize },
-                    { x: x + cutSize, y: y - h + cutSize },
-                    { x: x + cutSize, y: y - h },
-                    { x: x + w - cutSize, y: y - h },
-                    { x: x + w - cutSize, y: y - h + cutSize },
-                    { x: x + w, y: y - h + cutSize },
-                    { x: x + w, y: y - cutSize },
-                    { x: x + w - cutSize, y: y - cutSize },
-                    { x: x + w - cutSize, y: y },
-                    { x: x + cutSize, y: y },
-                    { x: x + cutSize, y: y - cutSize },
-                    { x: x, y: y - cutSize },
-                ];
+            // if (h >= 11) {
+            //     const cutSize = 5;
+            //     const points = [
+            //         { x: x, y: y - cutSize },
+            //         { x: x, y: y - h + cutSize },
+            //         { x: x + cutSize, y: y - h + cutSize },
+            //         { x: x + cutSize, y: y - h },
+            //         { x: x + w - cutSize, y: y - h },
+            //         { x: x + w - cutSize, y: y - h + cutSize },
+            //         { x: x + w, y: y - h + cutSize },
+            //         { x: x + w, y: y - cutSize },
+            //         { x: x + w - cutSize, y: y - cutSize },
+            //         { x: x + w - cutSize, y: y },
+            //         { x: x + cutSize, y: y },
+            //         { x: x + cutSize, y: y - cutSize },
+            //         { x: x, y: y - cutSize },
+            //     ];
                 
-                
-                // this.barGraphics[i].context.poly(points).fill(color)
-            } else {
+            //     this.barGraphics[i].context.poly(points).fill(color)
+            // } else {
 
-                // this.barGraphics[i].context.rect(offsetX, offsetY, w, Math.max(1, h)).fill(color)
+            //     this.barGraphics[i].context.rect(offsetX, offsetY, w, Math.max(1, h)).fill(color)
                 
-                // this.barGraphics[i].context = barContext
-                
-                
-            }
+            //     // this.barGraphics[i].context = barContext
+            // }
             
 
             if(this.data.barsData[i]['collision']){
@@ -307,7 +303,13 @@ export class ZenStage extends ZenStageUI {
                     const crack = TilingSprite.from(this.crackAsset)
                     crack.tileScale = this.calcLength(90 / 180)
                     crack.x = this.calcLength(10)
+
+                    // crack.y = h - height;
                     crack.y = Math.max(y - (h - top), y - height)
+
+                    // if (curPrice < lastPrice) {
+                    //     crack.y = Math.max(y - (h - top), y - height)
+                    // }
                     crack.width = this.calcLength(90)
                     crack.height = height;
                     this.barGraphics[i].addChild(crack);

@@ -70,11 +70,18 @@ export function padZero(num:number) {
 
 
 export function isMobile(){  
-    const userAgentInfo = navigator.userAgent;
-    const Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];  
+    if (window.innerWidth > 756) {
+        return false;
+    }
+
+    const userAgentInfo = navigator.userAgent || navigator.vendor || window.opera;
+    const Agents = ["Android", "webOS", "iPhone", "iPad", "iPod", "BlackBerry", "IEMobile", "Opera Mini", "SymbianOS", "Windows Phone"];  
     let flag = false;  
     for (let v = 0; v < Agents.length; v++) {  
-        if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = true; break; }  
-    }  
-    return flag;  
+        if (userAgentInfo.indexOf(Agents[v]) > -1) { 
+            flag = true; 
+            break; 
+        }  
+    }
+    return flag;
 }

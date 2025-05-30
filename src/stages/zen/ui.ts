@@ -85,7 +85,7 @@ export class ZenStageUI extends Stage {
     }
 
     public async load(elementId: string, preference: "webgl" | "webgpu" | undefined) {
-        await this.app.init({ background: '#5B98AA', resizeTo: document.getElementById("root"), preference })
+        await this.app.init({ background: '#5B98AA', resizeTo: document.getElementById("ghosty-page"), preference })
         this.app.ticker.maxFPS = 120
         document.getElementById(elementId)!.appendChild(this.app.canvas);
         this.app.stage.addChild(this.background)
@@ -362,8 +362,11 @@ export class ZenStageUI extends Stage {
         players.y = this.calcLength(246);
         players.eventMode = 'static';
         players.cursor = 'pointer';
-        players.on('pointerdown', () => {
-            this.events["changeModule"]("online-players");
+        players.on('pointerdown', (e) => {
+            e.stopPropagation();
+            // setTimeout(() => {
+                this.events["changeModule"]("zen-online-players");
+            // }, 300);
         });
 
 

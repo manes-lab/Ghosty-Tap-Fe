@@ -20,6 +20,12 @@ const networks = {
     localnet: { url: 'https://localhost:8000' },
 };
 
+const slushWalletConfig = {
+    name: 'Ghosty Tap',
+    approveConnectionUrl: 'https://my.slush.app/approve-connection?requestId=',
+    iconUrl: 'https://slush.app/favicon.ico',
+  };
+
 
 window.onerror = (message, source, lineno, colno, error) => {
     console.log('cappppppp:',{message, source, lineno, colno, error});
@@ -37,9 +43,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <SuiClientProvider networks={networks} defaultNetwork="localnet">
             <WalletProvider 
                 autoConnect 
-                // slushWallet={
-                //     { name: 'Ghosty Tap' }
-                // }
+                slushWallet={slushWalletConfig}
                 // storage={localStorage}
                 // storageKey="slush-wallet"
             >

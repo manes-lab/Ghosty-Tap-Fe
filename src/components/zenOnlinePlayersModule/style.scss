@@ -1,4 +1,4 @@
-.online-players-mask{
+.zen-online-players-mask{
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     cursor: pointer;
@@ -61,15 +61,15 @@
         }
     }
 
-    .online-players-module{
+    .zen-online-players-module{
         position: absolute;
         bottom:0;
         left:0;
         width:100%;
         height: 35rem;
-        padding: 3.8rem 0 0!important;
-        background: url("../../assets/img/adventure/online-players-bg.png") no-repeat top center;
-        background-size: 100% auto;
+        border-radius: 30px 30px 0px 0px;
+        border: 2px solid #60483A;
+        background: #BD8D64;
         -webkit-animation:  Show2 0.6s ease both;
         animation:  Show2 0.6s ease both;
         &.hide{
@@ -77,18 +77,18 @@
             animation:  Hide2 0.6s ease both;
         }
         .head{
-            margin: 0 2.9rem;
-            padding:0 1.2rem 1.9rem;
-            border-bottom: 5px solid rgba(0,0,0,1);
+            margin: 0 1.8rem;
+            padding:1.9rem 0 1.3rem;
+            border-bottom: 1px solid #A0704D;
             display: flex;
             align-items: center;
             justify-content: space-between;
             .head-left{
                 display: flex;
                 align-items: center;
-                color: #000;
-                font-family: "Pixeloid Sans";
-                font-size: 2.1rem;
+                color: #3F3027;
+                font-family: Gagalin;
+                font-size: 2.4rem;
                 letter-spacing: 0;
                 font-weight: 700;
                 .tip-btn{
@@ -106,14 +106,14 @@
                 .refresh-btn{
                     width:2rem;
                     height:2rem;
-                    background:url('../../assets/img/common/ic-refresh.png') no-repeat center center;
+                    background:url('../../assets/img/zen/refresh.png') no-repeat center center;
                     background-size: 2rem;
                     cursor: pointer;
                 }
             }
         }
         .list{
-            margin: 0 2.9rem;
+            margin: 1.4rem 1.8rem;
             // height: 27.5rem;
             // overflow-y: auto;
             .infinite-scroll-component{
@@ -121,75 +121,78 @@
             }
             .self{
                 position: fixed;
-                left:1.5rem;
-                right: 1.5rem;
+                left:0;
+                right: 0;
                 bottom:0;
-                background: #C0A373;
+                background: #CAAD95;
+                box-shadow: 0px -2px 0px 0px rgba(0, 0, 0, 0.20);
+            }
+            .item{
+                margin-bottom: 0.5rem;
+                border-radius: 1rem;
+                background: #CD9F77;
             }
             .self, .item{
-                padding: 0.6rem 1.6rem;
+                padding: 1rem;
                 display: flex;
                 align-items: center;
                 cursor: pointer;
                 .num{
                     width:4.6rem;
-                    color: #5B5B5B;
-                    -webkit-text-stroke-width: 1px;
-                    -webkit-text-stroke-color: #272622;
-                    font-family: "Pixeloid PixeloidSans-Bold";
-                    font-size: 1.6rem;
+                    color: #3F3727;
+                    font-family: "LogoSC LongZhuTi";
+                    font-size: 1.4rem;
                     font-style: normal;
                     font-weight: 700;
                     line-height: 2rem;
                     // letter-spacing: -0.58px;
-                    &.num1{
-                        color: #FED000;
-                    }
-                    &.num2{
-                        color: #AE7BCE;
-                    }
-                    &.num3{
-                        color: #E18B3F;
-                    }
+                    // &.num1{
+                    //     color: #FED000;
+                    // }
+                    // &.num2{
+                    //     color: #AE7BCE;
+                    // }
+                    // &.num3{
+                    //     color: #E18B3F;
+                    // }
                 }
                 .user{
                     display: flex;
                     align-items: center;
                     
                     .avatar{
-                        width:3.6rem;
-                        height:3.6rem;
+                        width:2.5rem;
+                        height:2.5rem;
                         background: url() no-repeat center center;
                         background-size: cover;
                     }
                     .name{
-                        margin-left:1.4rem;
-                        width: 9.3rem;
-                        color: #191919;
-                        font-family: "Pixeloid Sans";
-                        font-size: 2rem;
+                        margin-left:1rem;
+                        width: 6.3rem;
+                        color: #3F3027;
+                        font-family: "LogoSC LongZhuTi";
+                        font-size: 1.4rem;
                         font-style: normal;
                         font-weight: 400;
-                        letter-spacing: -0.8px;
                     }
                 }
                 .points{
                     width:16rem;
                     padding-right:2.5rem;
                     background: url("../../assets/img/adventure/coin.png") no-repeat right center;
-                    background-size: 2.2rem;
-                    color: #191919;
-                    font-family: "Pixeloid Sans";
-                    font-size: 2rem;
+                    background-size: contain;
+                    color: #3F3027;
+                    font-family: "LogoSC LongZhuTi";
+                    font-size: 1.4rem;
                     font-style: normal;
                     font-weight: 400;
                     text-align: right;
-                    letter-spacing: -0.66px;
                 }
                 // &:hover{
                 //     background: #303030;
                 // }
             }
+            
             .no-more, .scroll-loading{
                 padding:1.7rem 0;
                 font-family: "Pixeloid Sans";
