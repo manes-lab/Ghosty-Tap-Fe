@@ -23,6 +23,7 @@ const networks = {
 const slushWalletConfig = {
     name: 'Ghosty Tap',
     approveConnectionUrl: 'https://my.slush.app/approve-connection?requestId=',
+    signPersonalMessageUrl: 'https://my.slush.app/sign-personal-message?requestId=',
     iconUrl: 'https://slush.app/favicon.ico',
   };
 

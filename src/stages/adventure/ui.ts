@@ -589,9 +589,6 @@ export class AdventureStageUI extends Stage {
         // this.mainContainer.addChild(mask)
         this.mainContainer.addChild(this.klineContainer)
 
-        
-
-
         this.app.stage.addChild(this.mainContainer)
     }
 

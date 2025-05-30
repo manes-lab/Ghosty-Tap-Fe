@@ -15,7 +15,7 @@ export class Stage {
         this.events[event] = callback
     }
     calcLength = (length:number) => {
-        if(!this.app) return 0;
+        if(!this.app || !this.app?.screen) return 20;
         return this.app.screen.width * length / 750;
     }
 }

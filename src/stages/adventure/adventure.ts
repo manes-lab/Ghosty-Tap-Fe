@@ -102,6 +102,7 @@ export class AdventureStage extends AdventureStageUI {
     }
 
     tick = (data: any) => {
+        console.log("---00000----", data);
         if (!data || this.data.gameStoped) {
             return;
         }
@@ -322,7 +323,7 @@ export class AdventureStage extends AdventureStageUI {
                 this.clockGraph.text = '1';
             }
         }else{
-            // this.clockGraph.text = '3';
+            this.clockGraph.text = '3';
         }
     }
 

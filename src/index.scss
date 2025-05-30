@@ -34,7 +34,7 @@ body {
 #root{
   margin: 0 auto;
   overflow: hidden;
-  // height: 100Vh;
+  height: -webkit-fill-available;
 }
 
 a {

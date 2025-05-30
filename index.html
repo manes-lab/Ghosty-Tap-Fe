@@ -15,7 +15,23 @@
           Math.min((document.documentElement.clientWidth / 375) * 10, 20) + 'px';
       }
       document.addEventListener('DOMContentLoaded', inMobile);
-      window.onresize = inMobile;
+      
+
+
+      function updateHeightDifference() {
+        if(!isMobile()){return}
+
+        const vh = window.innerHeight;
+        const fillAvailable = document.documentElement.clientHeight;
+        const difference = Math.abs(vh - fillAvailable);
+        document.documentElement.style.setProperty('--fill-available', `${fillAvailable}px`);
+        document.documentElement.style.setProperty('--height-difference', `${difference}px`);
+      }
+      updateHeightDifference();
+      window.addEventListener('resize', function(){
+        inMobile()
+        updateHeightDifference()
+      });
     </script>
   </head>
   <body>

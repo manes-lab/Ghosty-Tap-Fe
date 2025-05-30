@@ -1,7 +1,7 @@
 .index-page{
     margin: 0 auto;
     width:100%;
-    height:100vh;
+    height:-webkit-fill-available;
     background: #D2A975;
     position: relative;
     .banner-box{
@@ -301,18 +301,7 @@
 }
 
 
-@media screen and (min-width: 540px) {
-    .ghosty-page, .index-page{
-        width: 375px;
-        height: 778px;
-        position: relative;
-    }
-    html{
-        font-size: 14.4px !important;
-    }
-}
-
-@media screen and (min-height: 778px) {
+@media screen and (min-width: 600px) {
     .ghosty-page, .index-page{
         width: 375px;
         height: 778px;
@@ -323,6 +312,28 @@
     }
 }
 
+// @media screen and (min-height: 1000px) {
+    
+//     .ghosty-page, .index-page{
+//         width: 375px;
+//         height: 778px;
+//         position: relative;
+//     }
+//     html{
+//         font-size: 10px !important;
+        
+//     }
+// }
+
+
+body{
+    &:has(.mobile-ghosty-page){
+        height: 100vh;
+        height: #{-webkit-fill-available};
+        height: calc(min(100vh, #{-webkit-fill-available}));
+        height: 100dvh;
+    }
+}
 
 .ghosty-page{
     margin: 0 auto;
@@ -333,15 +344,22 @@
     overflow: hidden;
     &.mobile-ghosty-page{
         width: 100%!important;
-        height: 100vh!important;
+        height: 100vh;
+        height: #{-webkit-fill-available};
+        height: calc(min(100vh, #{-webkit-fill-available}));
+        height: 100dvh;
         position: relative;
         top: 0;
         left: 0;
         transform: translate(0,0);
         .index-page{
             width: 100%!important;
-            height: 100vh!important;
+            height: 100vh;
+            height: #{-webkit-fill-available};
+            height: calc(min(100vh, #{-webkit-fill-available}));
+            height: 100dvh;
             position: relative;
+            overflow: hidden;
         }
     }
 }
