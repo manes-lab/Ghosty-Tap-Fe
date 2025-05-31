@@ -35,7 +35,6 @@ const slice = createSlice({
       state.showConnectModal = !state.showConnectModal;
     },
     updateAddress: (state, action) => {
-      console.log(action.payload, '----updateAddress----');
       state.address = action.payload;
     },
 

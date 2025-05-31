@@ -66,12 +66,9 @@ self.addEventListener('install', function(event) {
 
 
 // self.addEventListener('push', function(event) {
-//   console.log('00000000000000');
 //   let data = {};
-//   console.log(event);
 //   if (event.data) {
 //       data = event.data.json();
-//       console.log(data);
 //   } else {
 //       data = { title: '默认消息', body: '没有有效的消息内容' };
 //   }

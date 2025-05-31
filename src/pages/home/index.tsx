@@ -13,33 +13,15 @@ import LoadingModule from '../../components/loadingModule';
 
 
 
-
-import leaderboard1 from '../../assets/images/index/leaderboard-1.png';
-import leaderboard2 from '../../assets/images/index/leaderboard-2.png';
-import leaderboard3 from '../../assets/images/index/leaderboard-3.png';
-import battle1 from '../../assets/images/index/battle-1.png';
-import battle2 from '../../assets/images/index/battle-2.png';
-import profile1 from '../../assets/images/index/profile-1.png';
-import profile2 from '../../assets/images/index/profile-2.png';
-import invite1 from '../../assets/images/index/invite-1.png';
-import invite2 from '../../assets/images/index/invite-2.png';
-import coin1 from '../../assets/images/index/coin-1.png';
-import coin2 from '../../assets/images/index/coin-2.png';
-import stick1 from '../../assets/images/index/stick-1.png';
-import stick2 from '../../assets/images/index/stick-2.png';
-
-
-
-
 const Home: React.FC = () => {
   const wallets = useWallets();
   const currentAccount = useCurrentAccount();
   const { mutate: disconnect } = useDisconnectWallet({
     onSuccess: () => {
-      console.log('已退出登录');
+      console.log('disconnect success');
     },
     onError: (err) => {
-      console.error('退出失败:', err);
+      console.error('disconnect error:', err);
     },
   });
 
@@ -58,10 +40,6 @@ const Home: React.FC = () => {
   const [list, setList] = useState([]);
   const [totalCoin, setTotalCoin] = useState(0);
   let init = true;
-
-  useEffect(() => {
-    console.log(currentAccount, '------currentAccount----');
-  },[currentAccount])
   
 
   useEffect(() => {
@@ -206,7 +184,7 @@ const Home: React.FC = () => {
           {list.map((item:any, index) => {
             return (
               <div className="item" key={index}>
-                <div className={["num", "num"+(index+1)].join(" ")}>{index + 1}</div>
+                <div className={["num", "num"+(index+1)].join(" ")}></div>
                 <div className="user">
                   {/* <img className="avatar" src={`/img/avatar${item.user?.avatar}.png`}></img> */}
                   <div className="name txt-wrap">{item.user?.user_id?.slice(-6)}</div>
@@ -249,24 +227,6 @@ const Home: React.FC = () => {
 
     {isLoading && <LoadingModule  onClose={() => {}}/>}
     {/* {showInviteSuccess && <InviteSuccessModule props={{rewards:inviteRewards, inviteUserInfo}} onClose={() => {setInviteSuccessStatus(false);initRankData()}}/>} */}
-
-
-
-    <div className="img-loader">
-      <img src={leaderboard1}/>
-      <img src={leaderboard2}/>
-      <img src={leaderboard3}/>
-      <img src={battle1}/>
-      <img src={battle2}/>
-      <img src={profile1}/>
-      <img src={profile2}/>
-      <img src={invite1}/>
-      <img src={invite2}/>
-      <img src={coin1}/>
-      <img src={coin2}/>
-      <img src={stick1}/>
-      <img src={stick2}/>
-    </div>
 
     
   </div>

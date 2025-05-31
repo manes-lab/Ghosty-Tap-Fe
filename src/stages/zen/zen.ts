@@ -58,7 +58,6 @@ export class ZenStage extends ZenStageUI {
         super()
         this.data.instId = options.instId;
         this.data.address = options.address
-        console.log(options, '---options---');
     }
 
     load = async (elementId: string, preference: "webgl" | "webgpu" | undefined) => {
@@ -173,7 +172,7 @@ export class ZenStage extends ZenStageUI {
             game_id: this.data.gameId,
             timestamp: new Date().getTime(),
         }).then((res) => {
-            console.log(res)
+            console.log(res, "---submitData res---")
         })
         if (this.data.curCoin >= MAX_COIN) {
             this.data.cd = COOLING_DOWN

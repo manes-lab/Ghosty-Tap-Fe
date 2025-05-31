@@ -38,11 +38,10 @@ export const MainLayout : React.FC<propsType> = (props) => {
     // const connectWalletMutation = useConnectWallet();
     const { mutate: connectWallet } = useConnectWallet({
         onSuccess: (result) => {
-            console.log('连接成功:', result);
             dispatch(toggleConnectModal(null));
         },
         onError: (err) => {
-            console.error('连接失败:', err);
+            console.error('connect error:', err);
         },
     });
 
@@ -152,7 +151,6 @@ export const MainLayout : React.FC<propsType> = (props) => {
 
         let token = localStorage.getItem("ghosty-tap-"+account) || "";
 
-        console.log(currentAccount, account, token, '====currentAccount====');
         if(account && !token){
             (async () => {
                 const message = `Sign in with Sui Wallet`;

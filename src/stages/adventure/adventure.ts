@@ -54,7 +54,6 @@ export class AdventureStage extends AdventureStageUI {
         super();
         this.data.instId = options.instId;
         this.data.address = options.address;
-        console.log(options, '---options---');
     }
 
     load = async (elementId: string, preference: "webgl" | "webgpu" | undefined) => {
@@ -102,7 +101,6 @@ export class AdventureStage extends AdventureStageUI {
     }
 
     tick = (data: any) => {
-        console.log("---00000----", data);
         if (!data || this.data.gameStoped) {
             return;
         }
@@ -451,7 +449,6 @@ export class AdventureStage extends AdventureStageUI {
     }
 
     updatePlayersPanel = async (arr:Array<any>, count:number) => {
-        console.log(count, '----count---');
         this.playerGraph.text = count;
         this.playerAvatarContainer.removeChildren();
         this.playerAvatarContainer.boundsArea = new Rectangle(0, 0, this.calcLength(72 +  43 * (arr.length - 1)), this.calcLength(72));
@@ -477,7 +474,6 @@ export class AdventureStage extends AdventureStageUI {
     }
 
     makeChoice = (choose:string) => {
-        console.log("---makeChoice---", choose);
         this.data.selectStep = this.data.curStep >= 9 ? 1 : (this.data.curStep + 1);
         this.data.selectStep < 3 && this.earlyBounsFlying(choose);
         this.data.selectStep <= 3 && this.coinReduceFlying();

@@ -237,7 +237,7 @@ const Game: React.FC = () => {
       {curModule == 'reconnection' &&  <ReconnectionModule onClose={backHome} onConnect={()=>{changeStage()}}/>}
       {curModule == 'leaderboard' && <LeaderboardModule props={{stage: location.state?.mode}} onClose={() => {setCurModule('')}} onShowUser={showUser}/>}
       {curModule == 'adventure-online-players' && <AdventureOnlinePlayersModule props={{stage: location.state?.mode}} onClose={() => {setCurModule('')}} onShowUser={showUser}/>}
-      {curModule == 'zen-online-players' && <ZenOnlinePlayersModule props={{stage: location.state?.mode}} onClose={() => {console.log('close zen online');setCurModule('')}} onShowUser={showUser}/>}
+      {curModule == 'zen-online-players' && <ZenOnlinePlayersModule props={{stage: location.state?.mode}} onClose={() => {setCurModule('')}} onShowUser={showUser}/>}
 
       
       

@@ -15,18 +15,16 @@ console.log(pomelo, '----pomelo----');
 // let url = "ws://13.228.213.110"
 export async function enterSquare(data: any) {
     return await new Promise((resolve, reject) => {
-        console.log('----pomelo.init----');
         pomelo.init({
             // url,
             // path: "",
             log: true
         }, function() {
             var route = "connector.entryHandler.enterSquare";
-            console.log('---connector.entryHandler.enterSquare----');
             pomelo.request(route, {
                 ...data
             }, function(data: any) {
-                console.log('--hhhhhhh----');
+                console.log('---enterSquare success----');
                 // if(data.error) {
                 //     reject({data, success: false})
                 // }
@@ -95,9 +93,7 @@ export async function submitData(mode:string, params:any) {
             route = "battle.base.submitBattleAdventureGameData"
         }
 
-        console.log(route, params, '----submitData route----');
         pomelo.request(route, params, function(data: any) {
-            console.log(data, "-----submitData data----");
             if(data.error) {
                 
                 reject(data)

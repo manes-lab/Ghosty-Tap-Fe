@@ -1,21 +1,9 @@
 import {Container, Assets, Sprite, Graphics, Text, Rectangle, AnimatedSprite, TilingSprite, BitmapText } from 'pixi.js';
 import { Stage } from '../base';
 
-// import img_home from '../../assets/images/adventure/ic-home.png';
-// import img_leaderboard from '../../assets/images/adventure/ic-leaderboard.png';
-// import img_coin from '../../assets/images/common/ic-coin.png';
-// import bg_coin from '../../assets/images/zen/bg-coin.png';
-// import ic_open from '../../assets/images/zen/ic-open.png';
 import img_mail from '../../assets/images/battle/ic-mail.png';
 import img_mail_message from '../../assets/images/battle/ic-mail-message.png';
 
-// import progress_bottom from '../../assets/images/zen/progress-bottom.png'
-// import progress_cover from '../../assets/images/zen/progress-cover.png'
-// import progress_head from '../../assets/images/zen/progress-head.png'
-// import digits_bottom from '../../assets/images/zen/digits.png'
-// import recharging_coin from '../../assets/images/common/ic-coin.png'
-import img_crack from '../../assets/images/zen/crack.png'
-// import progress_stripe_bottom from '../../assets/images/zen/stripe-bottom.png'
 
 
 import progress_bottom from '../../assets/img/zen/progress-bottom.png'

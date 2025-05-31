@@ -16,7 +16,6 @@ const Game: React.FC = () => {
             battleOver = true
         })
         Pomelo.addListener("inviteBattle", async (msg: any) => {
-            console.log(msg, "inviteBattle")
             // const info = await api.get_invitation_for_battle({invite_id: msg.invite_id})
             const res: any = await Pomelo.dealBattleInvitation(msg.invite_id, "Accept")
             console.log(res)

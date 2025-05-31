@@ -67,7 +67,6 @@ export class BattleStage extends BattleStageUI {
     constructor(options: any) {
         super();
         this.data.address = options.address
-        console.log(options, '---options---');
         this.data.rewards = options.coins;
         this.data.instId = options.instId;
         this.data.gameId = options._id;
@@ -169,7 +168,6 @@ export class BattleStage extends BattleStageUI {
     }
 
     tick = () => {
-        console.log(this.data.gameStoped, this.data.settlement)
         if (this.data.gameStoped) {
             if (this.data.settlement) {
                 // ws.close()
@@ -198,7 +196,6 @@ export class BattleStage extends BattleStageUI {
             const lastIndex = bars1s.length - 5
             let win = false
             let result:number = 0;
-            console.log(bars1s)
             if (((bars1s[lastIndex][OPEN] < bars1s[curIndex][CLOSE]) && (this.data.selection == 1)) || ((bars1s[lastIndex][OPEN] > bars1s[curIndex][CLOSE]) && (this.data.selection == -1))) { //win
                 result = 1;
                 win = true

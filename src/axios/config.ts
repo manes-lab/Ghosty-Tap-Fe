@@ -52,7 +52,6 @@ export async function get(method: any, data: any) {
 
 export async function post(method: string, data: any) {
   const state = store.getState().moduleSlice;
-  console.log(state, '----state------');
   try {
     return axios.post(
       "/api/v1/" + method, 

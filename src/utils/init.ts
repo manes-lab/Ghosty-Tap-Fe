@@ -13,7 +13,6 @@ export async function init() {
 
 export async function initUser(account:string, token:string) {
     if (account && token) {
-        console.log("----enterSquare----")
         await Pomelo.enterSquare({
             user_id: account,
             token
