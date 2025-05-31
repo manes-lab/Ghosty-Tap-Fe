@@ -62,6 +62,7 @@ const Game: React.FC = () => {
 
   useEffect(() => {
     (async () => {
+
       const mode = location.state?.mode || 'adeventure'
       const t = location.state?.token || 'btc'
       const options = location.state?.options || {}
@@ -177,6 +178,7 @@ const Game: React.FC = () => {
   const destroyStage = async () => {
     try {
       await curStage?.destroy()
+      
     } catch (e) { 
       console.log(e)
     }

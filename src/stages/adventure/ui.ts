@@ -1,40 +1,7 @@
 import {Container, Assets, Sprite, Graphics, GraphicsContext, Text, Rectangle, AnimatedSprite, Texture, RenderContainer, Bounds, BitmapFont, BitmapText, TextStyle, CLEAR } from 'pixi.js';
 import { Stage } from '../base';
-// import img_home from '../../assets/images/zen/ic-home.png';
-// import img_leaderboard from '../../assets/images/zen/ic-leaderboard.png';
 
-// import img_clock from '../../assets/images/adventure/ic-clock.png';
-import clock_img_0 from '../../assets/images/adventure/ic-0.png';
-import clock_img_1 from '../../assets/images/adventure/ic-1.png';
-import clock_img_2 from '../../assets/images/adventure/ic-2.png';
-import clock_img_3 from '../../assets/images/adventure/ic-3.png';
-
-// import img_history from '../../assets/images/adventure/ic-history.png';
-// import img_coin from '../../assets/images/common/ic-coin.png';
-// import bg_coin from '../../assets/images/adventure/bg-coin.png';
-import ic_open from '../../assets/images/adventure/ic-open.png';
-// import img_mail from '../../assets/images/battle/ic-mail.png';
 import img_mail_message from '../../assets/images/battle/ic-mail-message.png';
-
-import early_bouns from '../../assets/images/adventure/early-bouns.png';
-
-import bg_before_choose from '../../assets/images/adventure/bg-before-choose.png';
-import bg_after_choose from '../../assets/images/adventure/bg-after-choose.png';
-
-import bg_result_bullish from '../../assets/images/adventure/bg-result-bullish.png';
-import bg_result_bearish from '../../assets/images/adventure/bg-result-bearish.png';
-import bg_result_neutral from '../../assets/images/adventure/bg-result-neutral.png';
-
-import img_win from '../../assets/images/adventure/img-win.png';
-import img_lose from '../../assets/images/adventure/img-lose.png';
-import bg_lose_line_short from '../../assets/images/adventure/bg-lose-line-short.png';
-import bg_lose_line_long from '../../assets/images/adventure/bg-lose-line-long.png';
-import bg_result_draw from '../../assets/images/adventure/bg-result-draw.png';
-import bg_result_no_bet from '../../assets/images/adventure/bg-result-no-bet.png';
-
-
-
-
 
 
 import img_header from '../../assets/img/adventure/header.jpg';

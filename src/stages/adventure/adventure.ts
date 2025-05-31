@@ -61,7 +61,6 @@ export class AdventureStage extends AdventureStageUI {
         await super.load(elementId, preference)
         this.data.gameStoped = false
         this.initConnect();
-
         // alert("2-before  get_user_status")
         api.get_user_status({
             user_id:  this.data.address ,
@@ -76,9 +75,7 @@ export class AdventureStage extends AdventureStageUI {
         //         resolve(1)
         //     }, 2000)
         // })
-
         ws.initWebSocket(this.data.instId, this.tick)
-
         // alert("4-after  initWebSocket")
         
         this.app.ticker.add(() => {
@@ -93,14 +90,15 @@ export class AdventureStage extends AdventureStageUI {
     }
     
 
-    destroy = async () => {
-        this.data.gameStoped = true
-        ws.close()
-        Pomelo.leaveSpace();
-        await super.destroy()
-    }
+    // destroy = async () => {
+    //     this.data.gameStoped = true
+    //     ws.close()
+    //     Pomelo.leaveSpace();
+    //     await super.destroy()
+    // }
 
     tick = (data: any) => {
+        console.log(data, this.data.gameStoped, "---tick-----");
         if (!data || this.data.gameStoped) {
             return;
         }
@@ -605,6 +603,7 @@ export class AdventureStage extends AdventureStageUI {
     }
 
     setBarsGraph = () => {
+        console.log("---setBarsGraph-----");
         this.klineContainer.x = this.calcLength(52);
 
         let bars = this.getDisplayBars()
@@ -673,6 +672,7 @@ export class AdventureStage extends AdventureStageUI {
                     lastY = lastY - h
                 }
             }
+            console.log(this.barGraphics, '-------');
         } 
 
         this.data.lastPos = {

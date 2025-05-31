@@ -7,7 +7,6 @@ let lastTime = 0
 
 export function initWebSocket(instId: string, callback: Function) {
     ws?.close()
-
     // let url = `wss://${window.location.host}/ws`
     // if (window.location.protocol == "http:") {
     //   url = `ws://${window.location.host}/ws`
@@ -16,7 +15,6 @@ export function initWebSocket(instId: string, callback: Function) {
     let url = "wss://ws.okx.com:8443/ws/v5/business"
     
     ws = new WebSocket(url);
-
     let channels = [
         {"channel": "candle1s", "instId": instId + "-SWAP"},
     ]
@@ -26,7 +24,6 @@ export function initWebSocket(instId: string, callback: Function) {
         console.log("websocket initialized")
         ws?.send(JSON.stringify(subParam))
     };
-
     ws.onmessage = (e: any) => {
         const data = e.data.indexOf("{")>-1 ? JSON.parse(e.data).data : null;
         callback(data)
