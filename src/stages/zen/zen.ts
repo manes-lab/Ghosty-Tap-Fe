@@ -100,7 +100,7 @@ export class ZenStage extends ZenStageUI {
     destroy = async () => {
         this.data.gameStoped = true
         ws.close()
-        Pomelo.leaveSpace();
+        Pomelo.leaveSpace(this.data.address);
         this.app.destroy({removeView: true}, {children: true});
     }
 
@@ -130,10 +130,10 @@ export class ZenStage extends ZenStageUI {
             'eth': 'Ethererum',
             'ton': 'Ton',
         }
-        const token = tradingPairMap[this.data.instId.split("-")[0].toLowerCase()]
+        const tradingPair = tradingPairMap[this.data.instId.split("-")[0].toLowerCase()]
         const res = await api.create_game({
             type: "zen",
-            trading_pair: token
+            trading_pair: tradingPair
         })
         if (!res.success) {
             this.events["changeModule"]("reconnection");
@@ -141,7 +141,7 @@ export class ZenStage extends ZenStageUI {
         }
         this.data.gameId = res.data._id
 
-        await Pomelo.enterSpace("zen", token)
+        await Pomelo.enterSpace("zen", tradingPair, this.data.address)
 
         Pomelo.addListener("onAdd", (data: any) => { 
             data.space == 'zen' && this.updateOnlinePlayers();
@@ -171,7 +171,7 @@ export class ZenStage extends ZenStageUI {
         Pomelo.submitData('zen', {
             game_id: this.data.gameId,
             timestamp: new Date().getTime(),
-        }).then((res) => {
+        }, this.data.address).then((res) => {
             console.log(res, "---submitData res---")
         })
         if (this.data.curCoin >= MAX_COIN) {

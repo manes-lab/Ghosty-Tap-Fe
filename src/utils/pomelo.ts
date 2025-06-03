@@ -23,22 +23,24 @@ export async function enterSquare(data: any) {
             var route = "connector.entryHandler.enterSquare";
             pomelo.request(route, {
                 ...data
-            }, function(data: any) {
-                console.log('---enterSquare success----');
-                // if(data.error) {
-                //     reject({data, success: false})
-                // }
-                // resolve({data, success: true})
+            }, function(res: any) {
+                console.log(data, res, '---enterSquare----');
+                if(res.error) {
+                    reject({res, success: false})
+                }
+                resolve({res, success: true})
             });
         });
     })
 }
 
-export async function leaveSquare() {
+export async function leaveSquare(account: string) {
     let route = "connector.entryHandler.leaveSquare"
     await new Promise((resolve, reject) => {
         pomelo.request(route, {
+             token: localStorage.getItem("ghosty-tap-"+account) || ""
         }, function(data: any) {
+            console.log(data, '---leaveSquare----');
             pomelo.addListener("disconnect", () => {
                 resolve(null)
             })
@@ -56,13 +58,17 @@ export function removeListener(route: string) {
     pomelo.removeListener(route)
 }
 
-export async function enterSpace(type: string, tradingPair: string) {
+export async function enterSpace(type: string, tradingPair: string, account: string) {
     return await new Promise((resolve, reject) => {
         let route = "space.base.enterSpace"
         pomelo.request(route, {
             type,
             tradingPair,
+            token: localStorage.getItem("ghosty-tap-"+account) || ""
         }, function(data: any) {
+            console.log( type,
+                tradingPair,
+                localStorage.getItem("ghosty-tap-"+account), data, '---enterSpace----');
             if(data.error) {
                 reject({data, success: false})
             }
@@ -71,11 +77,13 @@ export async function enterSpace(type: string, tradingPair: string) {
     })
 }
 
-export async function leaveSpace() {
+export async function leaveSpace(account: string) {
     return await new Promise((resolve, reject) => {
         let route = "space.base.leaveSpace"
         pomelo.request(route, {
         }, function(data: any) {
+            console.log(
+                localStorage.getItem("ghosty-tap-"+account), data, '---leaveSpace----');
             if(data.error) {
                 reject({data, success: false})
             }
@@ -84,7 +92,7 @@ export async function leaveSpace() {
     })
 }
 
-export async function submitData(mode:string, params:any) {
+export async function submitData(mode:string, params:any, account: string) {
     return await new Promise((resolve, reject) => {
         let route = "space.base.submitZenGameData"
         if (mode == "adventure") {
@@ -94,6 +102,8 @@ export async function submitData(mode:string, params:any) {
         }
 
         pomelo.request(route, params, function(data: any) {
+            console.log(params,
+                localStorage.getItem("ghosty-tap-"+account), data, '---submitData----');
             if(data.error) {
                 
                 reject(data)

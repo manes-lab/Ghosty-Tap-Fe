@@ -90,15 +90,15 @@ export class AdventureStage extends AdventureStageUI {
     }
     
 
-    // destroy = async () => {
-    //     this.data.gameStoped = true
-    //     ws.close()
-    //     Pomelo.leaveSpace();
-    //     await super.destroy()
-    // }
+    destroy = async () => {
+        this.data.gameStoped = true
+        ws.close()
+        Pomelo.leaveSpace(this.data.address);
+        await super.destroy()
+    }
 
     tick = (data: any) => {
-        console.log(data, this.data.gameStoped, "---tick-----");
+        // console.log(data, this.data.gameStoped, "---tick-----");
         if (!data || this.data.gameStoped) {
             return;
         }
@@ -228,17 +228,17 @@ export class AdventureStage extends AdventureStageUI {
             'eth': 'Ethererum',
             'ton': 'Ton',
         }
-        const token = tradingPairMap[this.data.instId.split("-")[0].toLowerCase()]
+        const tradingPair = tradingPairMap[this.data.instId.split("-")[0].toLowerCase()]
         const res = await api.create_game({
             type: "adventure",
-            trading_pair: token
+            trading_pair: tradingPair
         })
         if (!res.success) {
             this.events["changeModule"]("reconnection");
             return
         }
         this.data.gameId = res.data._id
-        await Pomelo.enterSpace("adventure", token);
+        await Pomelo.enterSpace("adventure", tradingPair, this.data.address);
 
         Pomelo.addListener("onAdd", (data: any) => { 
             data.space == 'adventure' && this.updateOnlinePlayers();
@@ -285,7 +285,7 @@ export class AdventureStage extends AdventureStageUI {
             game_id: this.data.gameId,
             time : this.data.selectStep,
             timestamp: new Date().getTime(),
-        }).then((res) => {
+        }, this.data.address).then((res) => {
             
         })
     }
@@ -477,7 +477,6 @@ export class AdventureStage extends AdventureStageUI {
         this.data.selectStep <= 3 && this.coinReduceFlying();
 
         if(choose != 'nobet'){
-            console.log(this.data.coin, this.data.coin < 100)
             if(this.data.coin < 100){
                 this.events["changeModule"]("insufficient-balance");
                 return;
@@ -672,7 +671,6 @@ export class AdventureStage extends AdventureStageUI {
                     lastY = lastY - h
                 }
             }
-            console.log(this.barGraphics, '-------');
         } 
 
         this.data.lastPos = {

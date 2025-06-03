@@ -6,7 +6,9 @@ let ws: WebSocket | undefined;
 let lastTime = 0
 
 export function initWebSocket(instId: string, callback: Function) {
-    ws?.close()
+    // ws?.close()
+    console.log(ws, '--------');
+    ws?.close(1000, "force")
     // let url = `wss://${window.location.host}/ws`
     // if (window.location.protocol == "http:") {
     //   url = `ws://${window.location.host}/ws`

@@ -139,7 +139,7 @@ export const MainLayout : React.FC<propsType> = (props) => {
             }
         })()
         return () => {
-            Pomelo.leaveSquare()
+            Pomelo.leaveSquare(currentAccount?.address || '')
         }
     },[])
 
