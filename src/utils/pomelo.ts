@@ -6,8 +6,6 @@ declare global {
 }
 
 const pomelo = window.pomelo
-console.log(pomelo, '----pomelo----');
-
 // let url = `wss://${window.location.host}`
 // if (window.location.protocol == "http:") {
 //     url = `ws://${window.location.host}`
@@ -102,10 +100,7 @@ export async function submitData(mode:string, params:any, account: string) {
         }
 
         pomelo.request(route, params, function(data: any) {
-            console.log(params,
-                localStorage.getItem("ghosty-tap-"+account), data, '---submitData----');
             if(data.error) {
-                
                 reject(data)
             }
             resolve(data)

@@ -171,10 +171,12 @@ export const MainLayout : React.FC<propsType> = (props) => {
                     token = res.data?.token || ''
                     localStorage.setItem("ghosty-tap-"+account, token);
                 }
-            })()
-        }
 
-        initUser(account, token);
+                initUser(account, token);
+            })()
+        }else{
+            initUser(account, token);
+        }
     },[currentAccount])
 
 

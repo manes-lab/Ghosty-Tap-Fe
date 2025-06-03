@@ -61,9 +61,10 @@ export class ZenStage extends ZenStageUI {
     }
 
     load = async (elementId: string, preference: "webgl" | "webgpu" | undefined) => {
+        ws.initWebSocket(this.data.instId, this.tick)
+        
         await super.load(elementId, preference)
         this.data.gameStoped = false
-        this.initConnect();
 
         const res = await api.get_user_status({
             user_id: this.data.address,
@@ -80,7 +81,7 @@ export class ZenStage extends ZenStageUI {
         // })
 
 
-        ws.initWebSocket(this.data.instId, this.tick)
+        await this.initConnect();
         this.app.ticker.add(() => {
             this.coinGraph.text = `${formatNumber(this.data.coin)}`
             if (this.data.cd > 0) {
@@ -94,7 +95,9 @@ export class ZenStage extends ZenStageUI {
             }
         })
 
+        
         this.events["load"]();
+        
     }
 
     destroy = async () => {
