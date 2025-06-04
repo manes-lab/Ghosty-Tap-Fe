@@ -19,6 +19,7 @@
     "antd": "^5.16.4",
     "axios": "^1.6.8",
     "better-scroll": "^2.5.1",
+    "buffer": "^6.0.3",
     "copy-to-clipboard": "^3.3.3",
     "js-base64": "^3.7.7",
     "lodash": "^4.17.21",

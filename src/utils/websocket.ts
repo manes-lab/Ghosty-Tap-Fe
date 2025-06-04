@@ -37,7 +37,7 @@ export function initWebSocket(instId: string, callback: Function) {
                 return
             }
             console.log('close');
-            initWebSocket(instId, callback)
+            // initWebSocket(instId, callback)
         };
     }, 1000)
 }

@@ -1,6 +1,5 @@
 import { ConnectModal, useCurrentAccount, useConnectWallet, useSignPersonalMessage  } from '@mysten/dapp-kit';
-import { verifyPersonalMessageSignature, verifySignature, verifyTransactionSignature, publicKeyFromRawBytes, publicKeyFromSuiBytes } from '@mysten/sui/verify';
-
+import { verifyPersonalMessageSignature } from '@mysten/sui/verify';
 
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,16 +16,6 @@ import BattleInvitation from "../components/battle/battleInvitationModule";
 import RejectBattleModule from "../components/battle/rejectBattleModule";
 import InviteSuccessModule from '../components/inviteSuccessModule';
 
-import largeBtn1 from '../assets/images/common/large-btn-1.png';
-import largeBtn2 from '../assets/images/common/large-btn-2.png';
-import btn1 from '../assets/images/common/btn-1.png';
-import btn2 from '../assets/images/common/btn-2.png';
-import greenBtn1 from '../assets/images/common/green-btn-1.png';
-import greenBtn2 from '../assets/images/common/green-btn-2.png';
-import smallWhiteBtn1 from '../assets/images/common/small-white-btn-1.png';
-import smallWhiteBtn2 from '../assets/images/common/small-white-btn-2.png';
-import smallGreenBtn1 from '../assets/images/common/small-green-btn-1.png';
-import smallGreenBtn2 from '../assets/images/common/small-green-btn-2.png';
  
 interface  propsType{
     children: React.ReactNode  
@@ -145,7 +134,6 @@ export const MainLayout : React.FC<propsType> = (props) => {
 
 
     useEffect(() => {
-        
         const account = currentAccount?.address || "";
         dispatch(updateAddress(account));
 
@@ -154,12 +142,16 @@ export const MainLayout : React.FC<propsType> = (props) => {
         if(account && !token){
             (async () => {
                 const message = `Sign in with Sui Wallet`;
+                const rawMessageBytes = new TextEncoder().encode(message);
+
                 const signedResult = await signPersonalMessage.mutateAsync({
-                    message: new TextEncoder().encode(message),
+                    message: rawMessageBytes,
                 });
-                const isValid = await verifyPersonalMessageSignature(new TextEncoder().encode(message), signedResult.signature, {
+
+                const isValid = await verifyPersonalMessageSignature(rawMessageBytes, signedResult.signature, {
                     address:  account
                 });
+
 
                 const res = await api.get_user_token({
                     address: account,
@@ -240,18 +232,6 @@ export const MainLayout : React.FC<propsType> = (props) => {
 
             {showInviteSuccess && <InviteSuccessModule props={{rewards:inviteRewards, inviteUserInfo}} onClose={() => {setInviteSuccessStatus(false);}}/>}
 
-            <div className="img-loader">
-                <img src={largeBtn1}/>
-                <img src={largeBtn2}/>
-                <img src={btn1}/>
-                <img src={btn2}/>
-                <img src={greenBtn1}/>
-                <img src={greenBtn2}/>
-                <img src={smallGreenBtn1}/>
-                <img src={smallGreenBtn2}/>
-                <img src={smallWhiteBtn1}/>
-                <img src={smallWhiteBtn2}/>
-            </div>
             <ConnectModal
                 open={state.showConnectModal}
                 onOpenChange={() => {dispatch(toggleConnectModal(null));}}
