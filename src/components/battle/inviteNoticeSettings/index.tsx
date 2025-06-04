@@ -57,7 +57,7 @@ const Settings: React.FC<{
 
 
   return <div className="mask settings-mask" id="settings-mask" onClick={close}>
-    <div className="module settings-module" id="settings-module" onClick={(event) => {event.stopPropagation();}}>
+    <div className="settings-module" id="settings-module" onClick={(event) => {event.stopPropagation();}}>
       <div className="close-btn" onClick={close}></div>
       <div className="title">Settings</div>
       <div className="module-content">

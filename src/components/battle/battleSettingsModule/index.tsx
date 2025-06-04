@@ -147,7 +147,7 @@ const BattleSettings: React.FC<{
 
 
   useEffect(() => {
-    props.data.type == 'share-link' && 
+    props.data?.type == 'share-link' && 
     api.get_invite_code({
       user_id: currentAccount?.address,
     }).then(res => {
@@ -325,7 +325,7 @@ const BattleSettings: React.FC<{
 
 
   return <div className="mask battle-settings-mask">
-    <div className="module battle-settings-module" ref={battleSettingsModule}>
+    <div className="battle-settings-module" ref={battleSettingsModule}>
       <div className="close-btn" onClick={onClose}></div>
       <div className="title">
         Battle Settings
@@ -333,12 +333,12 @@ const BattleSettings: React.FC<{
       </div>
       <div className="module-content">
         <div className="mini-title">1.Choose the trading pair</div>
-        <Dropdown overlayClassName={"trading-pair-dropdown-list"} menu={{ items: menuItems }} placement="bottom" arrow>
+        {/* <Dropdown overlayClassName={"trading-pair-dropdown-list"} menu={{ items: menuItems }} placement="bottom" arrow> */}
           <div className={["current-tab", currentPair.toLowerCase()].join(" ")}>
             {currentPair}
             <span>{tradingPairMap[currentPair]}</span>
           </div>
-        </Dropdown>
+        {/* </Dropdown> */}
 
 
         <div className="mini-title">2.Set the bet amount</div>
@@ -352,7 +352,7 @@ const BattleSettings: React.FC<{
         {/* getPopupContainer={() => document.body} tooltipProp={tooltipProp} */}
         
         {
-          props.data.type == 'share-link' ? <>
+          props.data?.type == 'share-link' ? <>
             {/* <textarea
               ref={textAreaRef}
               style={{ position: 'absolute', left: '-9999px' }}
@@ -377,7 +377,6 @@ const BattleSettings: React.FC<{
             </div>
           </> : (
             (hasSentRequest || battleRewards <= 0) ? <div className="confirm-btn disabled">Request Sent {hasSentRequest && <>({leftTime}s)</>}</div> : <div className="confirm-btn" onClick={sendRequest}>Send a Battle Request</div>
-            
           )
         }
       </div>

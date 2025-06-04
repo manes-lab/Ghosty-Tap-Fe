@@ -19,10 +19,10 @@ const LeaveBattle: React.FC<{
 
 
   return <div className="mask" onClick={onClose}>
-    <div className="module  leave-battle-module" onClick={(event) => {event.stopPropagation();}}>
+    <div className="leave-battle-module" onClick={(event) => {event.stopPropagation();}}>
       <div className="close-btn" onClick={onClose}></div>
       <div className="module-content">
-        <div className="leave-tip">If you leave now, you <br/> will lose</div>
+        <div className="leave-tip">If you leave now, you will lose</div>
         <div className="battle-rewards">
           {formatNumber(props.battleInfo.coins)}
           <div className="coin"></div>

@@ -9,7 +9,15 @@
 }
 
 .settings-module{
-    padding: 3rem 0 3rem 3rem!important;
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
+    width: 33.5rem;
+    padding: 3rem;
+    background: #BD8D64;
+    border-radius: 1.5rem;
+    border: 3px solid #60483A;
     -webkit-animation:  Show 0.6s ease both;
     animation:  Show 0.6s ease both;
     cursor: default;
@@ -23,75 +31,71 @@
         right:2rem;
         width:1.8rem;
         height:1.8rem;
-        background: url('../../../assets/images/common/ic-close.png') no-repeat center center;
+        background: url('../../../assets/img/common/close.png') no-repeat center center;
         background-size: 1.8rem;
         cursor: pointer;
     }
     .title{
-        padding-bottom:1.5rem;
-        font-family: SourceCodePro-Bold;
-        font-size: 1.7rem;
-        color: #FFFFFF;
-        line-height: 2.1rem;
-        font-weight: 700;
+        color: #3F3027;
+        font-family: Gagalin;
+        font-size: 2.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
     .mini-title{
-        margin-top:3rem;
-        font-family: SourceCodePro-Regular;
+        margin-top:4rem;
+        font-family: "LogoSC LongZhuTi";
         font-size: 1.2rem;
-        color: #FFFFFF;
+        color: #3F3027;
         letter-spacing: 0;
-        line-height: 1.7rem;
+        line-height: normal;
         font-weight: 400;
         &:first-child{
-            margin-top:1.5rem;
+            margin-top:3rem;
         }
     }
 
     .btn-group{
         margin-top:1.2rem;
-        width:11.6rem;
         display: flex;
-        justify-content: center;
-        background: #0E0E0E;
-        clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+        align-items: center;
         .btn{
-            width:5.8rem;
-            height:2.8rem;
-            background: rgba(255,255,255,0.1);
-            font-family: SourceCodePro-Medium;
-            font-size: 1.3rem;
-            color: #FFFFFF;
-            letter-spacing: 0;
-            text-align: center;
-            font-weight: 500;
-            line-height:2.8rem;
+            width:12.3rem;
+            height:3.2rem;
+            padding-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Gagalin;
+            font-size: 1.4rem;
+            color: #282722;
             cursor: pointer;
             &.active{
-                background: #FFFFFF;
-                color: #000000;
-                clip-path: polygon(0.4rem 0.4rem, 0.4rem 0, calc(100% - 0.4rem) 0, calc(100% - 0.4rem) 0.4rem, 100% 0.4rem, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) calc(100% - 0.4rem),calc(100% - 0.4rem) 100%,  0.4rem 100%, 0.4rem calc(100% - 0.4rem), 0 calc(100% - 0.4rem), 0 0.4rem);
+                background: url('../../../assets/img/common/small-yellow-btn-bg.png') no-repeat center center;
+                background-size: contain;
             }
-            
         }
     }
     
     
     .save-btn{
-        margin-top:3rem;
-        width:27.5rem;
-        height:5rem;
-        background: url('../../../assets/images/common/btn-2.png') no-repeat center bottom;
-        background-size: 100%;
-        -webkit-animation: Btn 1s ease infinite;
-        animation: Btn 1s ease infinite;
-        font-family: SourceCodePro-Medium;
-        font-size: 1.4rem;
-        color: #000000;
-        letter-spacing: 0;
-        text-align: center;
-        font-weight: 500;
-        line-height:4.2rem;
+        margin:7rem auto 0;
+        width:18.6rem;
+        height:3.2rem;
+        padding-bottom: 0.4rem;
+        background: url('../../../assets/img/common/gray-btn-bg.png') no-repeat center center;
+        background-size: contain;
         cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #282722;
+        font-family: Gagalin;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 }

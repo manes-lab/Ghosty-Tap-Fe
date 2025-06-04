@@ -14,7 +14,9 @@ const BattleInvitation: React.FC<{
   const navigate = useNavigate();
   const currentAccount = useCurrentAccount();
   const [battleUser, setBattleUser] = useState({});
-  const [inviteInfo, setInviteInfo] = useState({});
+  const [inviteInfo, setInviteInfo] = useState({
+    trading_pair: 'Bitcoin'
+  });
   const [currentTab, setCurrentTab] = useState('battle');
   const [block, setBlockStatus] = useState(false);
   const [leftTime, setLeftTime] = useState(30);
@@ -29,10 +31,12 @@ const BattleInvitation: React.FC<{
   useEffect(() => {
     api.get_invitation_for_battle({
       user_id: currentAccount?.address,
-      invite_id: props.data.invite_id,
+      invite_id: props.data?.invite_id,
     }).then((res) => {
       if(res?.data){
-        setInviteInfo(res.data.invitation);
+        setInviteInfo(res.data.invitation || {
+          trading_pair: 'Bitcoin'
+        });
         const {battle_user, coins, status, pvp_rate, pve_rate} = res.data;
         setBattleUser({...battle_user, coins, status, pvp_rate, pve_rate});
       }
@@ -40,7 +44,7 @@ const BattleInvitation: React.FC<{
   },[])
 
   useEffect(() => {
-    if(props.data.type == 'push' && leftTime > 0){
+    if(props.data?.type == 'push' && leftTime > 0){
       let interval:any = null;
       let leftSeconds = 30;
       interval = setInterval(() => {
@@ -70,11 +74,11 @@ const BattleInvitation: React.FC<{
       const res = await api.get_user_current_status({
         user_id: currentAccount?.address,
         battle_user_id: inviteInfo.invite_user_id,
-        invite_id: props.data.invite_id,
+        invite_id: props.data?.invite_id,
       })
       if(res?.success){
         if(res.data.status == 'Available' && res.data.is_sate){
-          const msg: any = await Pomelo.dealBattleInvitation(props.data.invite_id, choice)
+          const msg: any = await Pomelo.dealBattleInvitation(props.data?.invite_id, choice)
           navigate('/battle', { 
             state: {
                 mode: "battle", 
@@ -102,7 +106,7 @@ const BattleInvitation: React.FC<{
         }
       }
     }else{
-      const msg: any = await Pomelo.dealBattleInvitation(props.data.invite_id, choice)
+      const msg: any = await Pomelo.dealBattleInvitation(props.data?.invite_id, choice)
       onClose();
     }
   }
@@ -131,7 +135,7 @@ const BattleInvitation: React.FC<{
 
   return <>
     <div className="mask battle-invitation-mask">
-      <div className="module battle-invitation-module">
+      <div className="battle-invitation-module">
         <div className="close-btn" onClick={onClose}></div>
         <div className="title">
           Battle Invitation
@@ -180,11 +184,11 @@ const BattleInvitation: React.FC<{
           </div>
 
           <div className="battle-btns">
-            <div className="battle-btn decline-btn" onClick={() => {deal('Decline')}}>Decline{props.data.type == 'push' && <>({leftTime}s)</>}</div>
+            <div className="battle-btn decline-btn" onClick={() => {deal('Decline')}}>Decline{props.data?.type == 'push' && <>({leftTime}s)</>}</div>
             <div className="battle-btn accept-btn" onClick={() => {deal('Accept')}}>Accept</div>
           </div>
 
-          {props.data.type == 'push' && <div className={["block-invitation", block ? 'active' : ''].join(" ")} onClick={blockPlayer}>I don't want to receive this player's invitation within 24 hours</div>}
+          {props.data?.type == 'push' && <div className={["block-invitation", block ? 'active' : ''].join(" ")} onClick={blockPlayer}>I don't want to receive this player's invitation within 24 hours</div>}
         </div>
       </div>
     </div>

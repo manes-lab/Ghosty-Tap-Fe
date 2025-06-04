@@ -9,7 +9,7 @@
     width: 33.5rem;
     padding: 3rem;
     background: #BD8D64;
-    border-radius: 30px;
+    border-radius: 1.5rem;
     border: 3px solid #60483A;
     .close-btn{
         position: absolute;
@@ -42,8 +42,9 @@
     }
     .confirm-btn{
         margin:2.4rem auto 0;
-        width:18.4rem;
-        height:2.8rem;
+        width:18.6rem;
+        height:3.2rem;
+        padding-bottom: 0.4rem;
         background: url('../../assets/img/common/yellow-btn-bg.png') no-repeat center center;
         background-size: contain;
         cursor: pointer;

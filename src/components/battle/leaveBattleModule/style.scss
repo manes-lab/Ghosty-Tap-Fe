@@ -1,67 +1,78 @@
 .leave-battle-module{
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
+    width: 33.5rem;
+    padding: 7rem 3.9rem 4.7rem;
+    background: #BD8D64;
+    border-radius: 1.5rem;
+    border: 3px solid #60483A;
+
+    text-align: center;
     .close-btn{
         position: absolute;
         top:3rem;
         right:2rem;
         width:1.8rem;
         height:1.8rem;
-        background: url('../../../assets/images/common/ic-close.png') no-repeat center center;
+        background: url('../../../assets/img/common/close.png') no-repeat center center;
         background-size: 1.8rem;
         cursor: pointer;
     }
     .leave-tip{
-        font-family: SourceCodePro-Semibold;
-        font-size: 1.5rem;
-        color: rgba(255,255,255,0.5);
+        font-family: "LogoSC LongZhuTi";
+        font-size: 1.4rem;
+        color: #3F3027;
         letter-spacing: 0;
+        line-height: normal;
+        font-weight: 400;
         text-align: center;
-        line-height: 2.3rem;
-        font-weight: 600;
     }
     .battle-rewards{
-        margin-top:2rem;
-        display: flex;
+        margin:1.2rem auto 0;
+        height: 3.3rem;
+        padding: 0 1.5rem;
+        border-radius: 0.5rem;
+        background: rgba(202, 173, 149, 0.31);
+        display: inline-flex;
         align-items: center;
-        justify-content: center;
-        font-family: SourceCodePro-Bold;
-        font-size: 1.8rem;
-        color: #FFFFFF;
+
+        font-family: "LogoSC LongZhuTi";
+        font-size: 2rem;
+        color: #3F3027;
         text-align: center;
-        line-height: 2.2rem;
-        font-weight: 700;
+        line-height: 3.3rem;
+        font-weight: 400;
         .coin{
-            margin-left:0.8rem;
-            width:1.5rem;
-            height:1.5rem;
-            background: url('../../../assets/images/common/ic-coin.png') no-repeat right center;
-            background-size: 1.5rem;
+            margin-left:0.5rem;
+            width:2rem;
+            height:2rem;
+            background: url('../../../assets/img/common/coin.png') no-repeat center center;
+            background-size: contain;
         }
     }
     .leave-battle-btns{
-        margin-top:3rem;
+        margin-top:5.6rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         .leave-battle-btn{
-            width:13rem;
-            height:5rem;
-            background: url('') no-repeat center bottom;
-            background-size: 100%;
-            font-family: SourceCodePro-Medium;
+            width:12.3rem;
+            height:3.2rem;
+            padding-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Gagalin;
             font-size: 1.4rem;
-            color: #000000;
-            letter-spacing: 0;
-            text-align: center;
-            font-weight: 500;
-            line-height:4.2rem;
+            color: #282722;
             cursor: pointer;
+
+            background: url('../../../assets/img/common/small-yellow-btn-bg.png') no-repeat center center;
+            background-size: contain;
             &.leave-btn{
-                -webkit-animation: SmallWhiteBtn 1s ease infinite;
-                animation: SmallWhiteBtn 1s ease infinite;
-            }
-            &.stay-btn{
-                -webkit-animation: SmallGreenBtn 1s ease infinite;
-                animation: SmallGreenBtn 1s ease infinite;
+                background-image: url('../../../assets/img/common/small-gray-btn-bg.png')
             }
         }
     }

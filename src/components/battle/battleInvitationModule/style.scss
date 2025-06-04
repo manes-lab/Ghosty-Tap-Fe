@@ -2,38 +2,48 @@
     z-index: 100;
 }
 .battle-invitation-module{
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
+    width: 33.5rem;
+    padding: 2.2rem 2rem 3.5rem;
+    background: #BD8D64;
+    border-radius: 1.5rem;
+    border: 3px solid #60483A;
+    text-align: center;
     .close-btn{
         position: absolute;
         top:3rem;
         right:2rem;
         width:1.8rem;
         height:1.8rem;
-        background: url('../../../assets/images/common/ic-close.png') no-repeat center center;
+        background: url('../../../assets/img/common/close.png') no-repeat center center;
         background-size: 1.8rem;
         cursor: pointer;
     }
     .title{
-        padding-bottom:1.5rem;
-        font-family: SourceCodePro-Bold;
-        font-size: 1.7rem;
-        color: #FFFFFF;
-        line-height: 2.1rem;
-        font-weight: 700;
+        color: #3F3027;
+        font-family: Gagalin;
+        font-size: 2.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
         display: flex;
         align-items: center;
         .rule-btn{
-            margin-left:0.2rem;
-            width:3.8rem;
-            height:1.8rem;
-            background:url('../../../assets/images/leaderboard/ic-rule.png') no-repeat center center;
-            background-size: 1.8rem;
+            margin-left:0.6rem;
+            width:2rem;
+            height:2rem;
+            background:url('../../../assets/img/common/ic-tip.png') no-repeat center center;
+            background-size: 2rem;
             cursor: pointer;
         }
     }
 
 
     .invite-user{
-        margin-top:1.5rem;
+        margin-top:2rem;
         .avatar{
             margin: 0 auto;
             width:5rem;
@@ -45,56 +55,61 @@
                 position: absolute;
                 right: -0.5rem;
                 bottom: 0;
-                width: 1.5rem;
-                height:1.5rem;
+                width: 1.4rem;
+                height:1.4rem;
                 background: url() no-repeat center center;
                 background-size: cover;
             }
         }
         .name{
-            margin-top:1.2rem;
+            margin-top:0.4rem;
             width: 100%;
-            font-family: SourceCodePro-Bold;
+            color: #3F3027;
+            font-family: "LogoSC LongZhuTi";
             font-size: 1.4rem;
-            color: #FFFFFF;
             letter-spacing: 0;
             line-height: 1.8rem;
             font-weight: 700;
             text-align: center;
         }
         .battle-rewards{
-            margin-top:1.5rem;
-            display: flex;
+            margin:0.8rem auto 0;
+            height: 3.3rem;
+            padding: 0 1.5rem;
+            border-radius: 0.5rem;
+            background: rgba(202, 173, 149, 0.31);
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-family: SourceCodePro-Bold;
-            font-size: 1.8rem;
-            color: rgba(255,255,255,0.97);
-            line-height: 2.2rem;
-            font-weight: 700;
+
+            font-family: "LogoSC LongZhuTi";
+            font-size: 2rem;
+            color: #3F3027;
+            text-align: center;
+            line-height: 3.3rem;
+            font-weight: 400;
             .coin{
-                margin-left:0.8rem;
-                width:1.5rem;
-                height: 1.5rem;
-                background: url('../../../assets/images/common/ic-coin.png') no-repeat right center;
-                background-size: 1.5rem;
+                margin-left:0.5rem;
+                width:2rem;
+                height:2rem;
+                background: url('../../../assets/img/common/coin.png') no-repeat center center;
+                background-size: contain;
             }
         }
     }
 
     .content{
-        margin-top:2.5rem;
-        padding-top:2.5rem;
-        border-top: 1px solid rgba(255,255,255,0.16);
+        margin-top:1.5rem;
+        padding-top:1.4rem;
+        border-top: 1px solid #976F51;
         .tabs{
             display: flex;
             align-items: center;
             .tab-item{
                 width: 50%;
-                padding-bottom: 1rem;
-                font-family: SourceCodePro-Medium;
-                font-size: 1.4rem;
-                color: #FFFFFF;
+                padding-bottom: 0.8rem;
+                color: #815B46;
+                font-family: "LogoSC LongZhuTi";
+                font-size: 1.2rem;
                 letter-spacing: 0;
                 text-align: center;
                 font-weight: 500;
@@ -106,14 +121,13 @@
                     bottom: 0;
                     left:50%;
                     transform: translateX(-50%);
-                    width: 1.5rem;
+                    width: 2.5rem;
                     height:0.2rem;
-                    background: #51FFF0;
+                    background: #3F3027;
                     display: none;
                 }
                 &.active{
-                    font-family: SourceCodePro-Semibold;
-                    color: #51FFF0;
+                    color: #3F3027;
                     font-weight: 600;
                     &::after{
                         display: block;
@@ -122,39 +136,40 @@
             }
         }
         .info{
-            margin-top:1.8rem;
-            height:7.7rem;
-            background: rgba(255,255,255,0.08);
-            clip-path: polygon(0.5rem 0.5rem, 0.5rem 0, calc(100% - 0.5rem) 0, calc(100% - 0.5rem) 0.5rem, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) calc(100% - 0.5rem),calc(100% - 0.5rem) 100%,  0.5rem 100%, 0.5rem calc(100% - 0.5rem), 0 calc(100% - 0.5rem), 0 0.5rem);
+            margin:1.4rem auto 0;
+            width: 20.7rem;
+            height:6.5rem;
+            background: #CD9F77;
+            border-radius: 1rem;;
             &.battle-info{
                 padding: 1.5rem;
                 .key-value{
-                    margin-top:1.5rem;
+                    margin-top:0.5rem;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     .value{
-                        font-family: SourceCodePro-Regular;
-                        font-size: 1.3rem;
-                        color: rgba(255,255,255,1);
-                        line-height: 1.6rem;
+                        font-family: "LogoSC LongZhuTi";
+                        font-size: 1rem;
+                        color: #3F3027;
+                        line-height: 1.5rem;
                         font-weight: 400;
                         display: flex;
                         align-items: center;
                         .ic-coin{
-                            margin-left:0.5rem;
-                            width:1.5rem;
-                            height:1.5rem;
-                            background: url("../../../assets/images/common/ic-coin.png") no-repeat center center;
-                            background-size: 100%;
+                            margin-left:0.8rem;
+                            width:2rem;
+                            height:2rem;
+                            background: url("../../../assets/img/common/coin.png") no-repeat center center;
+                            background-size: contain;
                         }
                     }
                     .key{
-                        font-family: SourceCodePro-Regular;
-                        font-size: 1.3rem;
-                        color: rgba(255,255,255,0.5);
+                        font-family: "LogoSC LongZhuTi";
+                        font-size: 1rem;
+                        color: #60483A;
                         letter-spacing: 0;
-                        line-height: 1.6rem;
+                        line-height: 1.5rem;
                         font-weight: 400;
                     }
                     &:first-child{
@@ -170,18 +185,18 @@
                 .key-value{
                     width:50%;
                     .value{
-                        font-family: SourceCodePro-Semibold;
-                        font-size: 1.6rem;
-                        color: rgba(255,255,255,1);
-                        line-height: 2rem;
+                        font-family: "LogoSC LongZhuTi";
+                        font-size: 1rem;
+                        color: #3F3027;
+                        line-height: 1.5rem;
                         font-weight: 700;
                         text-align: center;
                     }
                     .key{
                         margin-top:0.3rem;
-                        font-family: SourceCodePro-Regular;
-                        font-size: 1.2rem;
-                        color: rgba(255,255,255,0.5);
+                        font-family: "LogoSC LongZhuTi";
+                        font-size: 1rem;
+                        color: #60483A;
                         letter-spacing: 0;
                         line-height: 1.5rem;
                         font-weight: 400;
@@ -194,49 +209,46 @@
 
 
     .battle-btns{
-        margin-top:3rem;
+        margin:2.3rem 2.3rem 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
         .battle-btn{
-            width:13rem;
-            height:5rem;
-            background: url('') no-repeat center bottom;
-            background-size: 100%;
-            font-family: SourceCodePro-Medium;
+            width:12.3rem;
+            height:3.2rem;
+            padding-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Gagalin;
             font-size: 1.4rem;
-            color: #000000;
-            letter-spacing: 0;
-            text-align: center;
-            font-weight: 500;
-            line-height:4.2rem;
+            color: #282722;
             cursor: pointer;
+
+            background: url('../../../assets/img/common/small-yellow-btn-bg.png') no-repeat center center;
+            background-size: contain;
             &.decline-btn{
-                -webkit-animation: SmallWhiteBtn 1s ease infinite;
-                animation: SmallWhiteBtn 1s ease infinite;
-            }
-            &.accept-btn{
-                -webkit-animation: SmallGreenBtn 1s ease infinite;
-                animation: SmallGreenBtn 1s ease infinite;
+                background-image: url('../../../assets/img/common/small-gray-btn-bg.png')
             }
         }
     }
 
 
     .block-invitation{
-        margin-top:1.2rem;
-        padding-left:2.7rem;
-        font-family: SourceCodePro-Regular;
-        font-size: 1.1rem;
-        color: rgba(255,255,255,0.5);
+        margin:2.2rem 3rem 0;
+        padding-left:2rem;
+        font-family: Lato;
+        font-size: 1rem;
+        color: #60483A;
         letter-spacing: 0;
-        line-height: 1.7rem;
+        line-height: 1.4rem;
         font-weight: 400;
-        background: url('../../../assets/images/common/ic-radio.png') no-repeat left center;
-        background-size: 1.5rem;
+        text-align: left;
+        background: url('../../../assets/img/common/ic-radio.png') no-repeat left 0.3rem;
+        background-size: 1rem;
         cursor: pointer;
         &.active{
-            background-image: url('../../../assets/images/common/ic-radio-active.png')
+            background-image: url('../../../assets/img/common/ic-radio-active.png')
         }
     }
     

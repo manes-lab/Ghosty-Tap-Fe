@@ -398,13 +398,13 @@
 
 .user-status{
   &.available{
-    background-image: url('./assets/images/common/ic-available.png')!important;
+    background-image: url('./assets/img/common/ic-available.png')!important;
   }
   &.offline{
     background-image: url('./assets/images/common/ic-offline.png')!important;
   }
   &.playing{
-    background-image: url('./assets/images/common/ic-playing.png')!important;
+    background-image: url('./assets/img/common/ic-playing.png')!important;
   }
 }
 

@@ -2,14 +2,23 @@
     z-index: 100;
 }
 .reject-battle-module{
-    padding: 3rem !important;
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
+    width: 33.5rem;
+    padding: 3rem 2rem 5rem;
+    background: #BD8D64;
+    border-radius: 1.5rem;
+    border: 3px solid #60483A;
+
     .close-btn{
         position: absolute;
         top:3rem;
         right:2rem;
         width:1.8rem;
         height:1.8rem;
-        background: url('../../../assets/images/common/ic-close.png') no-repeat center center;
+        background: url('../../../assets/img/common/close.png') no-repeat center center;
         background-size: 1.8rem;
         cursor: pointer;
     }
@@ -25,8 +34,8 @@
                 position: absolute;
                 right: -0.5rem;
                 bottom: 0;
-                width: 1.5rem;
-                height:1.5rem;
+                width: 1.4rem;
+                height:1.4rem;
                 background: url() no-repeat center center;
                 background-size: cover;
             }
@@ -34,9 +43,9 @@
         .name{
             margin-top:1.2rem;
             width: 100%;
-            font-family: SourceCodePro-Bold;
+            color: #3F3027;
+            font-family: "LogoSC LongZhuTi";
             font-size: 1.4rem;
-            color: #FFFFFF;
             letter-spacing: 0;
             line-height: 1.8rem;
             font-weight: 700;
@@ -47,31 +56,32 @@
 
     .intro{
         margin-top:1rem;
-        font-family: SourceCodePro-Regular;
-        font-size: 1.2rem;
-        color: rgba(255,255,255,0.7);
+        font-family: "LogoSC LongZhuTi";
+        font-size: 1.4rem;
+        color: #3F3027;
         letter-spacing: 0;
-        text-align: center;
-        line-height: 1.7rem;
+        line-height: normal;
         font-weight: 400;
+        text-align: center;
     }
 
     .confirm-btn{
-        margin-top:3rem;
-        width:27.5rem;
-        height:5rem;
-        background: url('../../../assets/images/common/btn-2.png') no-repeat center bottom;
-        background-size: 100%;
-        -webkit-animation: Btn 1s ease infinite;
-        animation: Btn 1s ease infinite;
-        font-family: SourceCodePro-Medium;
-        font-size: 1.4rem;
-        color: #000000;
-        letter-spacing: 0;
-        text-align: center;
-        font-weight: 500;
-        line-height:4.2rem;
+        margin:1.9rem auto 0;
+        width:18.6rem;
+        height:3.2rem;
+        padding-bottom: 0.4rem;
+        background: url('../../../assets/img/common/gray-btn-bg.png') no-repeat center center;
+        background-size: contain;
         cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #282722;
+        font-family: Gagalin;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
-    
 }
