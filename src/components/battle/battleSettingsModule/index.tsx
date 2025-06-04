@@ -69,17 +69,7 @@ const BattleSettings: React.FC<{
         </div>
       ),
     },
-    // {
-    //   key: 'Ton',
-    //   label: (
-    //     <div className={["trading-pair-dropdown-item ton", currentPair == 'Ton' ? 'active' : ''].join(" ")} onClick={() => {setCurrentPair('ton')}}>
-    //       Ton <span>TON/USDT</span>
-    //     </div>
-    //   ),
-    // },
   ];
-
-  // let marks: SliderSingleProps['marks'] = {};
 
 
 

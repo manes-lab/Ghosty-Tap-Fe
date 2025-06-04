@@ -20,8 +20,11 @@ const BattleHistory: React.FC<{
   const [isEnd, setEndStatus] = useState(false); 
   const limit = 20;
 
+  const [canClose, setCanClose] = useState(false);
   useEffect(() => {
     fetchData();
+    const timer = setTimeout(() => setCanClose(true), 600); 
+    return () => clearTimeout(timer);
   },[])
 
 
@@ -52,6 +55,8 @@ const BattleHistory: React.FC<{
   }
 
   const close = () => {
+    if (!canClose) return; 
+    
     document.getElementById('battle-history-mask')?.classList.add('hide');
     document.getElementById('battle-history-module')?.classList.add('hide');
     setTimeout(()=>{

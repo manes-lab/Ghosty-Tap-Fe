@@ -10,8 +10,7 @@ const insufficientBalanceModule: React.FC<{
       <div className="close-btn" onClick={onClose}></div>
       <div className="title">Insufficient Balance</div>
       <div className="intro">Play in  <span>ZEN-Mode</span> to get more coins</div>
-      <div className="confirm-btn" onClick={() => {onStart('zen')}}></div>
-      {/* Go to ZEN-Mode */}
+      <div className="confirm-btn" onClick={() => {onStart('zen')}}>Go to ZEN-Mode</div>
     </div>
   </div>
 };

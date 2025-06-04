@@ -10,7 +10,7 @@ const Start: React.FC<{
       <div className="close-btn" onClick={onClose}></div>
       <div className="title">Recharging</div>
       <div className="intro">Time for a break from tapping. Bet your coins in Adventure Mode to earn more!</div>
-      <div className="confirm-btn" onClick={() => {onStart('adventure')}}></div>
+      <div className="confirm-btn" onClick={() => {onStart('adventure')}}>Adventure Mode</div>
     </div>
   </div>
 };

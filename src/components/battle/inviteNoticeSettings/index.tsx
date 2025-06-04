@@ -12,10 +12,16 @@ const Settings: React.FC<{
   const [advAllowNotice, setAdvAllowNotice] = useState(true);
   const [batAllowNotice, setBatAllowNotice] = useState(true);
 
-  let isInit = true;
+  const [canClose, setCanClose] = useState(false);
   useEffect(() => {
-    if(isInit){
-      isInit = false;
+    const timer = setTimeout(() => setCanClose(true), 600); 
+    return () => clearTimeout(timer);
+  }, []);
+
+  const initialized = useRef(false);
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
       api.get_battle_invitation_notice_settings({
         user_id: currentAccount?.address,
       }).then((res:any) => {
@@ -29,6 +35,8 @@ const Settings: React.FC<{
 
 
   const close = () => {
+    if (!canClose) return; 
+    
     document.getElementById('settings-mask')?.classList.add('hide');
     document.getElementById('settings-modsule')?.classList.add('hide');
     onClose()

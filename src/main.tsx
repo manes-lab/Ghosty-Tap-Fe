@@ -53,6 +53,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 function preloadFonts(){
     document.fonts.load('1em Pixeloid Sans')
+    document.fonts.load('1em Gagalin')
 
     document.fonts.load('1em D-DINExp')
     document.fonts.load('1em SourceCodePro-Bold')
