@@ -134,6 +134,7 @@ export const MainLayout : React.FC<propsType> = (props) => {
 
 
     useEffect(() => {
+        console.log("currentAccount:",currentAccount);
         const account = currentAccount?.address || "";
         dispatch(updateAddress(account));
 
@@ -148,16 +149,17 @@ export const MainLayout : React.FC<propsType> = (props) => {
                     message: rawMessageBytes,
                 });
 
-                const isValid = await verifyPersonalMessageSignature(rawMessageBytes, signedResult.signature, {
-                    address:  account
-                });
+                // const isValid = await verifyPersonalMessageSignature(rawMessageBytes, signedResult.signature, {
+                //     address:  account
+                // });
+                // console.log("isValid:",isValid);
 
 
                 const res = await api.get_user_token({
                     address: account,
                     signature: signedResult.signature,
                     message: message,
-                    publicKey:isValid
+                    publicKey: currentAccount?.publicKey
                 })
                 if(res?.success){
                     token = res.data?.token || ''
