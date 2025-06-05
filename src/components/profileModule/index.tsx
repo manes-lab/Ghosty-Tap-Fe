@@ -28,6 +28,13 @@ const Profile: React.FC<{
     'Ton': 'ton'
   };
 
+  const [canClose, setCanClose] = useState(false);
+    useEffect(() => {
+      fetchData();
+      const timer = setTimeout(() => setCanClose(true), 600); 
+      return () => clearTimeout(timer);
+    },[])
+
 
   useEffect(() => {
     api.get_user_status({
@@ -63,6 +70,8 @@ const Profile: React.FC<{
   }
 
   const close = () => {
+    if (!canClose) return; 
+
     document.getElementById('profile-mask')?.classList.add('hide');
     document.getElementById('profile-module')?.classList.add('hide');
     setTimeout(()=>{
@@ -110,7 +119,7 @@ const Profile: React.FC<{
 
   return <>
     <div className="mask profile-mask" id="profile-mask">
-      <div className="module profile-module" id="profile-module">
+      <div className="profile-module" id="profile-module">
         <div className="close-btn" onClick={close}></div>
         <div className="module-content">
           {curUser && <div className="user">
@@ -119,7 +128,8 @@ const Profile: React.FC<{
             </div>
             <div className="name">{curUser.user_id?.slice(-6)}</div>
             <div className="coins">
-              <div className="coins-value">{formatNumber(curUser.coins)}</div>
+              {formatNumber(curUser.coins)}
+              <div className="coin"></div>
             </div>
             <div className="coins-tip">Available Tegen coins</div>
             {/* <div className="info ">Total Games Played: {user.total_count}</div>
@@ -135,15 +145,15 @@ const Profile: React.FC<{
               {list.slice(0,2).map((item:any, index) => {
                 return <div className={["item", tokenMap[item.trading_pair]].join(" ")} key={index}>
                   <div className="key-value">
+                    <div className="key">Rewards</div>
                     <div className="value">
                       {item.coins >= 0 ? `+${formatNumber(item.coins)}` : `${formatNumber(item.coins)}`}
                       <div className="ic-coin"></div>
                     </div>
-                    <div className="key">Rewards</div>
                   </div>
                   { currentTab != 'zen' && <div className="key-value">
-                      <div className="value">{Math.round(item.rate * 10000) / 100}%</div>
                       <div className="key">win rate</div>
+                      <div className="value">{Math.round(item.rate * 10000) / 100}%</div>
                     </div>
                   }
                 </div>

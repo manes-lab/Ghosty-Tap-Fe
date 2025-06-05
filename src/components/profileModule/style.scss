@@ -9,6 +9,16 @@
 
 
 .profile-module{
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
+    width: 33.5rem;
+    padding: 3rem 2.6rem 5rem;
+    background: #BD8D64;
+    border-radius: 1.5rem;
+    border: 2px solid #60483A;
+
     -webkit-animation:  Show 0.6s ease both;
     animation:  Show 0.6s ease both;
     &.hide{
@@ -21,7 +31,7 @@
         right:2rem;
         width:1.8rem;
         height:1.8rem;
-        background: url('../../assets/images/common/ic-close.png') no-repeat center center;
+        background: url('../../assets/img/common/close.png') no-repeat center center;
         background-size: 1.8rem;
         cursor: pointer;
     }
@@ -47,43 +57,51 @@
                 position: absolute;
                 right: -0.5rem;
                 bottom: 0;
-                width: 1.5rem;
-                height:1.5rem;
+                width: 1.4rem;
+                height:1.4rem;
                 background: url() no-repeat center center;
                 background-size: cover;
             }
         }
         .name{
-            margin-top:1.2rem;
-            font-family: SourceCodePro-Bold;
+            margin-top:0.4rem;
+            width: 100%;
+            color: #3F3027;
+            font-family: "LogoSC LongZhuTi";
             font-size: 1.4rem;
-            color: #FFFFFF;
-            text-align: center;
+            letter-spacing: 0;
+            line-height: 1.8rem;
             font-weight: 700;
+            text-align: center;
         }
         .coins{
-            font-size: 1.3rem;
-            margin:2.5rem 0 0;
+            margin:0.8rem auto 0;
+            height: 3.3rem;
+            padding: 0 1.5rem;
+            border-radius: 0.5rem;
+            background: rgba(202, 173, 149, 0.31);
+            display: inline-flex;
+            align-items: center;
+
+            font-family: "LogoSC LongZhuTi";
+            font-size: 2rem;
+            color: #3F3027;
             text-align: center;
-            .coins-value{
-                display: inline-block;
-                font-family: SourceCodePro-Regular;
-                font-size: 1.3rem;
-                color: #FFFFFF;
-                letter-spacing: 0;
-                text-align: right;
-                line-height: 1.6rem;
-                font-weight: 400;
-                padding-right: 2rem;
-                background: url('../../assets/images/common/ic-coin.png') no-repeat right center;
-                background-size: 1.5rem;
+            line-height: 3.3rem;
+            font-weight: 400;
+            .coin{
+                margin-left:0.5rem;
+                width:2rem;
+                height:2rem;
+                background: url('../../assets/img/common/coin.png') no-repeat center center;
+                background-size: contain;
             }
         }
         .coins-tip{
-            margin-top:1rem;
-            font-family: SourceCodePro-Medium;
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.5);
+            margin-top:0.5rem;
+            color: #815B46;
+            font-family: "LogoSC LongZhuTi";
+            font-size: 1rem;
             text-align: center;
             line-height: 1.5rem;
             font-weight: 500;
@@ -106,19 +124,19 @@
         }
     }
     .content{
-        margin-top:2.5rem;
-        padding-top: 2.5rem;
-        padding-bottom: 6rem;
-        border-top: 1px solid rgba(255,255,255,0.16);
+        margin-top:1.6rem;
+        padding-top: 1.2rem;
+        padding-bottom: 4rem;
+        border-top: 1px solid #976F51;
         .tabs{
             display: flex;
             align-items: center;
             .tab-item{
                 width: 50%;
-                padding-bottom: 1rem;
-                font-family: SourceCodePro-Medium;
-                font-size: 1.4rem;
-                color: #FFFFFF;
+                padding-bottom: 0.8rem;
+                color: #815B46;
+                font-family: "LogoSC LongZhuTi";
+                font-size: 1.2rem;
                 letter-spacing: 0;
                 text-align: center;
                 font-weight: 500;
@@ -130,14 +148,13 @@
                     bottom: 0;
                     left:50%;
                     transform: translateX(-50%);
-                    width: 1.5rem;
+                    width: 2.5rem;
                     height:0.2rem;
-                    background: #51FFF0;
+                    background: #3F3027;
                     display: none;
                 }
                 &.active{
-                    font-family: SourceCodePro-Semibold;
-                    color: #51FFF0;
+                    color: #3F3027;
                     font-weight: 600;
                     &::after{
                         display: block;
@@ -146,47 +163,52 @@
             }
         }
         .list{
-            margin-top:1.8rem;
-            height:14rem;
+            margin-top:1.4rem;
+            height:12rem;
             .item{
-                margin-bottom:1.5rem;
-                height:6rem;
-                padding: 0 1.5rem;
-                background: #FFBB83;
+
+                margin-bottom:0.5rem;
+                height:5.5rem;
+                padding: 0 1.6rem 0 1.2rem;
+                background: #EAC09B;
+                border-radius: 1rem;
                 display: flex;
                 align-items: center;
                 // justify-content: space-between;
                 position: relative;
-                clip-path: polygon(0.5rem 0.5rem, 0.5rem 0, calc(100% - 0.5rem) 0, calc(100% - 0.5rem) 0.5rem, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) calc(100% - 0.5rem),calc(100% - 0.5rem) 100%,  0.5rem 100%, 0.5rem calc(100% - 0.5rem), 0 calc(100% - 0.5rem), 0 0.5rem);
                 &:last-child{
                     margin-bottom: 0;
                 }
                 .key-value{
-                    margin-right:2.2rem;
+                    width: 50%;
+                    &:nth-child(2){
+                        padding-left: 2rem;
+                        border-left: 1px solid #A0704D;
+                    }
                     .value{
-                        font-family: SourceCodePro-Semibold;
-                        font-size: 1.3rem;
-                        color: #111111;
+                        margin-top:0.4rem;
+                        font-family: "LogoSC LongZhuTi";
+                        font-size: 1.2rem;
+                        color: #3F3027;
                         letter-spacing: 0;
-                        line-height: 1.8rem;
-                        font-weight: 600;
+                        line-height: 1.5rem;
+                        font-weight: 400;
                         display: flex;
                         align-items: center;
                         // justify-content: center;
                         .ic-coin{
-                            margin-left:0.6rem;
-                            width:1.3rem;
-                            height:1.3rem;
-                            background: url("../../assets/images/common/ic-coin.png") no-repeat center center;
-                            background-size: 100%;
+                            margin-left:0.5rem;
+                            width:2rem;
+                            height:2rem;
+                            background: url("../../assets/img/common/coin.png") no-repeat center center;
+                            background-size: contain;
                         }
                     }
                     .key{
-                        margin-top:0.3rem;
                         opacity: 0.5;
-                        font-family: SourceCodePro-Regular;
+                        font-family: Gagalin;
                         font-size: 1.2rem;
-                        color: #000000;
+                        color: #A0704D;
                         letter-spacing: 0;
                         line-height: 1.5rem;
                         font-weight: 400;
@@ -198,23 +220,23 @@
                     position: absolute;
                     bottom:0;
                     right:0;
-                    width:6rem;
-                    height:6rem;
-                    background: url("../../assets/images/profile/bg-btc.png") no-repeat center center;
-                    background-size: 100%;
+                    width:6.6rem;
+                    height:5.6rem;
+                    background: url("../../assets/img/profile/bg-btc.png") no-repeat right bottom;
+                    background-size: contain;
                 }
                 &.eth{
-                    background: #CEC6FF;
+                    background: #CBB8D7;
                     &::after{
-                        background-image: url("../../assets/images/profile/bg-eth.png");
+                        background-image: url("../../assets/img/profile/bg-eth.png");
                     }
 
                 }
                 &.ton{
-                    background: #ADCAFF;
-                    &::after{
-                        background-image: url("../../assets/images/profile/bg-ton.png");
-                    }
+                    // background: #ADCAFF;
+                    // &::after{
+                    //     background-image: url("../../assets/img/profile/bg-ton.png");
+                    // }
                 }
             }
             &.zen{
@@ -233,46 +255,40 @@
         bottom:0;
         left:0;
         width:100%;
-        padding: 5rem 0 3rem;
-        background: url('../../assets/images/profile/mask.png') no-repeat center center;
-        background-size: cover;
+        padding: 3rem 0 3.5rem;
+        background: linear-gradient(180deg, rgba(189, 141, 100, 0.00) 12.63%, #BD8D64 68.95%);
         display: flex;
         align-items: center;
         justify-content: center;
         .operate-btn{
-            background: url('') no-repeat center bottom;
-            background-size: 100%;
-            font-family: SourceCodePro-Medium;
+            padding-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Gagalin;
             font-size: 1.4rem;
-            color: #000000;
-            letter-spacing: 0;
-            text-align: center;
-            font-weight: 500;
-            line-height:4.2rem;
+            color: #282722;
             cursor: pointer;
         }
         &.other{
             .operate-btn{
                 margin: 0 0.7rem;
-                width:13rem;
-                height:5rem;
+                width:12.3rem;
+                height:3.2rem;
+                background: url('../../assets/img/common/small-yellow-btn-bg.png') no-repeat center center;
+                background-size: contain;
                 &.profile-btn{
-                    -webkit-animation: SmallWhiteBtn 1s ease infinite;
-                    animation: SmallWhiteBtn 1s ease infinite;
-                }
-                &.battle-btn{
-                    -webkit-animation: SmallGreenBtn 1s ease infinite;
-                    animation: SmallGreenBtn 1s ease infinite;
+                    background-image: url('../../assets/img/common/small-gray-btn-bg.png')
                 }
             }
         }
         &.self{
             .operate-btn{
-                width:27.5rem;
-                height:5rem;
+                width:18.6rem;
+                height:3.2rem;
                 &.profile-btn{
-                    -webkit-animation: Btn 1s ease infinite;
-                    animation: Btn 1s ease infinite;
+                    background: url('../../assets/img/common/gray-btn-bg.png') no-repeat center center;
+                    background-size: contain;
                 }
             }
 

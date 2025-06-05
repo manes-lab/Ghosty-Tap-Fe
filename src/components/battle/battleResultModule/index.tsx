@@ -24,6 +24,12 @@ const BattleResult: React.FC<{
   const [score, setScore] = useState(0);
   const [antagonistScore, setAntagonistScore] = useState(0);
 
+  const titleMap = {
+    success: "YOU WON!",
+    fail: "YOU lOST",
+    draw: "IT'S A DRAW"
+  }
+
   useEffect(() => {
     api.get_battle_result({
       user_id: currentAccount?.address,
@@ -77,11 +83,13 @@ const BattleResult: React.FC<{
 
   return <div className="mask" onClick={onClose}>
     {/* battle-result-win */}
-    <div className={["module battle-result-module", "battle-result-"+result.status].join(" ")} onClick={(event) => {event.stopPropagation();}}>
+    <div className={["battle-result-module", "battle-result-"+result.status].join(" ")} onClick={(event) => {event.stopPropagation();}}>
       <div className="close-btn" onClick={onClose}></div>
       <div className="module-content">
         <div className="battle-result-module-content">
-          <div className={["result-title", result.status].join(" ")}></div>
+          <div className={["result-title", result.status].join(" ")}>
+            {titleMap[result.status]}
+          </div>
 
           <div className="result-rewards">
             {formatNumber(result.coins)}

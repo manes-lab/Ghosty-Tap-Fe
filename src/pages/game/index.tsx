@@ -118,7 +118,7 @@ const Game: React.FC = () => {
       newStage = new SquareStage(options)
     }
     newStage!.on("changeModule", (module:string, args:any) => {
-      if(module == 'profile' || module == 'mail-box' || module == 'leaderboard'){
+      if(module == 'mail-box' || module == 'leaderboard'){
         message.open({
           type: 'info',
           content: 'Coming soon ',
@@ -196,13 +196,6 @@ const Game: React.FC = () => {
   }
 
   const showUser = (user:any) => {
-    message.open({
-      type: 'info',
-      content: 'Coming soon ',
-      className: 'q-toast-message',
-      duration: 5,
-    });
-    return;
     setCurUser(user);
     setProfileModuleStatus(true);
   }
@@ -264,6 +257,7 @@ const Game: React.FC = () => {
         <LoadingModule onClose={()=>{}}/>
       )}
       {showBattleResultModule && <BattleResultModule props={{result: curBattleResult, battleId: curBattleResult?._id}} onClose={closeResultModule}/>}
+
       {showProfileModule && <ProfileModule props={{user: curUser, mode: location.state?.mode}} onClose={() => {setProfileModuleStatus(false);}}/>}
     </div>
   )
