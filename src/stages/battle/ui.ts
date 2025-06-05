@@ -133,24 +133,24 @@ export class BattleStageUI extends Stage {
 
     public async load(elementId: string, preference: "webgl" | "webgpu" | undefined)  {
         await super.load(elementId, preference)
-        await this.app.init({ background: '#E5D2B2', resizeTo: document.body, preference })
+        await this.app.init({ background: '#E5D2B2', resizeTo: document.getElementById("ghosty-page"), preference })
         this.app.ticker.maxFPS = 120
         document.getElementById(elementId)!.appendChild(this.app.canvas);
         
         this.topContainer.addChild(this.line)
-        await this.initTopContainer();
-        await this.initBarsGraph()
-        await this.initBottom();
+        // await this.initTopContainer();
+        // await this.initBarsGraph()
+        // await this.initBottom();
         
-        await this.initMenu();
-        await this.initMark();
-        await this.initLoadingBoard();
-        this.initClock();
-        this.initMail();
-        this.initEarlyBouns();
-        this.initInfoCard();
-        this.initFireWall();
-        this.initStrikeChannelContainer()
+        // await this.initMenu();
+        // await this.initMark();
+        // await this.initLoadingBoard();
+        // this.initClock();
+        // this.initMail();
+        // this.initEarlyBouns();
+        // this.initInfoCard();
+        // this.initFireWall();
+        // this.initStrikeChannelContainer()
     }
     
 
@@ -161,8 +161,8 @@ export class BattleStageUI extends Stage {
     initStrikeChannelContainer = async () => {
         this.strikeChannelContainer.x = this.calcLength(40)
         this.strikeChannelContainer.y = this.app.screen.height - this.calcLength(280 + 40 + 82);
-        this.winFireAsset = await Assets.load(`${window.location.origin}/images/win_fire.json`)
-        this.particlesAsset = await Assets.load(`${window.location.origin}/images/particles.json`)
+        this.winFireAsset = await Assets.load(`${window.location.origin}/img/win_fire.json`)
+        this.particlesAsset = await Assets.load(`${window.location.origin}/img/particles.json`)
 
         this.app.stage.addChild(this.strikeChannelContainer)
 
@@ -645,7 +645,7 @@ export class BattleStageUI extends Stage {
     }
 
     initStrikeContainer = async () => {
-        const sheet = await Assets.load(`${window.location.origin}/images/fire.json`);
+        const sheet = await Assets.load(`${window.location.origin}/img/fire.json`);
         const anim = new AnimatedSprite(sheet.animations['run']);
         anim.label = "anim"
         anim.animationSpeed = 0.1666;
@@ -667,8 +667,8 @@ export class BattleStageUI extends Stage {
         this.fireWallContainer.zIndex = -1
         this.fireWallContainer.boundsArea = new Rectangle(0, 0, this.app.stage.width, Math.min(this.calcLength(1624), this.app.stage.height));
 
-        const firewallLeft = await Assets.load(`${window.location.origin}/images/firewall-left.json`);
-        const firewallRight = await Assets.load(`${window.location.origin}/images/firewall-right.json`);
+        const firewallLeft = await Assets.load(`${window.location.origin}/img/firewall-left.json`);
+        const firewallRight = await Assets.load(`${window.location.origin}/img/firewall-right.json`);
         const firewallLeftAnim = new AnimatedSprite(firewallLeft.animations['run']);
         firewallLeftAnim.label = "left"
         firewallLeftAnim.animationSpeed = 0.15;

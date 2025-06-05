@@ -899,7 +899,7 @@ export class AdventureStageUI extends Stage {
         this.strikeChannelContainer.y = this.app.screen.height - this.calcLength(433 + 20);
         this.strikeChannelContainer.zIndex = 1;
         this.winFireAsset = await Assets.load(`${window.location.origin}/img/win_fire.json`)
-        this.particlesAsset = await Assets.load(`${window.location.origin}/images/particles.json`)
+        this.particlesAsset = await Assets.load(`${window.location.origin}/img/particles.json`)
 
         this.app.stage.addChild(this.strikeChannelContainer)
 
@@ -907,7 +907,7 @@ export class AdventureStageUI extends Stage {
     }
 
     initStrikeContainer = async () => {
-        const sheet = await Assets.load(`${window.location.origin}/images/fire.json`);
+        const sheet = await Assets.load(`${window.location.origin}/img/fire.json`);
         const anim = new AnimatedSprite(sheet.animations['run']);
         anim.label = "anim"
         anim.animationSpeed = 0.1666;

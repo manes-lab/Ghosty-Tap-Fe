@@ -9,7 +9,7 @@ export class Stage {
         this.elementId = elementId
     }
     public async destroy() {
-        this.app.destroy({removeView: true}, {});
+        this.app?.destroy({removeView: true}, {});
     }
     on = (event: string, callback: Function) => {
         this.events[event] = callback

@@ -64,9 +64,6 @@ export async function enterSpace(type: string, tradingPair: string, account: str
             tradingPair,
             token: localStorage.getItem("ghosty-tap-"+account) || ""
         }, function(data: any) {
-            console.log( type,
-                tradingPair,
-                localStorage.getItem("ghosty-tap-"+account), data, '---enterSpace----');
             if(data.error) {
                 reject({data, success: false})
             }
@@ -80,8 +77,6 @@ export async function leaveSpace(account: string) {
         let route = "space.base.leaveSpace"
         pomelo.request(route, {
         }, function(data: any) {
-            console.log(
-                localStorage.getItem("ghosty-tap-"+account), data, '---leaveSpace----');
             if(data.error) {
                 reject({data, success: false})
             }
@@ -99,7 +94,10 @@ export async function submitData(mode:string, params:any, account: string) {
             route = "battle.base.submitBattleAdventureGameData"
         }
 
-        pomelo.request(route, params, function(data: any) {
+        pomelo.request(route, {
+            ...params,
+            token: localStorage.getItem("ghosty-tap-"+account) || ""
+        }, function(data: any) {
             if(data.error) {
                 reject(data)
             }
@@ -108,15 +106,17 @@ export async function submitData(mode:string, params:any, account: string) {
     })
 }
 
-export async function sendBattleInvitation(userId: string, tradingPair: string, coins: number) {
+export async function sendBattleInvitation(userId: string, tradingPair: string, coins: number, account: string) {
     return await new Promise((resolve, reject) => {
         let route = "battle.base.sendInvitation"
         let params = {
             be_invite_user_id: userId,
             trading_pair: tradingPair,
-            coins: coins
+            coins: coins,
+            token: localStorage.getItem("ghosty-tap-"+account) || ""
         }
         pomelo.request(route, params, function(data: any) {
+            console.log(params, data, '-----battle.base.sendInvitation----');
             if(data.error) {
                 reject(data)
             }
@@ -125,12 +125,13 @@ export async function sendBattleInvitation(userId: string, tradingPair: string, 
     })
 }
 
-export async function dealBattleInvitation(inviteId:string, type: string) {
+export async function dealBattleInvitation(inviteId:string, type: string, account: string) {
     return await new Promise((resolve, reject) => {
         let route = "battle.base.dealInvitation"
         let params = {
             invite_id: inviteId,
-            type
+            type,
+            token: localStorage.getItem("ghosty-tap-"+account) || ""
         }
         pomelo.request(route, params, function(data: any) {
             if(data.error) {

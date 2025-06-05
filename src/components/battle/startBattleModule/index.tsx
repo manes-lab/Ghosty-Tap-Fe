@@ -47,7 +47,7 @@ const StartBattle: React.FC<{
         <div className="left-user">
           <div className={["left-user-img", close ? 'hide' : ''].join(" ")}></div>
           <div className="user-info left-user-info">
-            <div className="name txt-wrap">{user?.user_id?.slice(-6)}</div>
+            <div className="name txt-wrap">{currentAccount?.address?.slice(-6)}</div>
             <div className="avatar" style={{backgroundImage: `url(/img/avatar${state.profile?.avatar || 1}.png)`}}></div>
           </div>
         </div>

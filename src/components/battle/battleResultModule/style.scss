@@ -87,13 +87,13 @@
 
         .battle-result{
             margin:2.6rem 0;
-            height: 13.6rem;
-            padding: 2rem 1.5rem;
+            height: 15.6rem;
+            padding: 2.3rem 1.5rem;
             border-radius: 1rem;
             background: #CD9F77;
 
             .battle-user{
-                margin-top:2.5rem;
+                margin-top:1rem;
                 display: flex;
                 align-items: center;
                 position: relative;
@@ -116,6 +116,7 @@
                         letter-spacing: 0;
                         line-height: 1.7rem;
                         font-weight: 700;
+                        text-align: left;
                     }
                     .score{
                         margin-top:0.2rem;
@@ -135,9 +136,9 @@
                     display: flex;
                     align-items: center;
                     .battle-item{
-                        margin-left:0.2rem;
-                        width: 0.5rem;
-                        height:0.5rem;
+                        margin-left:0.1rem;
+                        width: 1rem;
+                        height:1rem;
                         background: #60483A;
                         border: 1px solid #60483A;
                         border-radius: 50%;
@@ -162,10 +163,11 @@
 
         .leave-game{
             margin:2.6rem 0;
-            height: 13.6rem;
-            padding-top:12.8rem;
+            height: 15.6rem;
+            padding-top:11.3rem;
+            border-radius: 1rem;
             background:#CD9F77 url('../../../assets/img/battle/result/flee.png') no-repeat center 1rem;
-            background-size: 4.5rem;
+            background-size: auto 10.3rem;
 
             font-family: "LogoSC LongZhuTi";
             font-size: 1.4rem;

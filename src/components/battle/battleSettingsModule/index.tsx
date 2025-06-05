@@ -247,7 +247,7 @@ const BattleSettings: React.FC<{
     if(battleRewards <= 0 || (battleUser && !await checkUserStatus())){
       return false;
     }
-    const res = await Pomelo.sendBattleInvitation(battleUser, currentPair, battleRewards)
+    const res = await Pomelo.sendBattleInvitation(battleUser, currentPair, battleRewards, currentAccount?.address)
     setSentRequestStatus(true);
   }
 

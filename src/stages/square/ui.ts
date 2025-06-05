@@ -40,7 +40,7 @@ export class SquareStageUI extends Stage {
 
     public async load(elementId: string, preference: "webgl" | "webgpu" | undefined)  {
         await super.load(elementId, preference)
-        await this.app.init({ background: '#000000', resizeTo: document.body, preference })
+        await this.app.init({ background: '#000000', resizeTo: document.getElementById("ghosty-page"), preference })
         this.app.ticker.maxFPS = 120
         document.getElementById(elementId)!.appendChild(this.app.canvas);
         this.app.stage.addChild(this.background)
@@ -432,7 +432,7 @@ export class SquareStageUI extends Stage {
         players.eventMode = 'static';
         players.cursor = 'pointer';
         players.on('pointerdown', () => {
-            this.events["changeModule"]("online-players");
+            this.events["changeModule"]("zen-online-players");
         });
         
 

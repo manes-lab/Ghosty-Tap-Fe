@@ -55,47 +55,48 @@ export const MainLayout : React.FC<propsType> = (props) => {
             if (!currentAccount?.address) {
                 return
             }
-            Pomelo.addListener("acceptBattle", (msg: any) => {
-                dispatch(updateModule({
-                    module: "battleSettings", 
-                    show: false,
-                    args: null
-                }))
-                navigate('/battle', { 
-                    state: {
-                        mode: "battle", 
-                        token: tokenMap[msg.trading_pair],
-                        options : msg
-                    },
-                    replace: true
-                })
-            })
+            // Pomelo.addListener("acceptBattle", (msg: any) => {
+            //     dispatch(updateModule({
+            //         module: "battleSettings", 
+            //         show: false,
+            //         args: null
+            //     }))
+            //     navigate('/battle', { 
+            //         state: {
+            //             mode: "battle", 
+            //             token: tokenMap[msg.trading_pair],
+            //             options : msg
+            //         },
+            //         replace: true
+            //     })
+            // })
 
-            Pomelo.addListener("declineBattle", (msg: any) => {
-                dispatch(updateModule({
-                    module: "rejectBattle", 
-                    show: true,
-                    args: msg
-                }))
-            })
+            // Pomelo.addListener("declineBattle", (msg: any) => {
+            //     dispatch(updateModule({
+            //         module: "rejectBattle", 
+            //         show: true,
+            //         args: msg
+            //     }))
+            // })
 
-            Pomelo.addListener("inviteBattle", async (msg: any) => {
-                if(/\/battle|\/adventure/.test(window.location.href)){
-                    dispatch(updateNewInvitation(true))
-                }else{
-                    dispatch(updateModule({
-                        module: "battleInvitation", 
-                        show: true,
-                        args: {
-                            // ...info.data,
-                            invite_id: msg.invite_id,
-                            type: 'push'
-                        }
-                    }))
-                }
+            // Pomelo.addListener("inviteBattle", async (msg: any) => {
+            //     console.log("----inviteBattle----");
+            //     if(/\/battle|\/adventure/.test(window.location.href)){
+            //         dispatch(updateNewInvitation(true))
+            //     }else{
+            //         dispatch(updateModule({
+            //             module: "battleInvitation", 
+            //             show: true,
+            //             args: {
+            //                 // ...info.data,
+            //                 invite_id: msg.invite_id,
+            //                 type: 'push'
+            //             }
+            //         }))
+            //     }
                 
                 
-            })
+            // })
 
             // if(WebApp?.initDataUnsafe?.start_param){
             //     const start_param = WebApp?.initDataUnsafe?.start_param;
@@ -130,30 +131,22 @@ export const MainLayout : React.FC<propsType> = (props) => {
         return () => {
             Pomelo.leaveSquare(currentAccount?.address || '')
         }
-    },[])
+    },[currentAccount])
 
 
     useEffect(() => {
-        console.log("currentAccount:",currentAccount);
         const account = currentAccount?.address || "";
         dispatch(updateAddress(account));
 
         let token = localStorage.getItem("ghosty-tap-"+account) || "";
-
-        if(account && !token){
-            (async () => {
+        (async () => {
+            if(account && !token){
                 const message = `Sign in with Sui Wallet`;
                 const rawMessageBytes = new TextEncoder().encode(message);
 
                 const signedResult = await signPersonalMessage.mutateAsync({
                     message: rawMessageBytes,
                 });
-
-                // const isValid = await verifyPersonalMessageSignature(rawMessageBytes, signedResult.signature, {
-                //     address:  account
-                // });
-                // console.log("isValid:",isValid);
-
 
                 const res = await api.get_user_token({
                     address: account,
@@ -166,11 +159,55 @@ export const MainLayout : React.FC<propsType> = (props) => {
                     localStorage.setItem("ghosty-tap-"+account, token);
                 }
 
-                initUser(account, token);
-            })()
-        }else{
-            initUser(account, token);
-        }
+                await initUser(account, token);
+                
+            }else{
+                await initUser(account, token);
+            }
+
+
+            Pomelo.addListener("acceptBattle", (msg: any) => {
+                dispatch(updateModule({
+                    module: "battleSettings", 
+                    show: false,
+                    args: null
+                }))
+                navigate('/battle', { 
+                    state: {
+                        mode: "battle", 
+                        token: tokenMap[msg.trading_pair],
+                        options : msg
+                    },
+                    replace: true
+                })
+            })
+    
+            Pomelo.addListener("declineBattle", (msg: any) => {
+                dispatch(updateModule({
+                    module: "rejectBattle", 
+                    show: true,
+                    args: msg
+                }))
+            })
+    
+            Pomelo.addListener("inviteBattle", async (msg: any) => {
+                if(/\/battle|\/adventure/.test(window.location.href)){
+                    dispatch(updateNewInvitation(true))
+                }else{
+                    dispatch(updateModule({
+                        module: "battleInvitation", 
+                        show: true,
+                        args: {
+                            // ...info.data,
+                            invite_id: msg.invite_id,
+                            type: 'push'
+                        }
+                    }))
+                }
+                
+                
+            })
+        })()
     },[currentAccount])
 
 

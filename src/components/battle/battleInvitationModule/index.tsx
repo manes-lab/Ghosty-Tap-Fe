@@ -78,7 +78,7 @@ const BattleInvitation: React.FC<{
       })
       if(res?.success){
         if(res.data.status == 'Available' && res.data.is_sate){
-          const msg: any = await Pomelo.dealBattleInvitation(props.data?.invite_id, choice)
+          const msg: any = await Pomelo.dealBattleInvitation(props.data?.invite_id, choice, currentAccount?.address)
           navigate('/battle', { 
             state: {
                 mode: "battle", 
@@ -106,7 +106,7 @@ const BattleInvitation: React.FC<{
         }
       }
     }else{
-      const msg: any = await Pomelo.dealBattleInvitation(props.data?.invite_id, choice)
+      const msg: any = await Pomelo.dealBattleInvitation(props.data?.invite_id, choice, currentAccount?.address)
       onClose();
     }
   }

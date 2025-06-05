@@ -17,7 +17,7 @@ const Game: React.FC = () => {
         })
         Pomelo.addListener("inviteBattle", async (msg: any) => {
             // const info = await api.get_invitation_for_battle({invite_id: msg.invite_id})
-            const res: any = await Pomelo.dealBattleInvitation(msg.invite_id, "Accept")
+            const res: any = await Pomelo.dealBattleInvitation(msg.invite_id, "Accept", "")
             console.log(res)
             battleId = res.data._id
             await sleep(3000)
@@ -46,7 +46,7 @@ const Game: React.FC = () => {
             const res = await Pomelo.readyForBattle(msg.battle_id)
           })
 
-        const res = await Pomelo.sendBattleInvitation("1408854003", 'Ethererum', 1);
+        const res = await Pomelo.sendBattleInvitation("1408854003", 'Ethererum', 1, '');
     })()
     return () => {
     };

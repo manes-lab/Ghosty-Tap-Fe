@@ -54,9 +54,11 @@ export class SquareStage extends SquareStageUI {
         // await Pomelo.enterSpace("square", '');
 
         Pomelo.addListener("onAdd", (data: any) => { 
+            console.log("----onAdd------");
             data.space == 'square' && this.updateOnlinePlayers();
         })
         Pomelo.addListener("onLeave", (data: any) => { 
+            console.log("----onLeave------");
             this.updateOnlinePlayers();
         })
 
