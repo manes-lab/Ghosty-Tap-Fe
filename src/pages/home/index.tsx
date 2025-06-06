@@ -204,6 +204,7 @@ const Home: React.FC = () => {
     <div className="page-entry" ref={entryRef}>
       <div className="entry entry-leaderboard" onClick={() => {jumpPage('/leaderboard')}}>Ranking</div>
       <div className="entry entry-battle"  onClick={() => {onStart('square')}}>Battle</div>
+      <div className="entry entry-battle"  onClick={() => {onStart('battle')}}>Battle2</div>
       {/* onClick={() => {onStart('square')}} */}
       <div className="entry entry-profile" onClick={() => {jumpPage(`/user/${currentAccount?.address}`)}}>Profile</div>
       <div className="entry entry-invite" onClick={() => {jumpPage('/invite')}}>Invite</div>

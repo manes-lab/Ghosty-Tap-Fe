@@ -77,94 +77,94 @@ export class BattleStage extends BattleStageUI {
     }
 
     load = async (elementId: string, preference: "webgl" | "webgpu" | undefined) => {
-        const bars_res = await api.get_battle_bars({
-            battle_id: this.data.gameId
-        });
-        this.data.preparedBars = bars_res.data;
+        // const bars_res = await api.get_battle_bars({
+        //     battle_id: this.data.gameId
+        // });
+        // this.data.preparedBars = bars_res.data;
 
-        this.data.popupBars = this.data.preparedBars[0]
-        for (let i = 0; i < 4; i ++) {
-            this.data.popupBars.push([0, 0, 0, 0, 0])
-        }
-        this.initConnect();
+        // this.data.popupBars = this.data.preparedBars[0]
+        // for (let i = 0; i < 4; i ++) {
+        //     this.data.popupBars.push([0, 0, 0, 0, 0])
+        // }
+        // this.initConnect();
         await super.load(elementId, preference)
-        this.initMenuInfo();
+        // this.initMenuInfo();
 
-        this.app.ticker.add(() => {
-            if (this.data.toState != this.data.curState) {
-                this.data.toState.visible = true
-                this.data.curState.visible = false
-                this.data.curState = this.data.toState
-            }
-            if(this.data.toClockCount){
-                if (this.data.toClockCount != this.data.curClockCount) {
-                    this.data.toClockCount.visible = true
-                    this.data.curClockCount.visible = false
-                    this.data.curClockCount = this.data.toClockCount
-                }
-            }else{
-                this.data.curClockCount.visible = false
-            }
+        // this.app.ticker.add(() => {
+        //     if (this.data.toState != this.data.curState) {
+        //         this.data.toState.visible = true
+        //         this.data.curState.visible = false
+        //         this.data.curState = this.data.toState
+        //     }
+        //     if(this.data.toClockCount){
+        //         if (this.data.toClockCount != this.data.curClockCount) {
+        //             this.data.toClockCount.visible = true
+        //             this.data.curClockCount.visible = false
+        //             this.data.curClockCount = this.data.toClockCount
+        //         }
+        //     }else{
+        //         this.data.curClockCount.visible = false
+        //     }
             
-        })
+        // })
         
-        let checkReady = () => {
-            if (this.data.ready && this.data.antagonistReady) {
-                this.app.ticker.remove(checkReady)
+        // let checkReady = () => {
+        //     if (this.data.ready && this.data.antagonistReady) {
+        //         this.app.ticker.remove(checkReady)
                 
-                this.data.gameStoped = false
-                this.events["load"]();
-                this.clockContainer.visible = true
-                let step = 5
-                let loadingCountDown = () => {
-                    console.log(step)
-                    this.clockContainer.visible = true;
-                    switch (step) {
-                        case 5:
-                            this.data.toClockCount = this.clockFiveContainer;
-                            break
-                        case 4:
-                            this.data.toClockCount = this.clockFourContainer;
-                            break
-                        case 3:
-                            this.data.toClockCount = this.clockThreeContainer;
-                            break
-                        case 2:
-                            this.data.toClockCount = this.clockTwoContainer;
-                            break
-                        case 1:
-                            this.data.toClockCount = this.clockOneContainer;
-                            break
-                        default:
-                            this.data.toClockCount = null;
-                            this.clockContainer.visible = false;
-                            this.loadingBoardContainer.visible = false
-                            this.beforeChooseContainer.visible = true
-                            // this.tick()
-                            this.data.interval = setInterval(this.tick, 1000)
-                            break
-                    }
-                    if (step > 0) {
-                        step -= 1
-                        setTimeout(loadingCountDown, 1000)
-                    }
-                }
-                loadingCountDown()
-            }
-        }
-        // this.events["load"](); //----test
-        this.app.ticker.add(checkReady)
-        this.data.ready = true
-        Pomelo.readyForBattle(this.data.gameId)
+        //         this.data.gameStoped = false
+        //         this.events["load"]();
+        //         this.clockContainer.visible = true
+        //         let step = 5
+        //         let loadingCountDown = () => {
+        //             console.log(step)
+        //             this.clockContainer.visible = true;
+        //             switch (step) {
+        //                 case 5:
+        //                     this.data.toClockCount = this.clockFiveContainer;
+        //                     break
+        //                 case 4:
+        //                     this.data.toClockCount = this.clockFourContainer;
+        //                     break
+        //                 case 3:
+        //                     this.data.toClockCount = this.clockThreeContainer;
+        //                     break
+        //                 case 2:
+        //                     this.data.toClockCount = this.clockTwoContainer;
+        //                     break
+        //                 case 1:
+        //                     this.data.toClockCount = this.clockOneContainer;
+        //                     break
+        //                 default:
+        //                     this.data.toClockCount = null;
+        //                     this.clockContainer.visible = false;
+        //                     this.loadingBoardContainer.visible = false
+        //                     this.beforeChooseContainer.visible = true
+        //                     // this.tick()
+        //                     this.data.interval = setInterval(this.tick, 1000)
+        //                     break
+        //             }
+        //             if (step > 0) {
+        //                 step -= 1
+        //                 setTimeout(loadingCountDown, 1000)
+        //             }
+        //         }
+        //         loadingCountDown()
+        //     }
+        // }
+        this.events["load"](); //----test
+        // this.app.ticker.add(checkReady)
+        // this.data.ready = true
+        // Pomelo.readyForBattle(this.data.gameId)
     }
     
 
     destroy = async () => {
-        this.data.gameStoped = true
-        clearInterval(this.data.interval)
-        Pomelo.leaveBattle(this.data.gameId)
-        Pomelo.leaveSpace();
-        await super.destroy()
+        // this.data.gameStoped = true
+        // clearInterval(this.data.interval)
+        // Pomelo.leaveBattle(this.data.gameId)
+        // Pomelo.leaveSpace();
+        // await super.destroy()
     }
 
     tick = () => {
@@ -313,10 +313,14 @@ export class BattleStage extends BattleStageUI {
 
         const rewards = this.rewardsContainer.getChildByLabel('rewards') as Text;
         rewards.text = formatNumber(this.data.rewards);
-        rewards.x = (this.calcLength(750 - 42) - rewards.width) / 2;
+
 
         const coinIcon = this.rewardsContainer.getChildByLabel('coinIcon') as Sprite;
-        coinIcon.x = rewards.x + rewards.width + this.calcLength(12);
+
+
+        rewards.x = (this.calcLength(320) - rewards.width - this.calcLength(60)) / 2 + rewards.width / 2;
+
+        coinIcon.x = (this.calcLength(320) - rewards.width - this.calcLength(60)) / 2 + rewards.width + this.calcLength(20);
 
         
 
@@ -575,13 +579,13 @@ export class BattleStage extends BattleStageUI {
         this.app.ticker.add(tick)
     }
 
-    playLoseAnim = () => {
-        this.loseLineContainer.y = this.calcLength(-240);
-        moveTo(this.app, this.loseLineContainer, 0.6, {
-            fromY: this.loseLineContainer.y,
-            toY: -3
-        })
-    }
+    // playLoseAnim = () => {
+    //     this.loseLineContainer.y = this.calcLength(-240);
+    //     moveTo(this.app, this.loseLineContainer, 0.6, {
+    //         fromY: this.loseLineContainer.y,
+    //         toY: -3
+    //     })
+    // }
 
     makeChoice = (choose:string) => {
         this.data.selectStep = this.data.curStep >= LIMIT ? 1 : (this.data.curStep + 1);
@@ -649,9 +653,11 @@ export class BattleStage extends BattleStageUI {
             this.data.toState = this.resultNoBetContainer;
         }else if(openValue == closeValue){
             this.data.toState = this.resultDrawContainer;
+            this.resultDrawContainer?.getChildByLabel('winanim')?.play();
         }else{
-            this.playLoseAnim();
+            // this.playLoseAnim();
             this.data.toState = this.resultLoseContainer;
+            this.resultLoseContainer?.getChildByLabel('winanim')?.play();
         }
     }
 
@@ -732,48 +738,57 @@ export class BattleStage extends BattleStageUI {
             let w = this.data.barWidth
             let h = Math.floor(this.klineContainer.height * per)
             // h = Math.max(1, h)
-            let color = 0xff3a66;
+            let color = 0xBB5656;
             let offsetX = 0
             let offsetY = 0
             if (curPrice > lastPrice) {
-                color = 0x73ff4e;
+                color = 0x689966;
                 offsetY = -h
             }
             i == 0 && (lastY = (this.data.max - bar[OPEN]) / this.data.maxmin * this.klineContainer.height);
 
-            if (h >= 11) {
-                const cutSize = 5;
-                const x = 0
-                let y = 0
-                if(curPrice < lastPrice){
-                    y = h;
-                }
-                const points = [
-                    {x: x, y: y - cutSize},
-                    {x: x, y: y - h + cutSize},
-                    {x: x + cutSize, y: y - h + cutSize},
-                    {x: x + cutSize, y: y - h},
-                    {x: x + w - cutSize, y: y - h},
-                    {x: x + w - cutSize, y: y - h + cutSize},
-                    {x: x + w, y: y - h + cutSize},
-                    {x: x + w, y: y - cutSize},
-                    {x: x + w - cutSize, y: y - cutSize},
-                    {x: x + w - cutSize, y: y},
-                    {x: x + cutSize, y: y},
-                    {x: x + cutSize, y: y - cutSize},
-                    {x: x, y: y - cutSize},
-                ];
+            // if (h >= 11) {
+            //     const cutSize = 5;
+            //     const x = 0
+            //     let y = 0
+            //     if(curPrice < lastPrice){
+            //         y = h;
+            //     }
+            //     const points = [
+            //         {x: x, y: y - cutSize},
+            //         {x: x, y: y - h + cutSize},
+            //         {x: x + cutSize, y: y - h + cutSize},
+            //         {x: x + cutSize, y: y - h},
+            //         {x: x + w - cutSize, y: y - h},
+            //         {x: x + w - cutSize, y: y - h + cutSize},
+            //         {x: x + w, y: y - h + cutSize},
+            //         {x: x + w, y: y - cutSize},
+            //         {x: x + w - cutSize, y: y - cutSize},
+            //         {x: x + w - cutSize, y: y},
+            //         {x: x + cutSize, y: y},
+            //         {x: x + cutSize, y: y - cutSize},
+            //         {x: x, y: y - cutSize},
+            //     ];
 
-                let barContext = new GraphicsContext();
-                barContext.poly(points);
-                barContext.fill(color);
-                this.barGraphics[i].context = barContext;
-            } else {
-                let barContext = new GraphicsContext().rect(offsetX, offsetY, w, Math.max(1, h)).fill(color)
-                this.barGraphics[i].context = barContext
-            }
+            //     let barContext = new GraphicsContext();
+            //     barContext.poly(points);
+            //     barContext.fill(color);
+            //     this.barGraphics[i].context = barContext;
+            // } else {
+            //     let barContext = new GraphicsContext().rect(offsetX, offsetY, w, Math.max(1, h)).fill(color)
+            //     this.barGraphics[i].context = barContext
+            // }
+            // this.barGraphics[i].x = lastX
+            // this.barGraphics[i].y = lastY
+
+
             this.barGraphics[i].x = lastX
             this.barGraphics[i].y = lastY
+            this.barGraphics[i]
+            .beginFill(color)
+            // .lineStyle(2, 0x60483A)
+            .drawRoundedRect(offsetX, offsetY, w, h, 6)
+            .endFill();
 
             
             
@@ -833,13 +848,13 @@ export class BattleStage extends BattleStageUI {
         const toY = this.data.lastPos.y
         this.line.zIndex = 10
 
-        let color = toY > fromY ? 0xff3a66 : 0x73ff4e;
+        let color = toY > fromY ? 0x689966 : 0xBB5656;
 
-        this.startCircle.circle(fromX, fromY, 6).fill(0xffffff).stroke({ width: 2, color: 0x000000 });
+        this.startCircle.circle(fromX, fromY, 8).fill(color).stroke({ width: 2, color: 0xBD916C });
         this.startCircle.zIndex = 11;
         this.topContainer.addChild(this.startCircle);
 
-        this.endCircle.circle(toX, toY, 6).fill(0xffffff).stroke({ width: 2, color: 0x000000 });
+        this.endCircle.circle(toX, toY, 8).fill(color).stroke({ width: 2, color: 0xBD916C });
         this.endCircle.zIndex = 11;
         this.topContainer.addChild(this.endCircle);
 
@@ -877,14 +892,6 @@ export class BattleStage extends BattleStageUI {
             this.line.moveTo(fromX, fromY)
             this.line.lineTo(curX, curY)
             this.line.stroke({ width: 4, color: color });
-
-            this.lineTopBorder.moveTo(fromX, fromY -  2);
-            this.lineTopBorder.lineTo(curX, curY - 2)
-            this.lineTopBorder.stroke({ width: 3, color: 0x4B3421 });
-
-            this.lineBottomBorder.moveTo(fromX, fromY +  2);
-            this.lineBottomBorder.lineTo(curX, curY + 2)
-            this.lineBottomBorder.stroke({ width: 3, color: 0x4B3421 });
             
             remainTime -= this.app.ticker.deltaMS
             if (remainTime <= 0) {

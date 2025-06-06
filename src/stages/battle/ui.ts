@@ -13,7 +13,7 @@ import bg_banner from '../../assets/images/battle/bg_banner.png';
 import img_leave from '../../assets/images/battle/ic-leave.png';
 import img_mail from '../../assets/images/battle/ic-mail.png';
 import img_mail_message from '../../assets/images/battle/ic-mail-message.png';
-import img_coin from '../../assets/images/common/ic-coin.png';
+// import img_coin from '../../assets/images/common/ic-coin.png';
 
 import early_bouns from '../../assets/images/adventure/early-bouns.png';
 
@@ -30,6 +30,25 @@ import bg_lose_line_short from '../../assets/images/adventure/bg-lose-line-short
 import bg_lose_line_long from '../../assets/images/adventure/bg-lose-line-long.png';
 import bg_result_draw from '../../assets/images/battle/bg-result-draw.png';
 import bg_result_no_bet from '../../assets/images/battle/bg-result-no-bet.png';
+
+
+
+import bg from '../../assets/img/battle/bg.png';
+import bg_bottom from '../../assets/img/battle/bg-bottom.png';
+import main_content_bg from '../../assets/img/battle/main-content-bg.png';
+import quit_img from '../../assets/img/battle/quit.png';
+import img_coin from '../../assets/img/common/coin.png';
+import left_user from '../../assets/img/battle/left-user.png';
+import right_user from '../../assets/img/battle/right-user.png';
+import title_bg from '../../assets/img/battle/title-bg.png';
+import btn_img from '../../assets/img/battle/btn.png';
+import bullish_img from '../../assets/img/battle/bullish.png';
+import bearish_img from '../../assets/img/battle/bearish.png';
+import win_avatar from '../../assets/img/battle/win-avatar.png';
+import lose_avatar from '../../assets/img/battle/lose-avatar.png';
+
+
+
 
 const LIMIT = 5
 
@@ -106,7 +125,7 @@ export class BattleStageUI extends Stage {
     resultDrawContainer: Container = new Container();
     resultNoBetContainer: Container = new Container();
 
-    loseLineContainer: Container = new Container();
+    // loseLineContainer: Container = new Container();
 
     waitingBattleResultContainer: Container = new Container();
 
@@ -136,14 +155,17 @@ export class BattleStageUI extends Stage {
         await this.app.init({ background: '#E5D2B2', resizeTo: document.getElementById("ghosty-page"), preference })
         this.app.ticker.maxFPS = 120
         document.getElementById(elementId)!.appendChild(this.app.canvas);
+
+
+        await this.initBg();
         
         this.topContainer.addChild(this.line)
-        // await this.initTopContainer();
-        // await this.initBarsGraph()
-        // await this.initBottom();
+        await this.initTopContainer();
+        await this.initBarsGraph()
+        await this.initBottom();
         
-        // await this.initMenu();
-        // await this.initMark();
+        await this.initMenu();
+        await this.initMark();
         // await this.initLoadingBoard();
         // this.initClock();
         // this.initMail();
@@ -158,88 +180,61 @@ export class BattleStageUI extends Stage {
         await super.destroy()
     }
 
-    initStrikeChannelContainer = async () => {
-        this.strikeChannelContainer.x = this.calcLength(40)
-        this.strikeChannelContainer.y = this.app.screen.height - this.calcLength(280 + 40 + 82);
-        this.winFireAsset = await Assets.load(`${window.location.origin}/img/win_fire.json`)
-        this.particlesAsset = await Assets.load(`${window.location.origin}/img/particles.json`)
+    initBg = async () => {
+        const bg_img = await Assets.load(bg);
+        const pageBg = Sprite.from(bg_img);
+        pageBg.width = this.calcLength(750);
+        pageBg.height = this.app.screen.height;
+        this.app.stage.addChild(pageBg)
 
-        this.app.stage.addChild(this.strikeChannelContainer)
+        const bg_bottom_img = await Assets.load(bg_bottom);
+        const pageBgBottom = Sprite.from(bg_bottom_img);
+        pageBgBottom.width = this.calcLength(750);
+        pageBgBottom.height = this.calcLength(350);
+        pageBgBottom.y = this.app.screen.height - this.calcLength(350);
+        this.app.stage.addChild(pageBgBottom)
 
-        this.strikeChannelContainer.visible = true
-    }
 
-
-    initTopContainer = async () => {
-        // this.topContainer.boundsArea = new Rectangle(0, 0, this.app.screen.width, this.app.screen.height / 2)
-        const h = this.app.screen.height - this.calcLength(40+124+50+40+280+40+28);
-        this.topContainer.x = this.calcLength(30);
-        this.topContainer.y = this.calcLength(40+124+50+14);
-        this.topContainer.boundsArea = new Rectangle(0, 0, this.calcLength(558), h);
-        this.topContainer.zIndex = 1;
-
-        this.klineContainer.x = 0;
-        this.klineContainer.y = 0;
-        this.klineContainer.height = h;
-        this.klineContainer.boundsArea = new Rectangle(0, 0, this.calcLength(558), h);
-        let mask = new Graphics()
-        // Add the rectangular area to show
-        .rect(this.calcLength(7),0,this.calcLength(558),h)
-        .fill(0xffffff).stroke({ width: 4, color: 0xffd900 })
-        this.topContainer.mask = mask
-        this.topContainer.addChild(mask)
-        this.topContainer.addChild(this.klineContainer)
-        this.app.stage.addChild(this.topContainer)
-    }
-
-    initBarsGraph = async () => {
-        this.data.barWidth = this.calcLength(110)
-        let bars = []
-        for (let i = 0; i < LIMIT; i ++) {
-          let graphic = new Graphics()
-          this.klineContainer?.addChild(graphic)
-          graphic.zIndex = 1;
-          bars.push(graphic)
-        }
-        this.barGraphics = bars
+        const main_content_bg_img = await Assets.load(main_content_bg);
+        const mainContentBg = Sprite.from(main_content_bg_img);
+        mainContentBg.width = this.calcLength(734);
+        mainContentBg.height = this.app.screen.height - this.calcLength(312 + 407);
+        mainContentBg.x = this.calcLength(8);
+        mainContentBg.y = this.calcLength(312);
+        this.app.stage.addChild(mainContentBg)
     }
 
     initMenu = async () => {
         this.bannerContainer.x = this.calcLength(0);
         this.bannerContainer.y = this.calcLength(0);
-        this.bannerContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(240));
-
-
-        const bg = await Assets.load(bg_banner);
-        const bannerBg = Sprite.from(bg);
-        bannerBg.width = this.calcLength(750);
-        bannerBg.height = this.calcLength(240);
-        this.bannerContainer.addChild(bannerBg);
+        this.bannerContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(350));
 
 
         //TradingPair
         const tradingPair = new BitmapText({
             text: `${this.data.instId.replace('-', '/')}`,
-            style:{
-                fill: '#FBEED0',
-                fontSize: this.calcLength(26),
-                fontFamily: 'SourceCodePro-Semibold',
-            }
+            style:  new TextStyle({
+                fill: '#282722',
+                fontSize: this.calcLength(36),
+                fontFamily: 'Gagalin',
+                stroke: '#CAAD95',
+                strokeThickness: 1,
+            })
         })
-        tradingPair.x = this.calcLength(375)
-        tradingPair.y = this.calcLength(32)
+        tradingPair.x = this.calcLength(375);
+        tradingPair.y = this.calcLength(86);
         tradingPair.anchor.set(0.5, 0.5);
         tradingPair.label = 'tradingPair';
         this.bannerContainer.addChild(tradingPair);
 
 
         //leave
-        const imgQuit = await Assets.load(img_leave);
-        const leaveIcon = Sprite.from(imgQuit);
-        leaveIcon.width = this.calcLength(30);
-        leaveIcon.height = this.calcLength(30);
-        leaveIcon.x = this.calcLength(375) + tradingPair.width / 2 + this.calcLength(16);
-        leaveIcon.y = this.calcLength(17);
+        const quitImg = await Assets.load(quit_img);
+        const leaveIcon = Sprite.from(quitImg);
+        leaveIcon.width = this.calcLength(36);
+        leaveIcon.height = this.calcLength(36);
+        leaveIcon.x = this.calcLength(375) + tradingPair.width / 2 + this.calcLength(12);
+        leaveIcon.y = this.calcLength(70);
         leaveIcon.eventMode = 'static';
         leaveIcon.cursor = 'pointer';
         leaveIcon.on('pointerdown', () => {
@@ -249,79 +244,95 @@ export class BattleStageUI extends Stage {
 
 
         //coin
-        this.rewardsContainer.x = this.calcLength(0);
-        this.rewardsContainer.y = this.calcLength(83);
+        this.rewardsContainer.x = this.calcLength(215);
+        this.rewardsContainer.y = this.calcLength(120);
+
+        //coin-bg
+        const coinBg = new Graphics();
+        coinBg.beginFill(0xCAAD95);
+        coinBg.lineStyle(2, 0x60483A); 
+        coinBg.drawRoundedRect(0, 0, this.calcLength(320), this.calcLength(66), this.calcLength(10));
+        coinBg.endFill();
+        this.rewardsContainer.addChild(coinBg);
+
         //coin-text
         const rewards = new BitmapText({
-            text: "130, 0000",
+            text: "13",
             style: {
-                fill: '#322314',
-                fontSize: this.calcLength(30),
-                fontFamily: 'SourceCodePro-Bold',
+                fill: '#3F3027',
+                fontSize: this.calcLength(40),
+                fontFamily: 'LogoSC LongZhuTi',
             }
         });
+        rewards.x = this.calcLength(160 - 50);
+        rewards.y = this.calcLength(33);
         rewards.label = 'rewards'
-        // rewards.anchor.set(0.5, 0)
+        rewards.anchor.set(0, 0.5);
         this.rewardsContainer.addChild(rewards);
+
         //coin-icon
         const imgCoin = await Assets.load(img_coin);
         const coinIcon = Sprite.from(imgCoin);
-        coinIcon.width = this.calcLength(30);
-        coinIcon.height = this.calcLength(30);
+        coinIcon.x = this.calcLength(240);
+        coinIcon.y = this.calcLength(13);
+        coinIcon.width = this.calcLength(40);
+        coinIcon.height = this.calcLength(40);
         coinIcon.label = 'coinIcon'
         this.rewardsContainer.addChild(coinIcon);
-        this.rewardsContainer.pivot.set(0, this.rewardsContainer.height / 2);
+        // this.rewardsContainer.pivot.set(0, this.rewardsContainer.height / 2);
         this.bannerContainer.addChild(this.rewardsContainer);
 
 
         //my avatar
-        const myAvatarImg = await Assets.load(`${window.location.origin}/img/avatar${this.data.myAvatarIndex}.png`);
+        // const myAvatarImg = await Assets.load(`${window.location.origin}/img/avatar${this.data.myAvatarIndex}.png`);
+        const myAvatarImg = await Assets.load(left_user);
         const myAvatar = Sprite.from(myAvatarImg);
-        myAvatar.width = this.calcLength(80);
-        myAvatar.height = this.calcLength(80);
-        myAvatar.x = this.calcLength(40);
-        myAvatar.y = this.calcLength(28);
+        myAvatar.width = this.calcLength(147);
+        myAvatar.height = this.calcLength(147);
+        myAvatar.x = this.calcLength(33);
+        myAvatar.y = this.calcLength(200);
         this.bannerContainer.addChild(myAvatar);
 
         //my name
-        const myName = new BitmapText({
-            text: "You",
-            style: {
-                fill: '#FBEED0',
-                fontSize: this.calcLength(24),
-                fontFamily: 'SourceCodePro-Bold',
-            }
-        });
-        myName.x = this.calcLength(40);
-        myName.y = this.calcLength(136);
-        myName.anchor.set(0, 0.5);
-        this.bannerContainer.addChild(myName);
+        // const myName = new BitmapText({
+        //     text: "You",
+        //     style: {
+        //         fill: '#FBEED0',
+        //         fontSize: this.calcLength(24),
+        //         fontFamily: 'SourceCodePro-Bold',
+        //     }
+        // });
+        // myName.x = this.calcLength(40);
+        // myName.y = this.calcLength(136);
+        // myName.anchor.set(0, 0.5);
+        // this.bannerContainer.addChild(myName);
 
 
         //antagonist avatar
         // const antagonistAvatarImg = await Assets.load(`${window.location.origin}/img/avatar1.png`);
-        // const antagonistAvatar = Sprite.from(antagonistAvatarImg);
-        // antagonistAvatar.width = this.calcLength(80);
-        // antagonistAvatar.height = this.calcLength(80);
-        // antagonistAvatar.x = this.calcLength(630);
-        // antagonistAvatar.y = this.calcLength(28);
-        // this.bannerContainer.addChild(antagonistAvatar);
+        const antagonistAvatarImg = await Assets.load(right_user);
+        const antagonistAvatar = Sprite.from(antagonistAvatarImg);
+        antagonistAvatar.width = this.calcLength(147);
+        antagonistAvatar.height = this.calcLength(151);
+        antagonistAvatar.x = this.calcLength(572);
+        antagonistAvatar.y = this.calcLength(198);
+        this.bannerContainer.addChild(antagonistAvatar);
 
 
         //antagonist name
-        const antagonistName = new BitmapText({
-            text: '',
-            style: {
-                fill: '#FBEED0',
-                fontSize: this.calcLength(24),
-                fontFamily: 'SourceCodePro-Bold',
-            }
-        });
-        antagonistName.x = this.calcLength(710);
-        antagonistName.y = this.calcLength(136);
-        antagonistName.anchor.set(1, 0.5);
-        antagonistName.label = 'antagonistName'
-        this.bannerContainer.addChild(antagonistName);
+        // const antagonistName = new BitmapText({
+        //     text: '',
+        //     style: {
+        //         fill: '#FBEED0',
+        //         fontSize: this.calcLength(24),
+        //         fontFamily: 'SourceCodePro-Bold',
+        //     }
+        // });
+        // antagonistName.x = this.calcLength(710);
+        // antagonistName.y = this.calcLength(136);
+        // antagonistName.anchor.set(1, 0.5);
+        // antagonistName.label = 'antagonistName'
+        // this.bannerContainer.addChild(antagonistName);
         
         this.initScoreboardGraph();
         this.initBattleResultsGraph();
@@ -331,20 +342,32 @@ export class BattleStageUI extends Stage {
 
     initScoreboardGraph = async () => {
         const myScoreContainer: Container = new Container()
-        myScoreContainer.x = this.calcLength(223);
-        myScoreContainer.y = this.calcLength(130);
+        myScoreContainer.x = this.calcLength(210);
+        myScoreContainer.y = this.calcLength(211);
+
+        for(let i = 0; i<5; i++){
+            const numBg = new Graphics();
+            numBg.beginFill(0xCAAD95);
+            numBg.lineStyle(2, 0x60483A); 
+            numBg.drawRoundedRect(0, 0, this.calcLength(24), this.calcLength(38), this.calcLength(4));
+            numBg.endFill();
+            numBg.x = this.calcLength(i * 24);
+            myScoreContainer.addChild(numBg);
+        }
+
+
         let myNums = []
         for(let i = 0; i<5; i++){
             const num = new BitmapText({
                 text: '0',
                 style: {
-                    fill: '#322314',
-                    fontSize: this.calcLength(32),
-                    fontFamily: 'D-DINExp',
+                    fill: '#3F3027',
+                    fontSize: this.calcLength(24),
+                    fontFamily: 'LogoSC LongZhuTi',
                 }
             });
-            num.x = this.calcLength(13.5) + this.calcLength(i * 27);
-            num.y = this.calcLength(22);
+            num.x = this.calcLength(12) + this.calcLength(i * 24);
+            num.y = this.calcLength(19);
             num.anchor.set(0.5, 0.5);
             myScoreContainer.addChild(num);
             myNums.push(num);
@@ -354,20 +377,32 @@ export class BattleStageUI extends Stage {
 
 
         const antagonistScoreContainer: Container = new Container()
-        antagonistScoreContainer.x = this.calcLength(392.5);
-        antagonistScoreContainer.y = this.calcLength(130);
+        antagonistScoreContainer.x = this.calcLength(410);
+        antagonistScoreContainer.y = this.calcLength(211);
+
+        for(let i = 0; i<5; i++){
+            const numBg = new Graphics();
+            numBg.beginFill(0xCAAD95);
+            numBg.lineStyle(2, 0x60483A); 
+            numBg.drawRoundedRect(0, 0, this.calcLength(24), this.calcLength(38), this.calcLength(4));
+            numBg.endFill();
+            numBg.x = this.calcLength(i * 24);
+            antagonistScoreContainer.addChild(numBg);
+        }
+
+
         let antagonistNums = []
         for(let i = 0; i<5; i++){
             const num = new BitmapText({
                 text: '0',
                 style: {
-                    fill: '#322314',
-                    fontSize: this.calcLength(32),
-                    fontFamily: 'D-DINExp',
+                    fill: '#3F3027',
+                    fontSize: this.calcLength(24),
+                    fontFamily: 'LogoSC LongZhuTi',
                 }
             });
-            num.x = this.calcLength(13.5) + this.calcLength(i * 27);
-            num.y = this.calcLength(22);
+            num.x = this.calcLength(12) + this.calcLength(i * 24);
+            num.y = this.calcLength(19);
             num.anchor.set(0.5, 0.5);
             antagonistScoreContainer.addChild(num);
             antagonistNums.push(num);
@@ -377,34 +412,17 @@ export class BattleStageUI extends Stage {
     }
 
     initBattleResultsGraph = async () => {
-        const w = this.calcLength(10);
-        const h = this.calcLength(10);
-        const cutSize = this.calcLength(2);
-        const points = [
-            {x: 0, y: cutSize},
-            {x: 0, y: h - cutSize},
-            {x: cutSize, y: h - cutSize},
-            {x: cutSize, y: h},
-            {x: w - cutSize, y: h},
-            {x: w - cutSize, y: h - cutSize},
-            {x: w, y: h - cutSize},
-            {x: w, y: cutSize},
-            {x: w - cutSize, y: cutSize},
-            {x: w - cutSize, y: 0},
-            {x: cutSize, y: 0},
-            {x: cutSize, y: cutSize},
-            {x: 0, y: cutSize},
-        ];
-
         const myBattleResultsContainer: Container = new Container()
-        myBattleResultsContainer.x = this.calcLength(223);
-        myBattleResultsContainer.y = this.calcLength(194);
+        myBattleResultsContainer.x = this.calcLength(210);
+        myBattleResultsContainer.y = this.calcLength(259);
         let myBattles = []
         for(let i = 0; i<10; i++){
             const graphic = new Graphics();
-            graphic.beginFill('rgba(0, 0, 0, 0.3)');
-            graphic.poly(points).fill();
-            graphic.x = this.calcLength(14 * i);
+            graphic.beginFill(0x60483A);
+            graphic.lineStyle(1, 0x60483A); 
+            graphic.drawRoundedRect(0, 0, this.calcLength(10), this.calcLength(10), this.calcLength(10));
+            graphic.endFill();
+            graphic.x = this.calcLength(12 * i);
             myBattleResultsContainer.addChild(graphic);
             myBattles.push(graphic);
         }
@@ -413,19 +431,96 @@ export class BattleStageUI extends Stage {
 
 
         const antagonistBattleResultsContainer: Container = new Container()
-        antagonistBattleResultsContainer.x = this.calcLength(400);
-        antagonistBattleResultsContainer.y = this.calcLength(194);
+        antagonistBattleResultsContainer.x = this.calcLength(410);
+        antagonistBattleResultsContainer.y = this.calcLength(259);
         let antagonistBattles = [];
         for(let i = 0; i<10; i++){
             const graphic = new Graphics();
-            graphic.beginFill('rgba(0, 0, 0, 0.3)');
-            graphic.poly(points).fill();
-            graphic.x = this.calcLength(14 * i);
+            graphic.beginFill(0x60483A);
+            graphic.lineStyle(1, 0x60483A); 
+            graphic.drawRoundedRect(0, 0, this.calcLength(10), this.calcLength(10), this.calcLength(10));
+            graphic.endFill();
+            graphic.x = this.calcLength(12 * i);
             antagonistBattleResultsContainer.addChild(graphic);
             antagonistBattles.push(graphic);
         }
         this.antagonistBattleResultsGraphics = antagonistBattles;
         this.bannerContainer.addChild(antagonistBattleResultsContainer);
+    }
+
+    initTopContainer = async () => {
+        // this.topContainer.boundsArea = new Rectangle(0, 0, this.app.screen.width, this.app.screen.height / 2)
+        const h = this.app.screen.height - this.calcLength(312 + 407 + 100 + 100);
+        this.topContainer.x = this.calcLength(90);
+        this.topContainer.y = this.calcLength(312 + 100);
+        this.topContainer.boundsArea = new Rectangle(0, 0, this.calcLength(480), h);
+        this.topContainer.zIndex = 1;
+
+        this.klineContainer.x = 0;
+        this.klineContainer.y = 0;
+        this.klineContainer.height = h;
+        this.klineContainer.boundsArea = new Rectangle(0, 0, this.calcLength(480), h);
+        let mask = new Graphics()
+        // Add the rectangular area to show
+        .rect(this.calcLength(7),0,this.calcLength(480),h)
+        .fill(0xffffff).stroke({ width: 4, color: 0xffd900 })
+        this.topContainer.mask = mask
+        this.topContainer.addChild(mask)
+        this.topContainer.addChild(this.klineContainer)
+        this.app.stage.addChild(this.topContainer)
+    }
+
+    initMark = async () => {
+        const h = this.app.screen.height - this.calcLength(312 + 407 + 100 + 100);
+        const markContainer: Container = new Container()
+        markContainer.x = this.calcLength(90);
+        markContainer.y = this.calcLength(312 + 100);
+        markContainer.height = h;
+        markContainer.boundsArea = new Rectangle(0, 0, this.calcLength(570), h);
+
+
+        //Mark-line
+        for (let i = 0; i < 10; i ++) {
+            const graphic = new Graphics().rect(0, 0, this.calcLength(480), 1).fill(0x75695F);
+            graphic.x = this.calcLength(0);
+            graphic.y = this.calcLength(14) + this.klineContainer.height / 10 * i;
+            markContainer.addChild(graphic)
+        }
+
+
+        //Mark-value
+        let marks = []
+        for (let i = 0; i < 10; i ++) {
+            const graphic = new BitmapText({
+                text: '',
+                style:{
+                    fill: `#CAAD95`,
+                    fontSize: this.calcLength(18),
+                    fontFamily: 'LogoSC LongZhuTi',
+                },
+                x:  this.calcLength(490),
+                y:  this.klineContainer.height / 10 * i
+            })
+            graphic.zIndex = 10
+            graphic.alpha = 0.4
+            marks.push(graphic);
+            markContainer.addChild(graphic)
+        }
+        this.markGraphics = marks;
+
+        this.app.stage.addChild(markContainer);
+    }
+
+    initBarsGraph = async () => {
+        this.data.barWidth = this.calcLength(94)
+        let bars = []
+        for (let i = 0; i < LIMIT; i ++) {
+          let graphic = new Graphics()
+          this.klineContainer?.addChild(graphic)
+          graphic.zIndex = 1;
+          bars.push(graphic)
+        }
+        this.barGraphics = bars
     }
 
     initMail = async () => {
@@ -454,47 +549,6 @@ export class BattleStageUI extends Stage {
         mailMessage.visible = false;
 
         this.app.stage.addChild( this.mailContainer);
-    }
-
-    initMark = async () => {
-        const h = this.app.screen.height - this.calcLength(40+124+50+40+280+40);
-        const markContainer: Container = new Container()
-        markContainer.x = this.calcLength(0);
-        markContainer.y = this.calcLength(40+124+50);
-        markContainer.height = h;
-        markContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), h);
-
-
-        //Mark-line
-        for (let i = 0; i < 10; i ++) {
-            const graphic = new Graphics().rect(0, 0, this.calcLength(560), 1).fill(0x000000, 0.16);
-            graphic.x = this.calcLength(40);
-            graphic.y = this.calcLength(14) + this.klineContainer.height / 9 * i;
-            markContainer.addChild(graphic)
-        }
-
-
-        //Mark-value
-        let marks = []
-        for (let i = 0; i < 10; i ++) {
-            const graphic = new BitmapText({
-                text: '',
-                style:{
-                    fill: `rgba(0,0,0,1)`,
-                    fontSize: this.calcLength(24),
-                    fontFamily: 'SourceCodePro-Medium',
-                },
-                x:  this.calcLength(610),
-                y:  this.klineContainer.height / 9 * i
-            })
-            graphic.zIndex = 10
-            graphic.alpha = 0.4
-            marks.push(graphic);
-            markContainer.addChild(graphic)
-        }
-        this.markGraphics = marks;
-
-        this.app.stage.addChild(markContainer);
     }
 
     initClock = async () => {
@@ -600,48 +654,15 @@ export class BattleStageUI extends Stage {
         this.clockContainer.visible = false;
     }
 
-    initBottom = async () => {
-        const bottomContainer: Container = new Container()
-        bottomContainer.y = this.app.screen.height - this.calcLength(280 + 40);
-        bottomContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(560));
+    initStrikeChannelContainer = async () => {
+        this.strikeChannelContainer.x = this.calcLength(40)
+        this.strikeChannelContainer.y = this.app.screen.height - this.calcLength(280 + 40 + 82);
+        this.winFireAsset = await Assets.load(`${window.location.origin}/img/win_fire.json`)
+        this.particlesAsset = await Assets.load(`${window.location.origin}/img/particles.json`)
 
-        await this.initStrikeContainer();
-        await this.initBeforeChoose();
-        bottomContainer.addChild(this.beforeChooseContainer);
+        this.app.stage.addChild(this.strikeChannelContainer)
 
-        //Loading
-        await this.initLoadingBoard();
-        bottomContainer.addChild(this.loadingBoardContainer);
-
-        //YOUR CHOICE 1-3
-        await this.initAfterChoosen();
-        bottomContainer.addChild(this.afterChooseContainer);
-
-        //result 1-3
-        await this.initResultBullish();
-        bottomContainer.addChild(this.resultBullishContainer);
-        await this.initResultBearish();
-        bottomContainer.addChild(this.resultBearishContainer);
-        await this.initResultNeutral();
-        bottomContainer.addChild(this.resultNeutralContainer);
-
-        //result 1-4
-        await this.initResultWin();
-        bottomContainer.addChild(this.resultWinContainer);
-
-        await this.initResultLose();
-        bottomContainer.addChild(this.resultLoseContainer);
-
-        await this.initResultDraw();
-        bottomContainer.addChild(this.resultDrawContainer);
-
-        await this.initResultNoBet();
-        bottomContainer.addChild(this.resultNoBetContainer);
-
-        await this.initWaitingBattleResult();
-        bottomContainer.addChild(this.waitingBattleResultContainer);
-    
-        this.app.stage.addChild(bottomContainer)
+        this.strikeChannelContainer.visible = true
     }
 
     initStrikeContainer = async () => {
@@ -777,58 +798,131 @@ export class BattleStageUI extends Stage {
         this.loadingBoardContainer.visible = true;
     }
 
-    initBeforeChoose = async () => {
-        this.beforeChooseContainer.boundsArea = new Rectangle(0, 0, this.calcLength(670), this.calcLength(280));
-        this.beforeChooseContainer.x = this.calcLength(40);
-        //bg
-        const bgBeforeChoose = await Assets.load(bg_before_choose);
-        const chooseBg = Sprite.from(bgBeforeChoose);
-        chooseBg.width = this.calcLength(670);
-        chooseBg.height = this.calcLength(280);
-        this.beforeChooseContainer.addChild(chooseBg);
-        
+    initBottom = async () => {
+        const bottomContainer: Container = new Container()
+        bottomContainer.y = this.app.screen.height - this.calcLength(393);
+        bottomContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(393));
 
-        //bullish-btn
-        const sheet = await Assets.load(`${window.location.origin}/images/button.json`);
-        const animBullish = new AnimatedSprite(sheet.animations['bullishRun']);
-        animBullish.animationSpeed = 0.05;
-        animBullish.play();
-        animBullish.scale = this.app.screen.width / 1500;
-        animBullish.anchor.set(0.5, 1);
-        animBullish.x = this.calcLength(175);
-        animBullish.y = this.calcLength(228);
-        animBullish.zIndex = 2;
-        animBullish.eventMode = 'static';
-        animBullish.cursor = 'pointer';
-        animBullish.on('pointerdown', () => {
+        // await this.initStrikeContainer();
+        await this.initBeforeChoose();
+        bottomContainer.addChild(this.beforeChooseContainer);
+
+        // //Loading
+        // await this.initLoadingBoard();
+        // bottomContainer.addChild(this.loadingBoardContainer);
+
+        // //YOUR CHOICE 1-3
+        // await this.initAfterChoosen();
+        // bottomContainer.addChild(this.afterChooseContainer);
+
+        // //result 1-3
+        // await this.initResultBullish();
+        // bottomContainer.addChild(this.resultBullishContainer);
+        // await this.initResultBearish();
+        // bottomContainer.addChild(this.resultBearishContainer);
+        // await this.initResultNeutral();
+        // bottomContainer.addChild(this.resultNeutralContainer);
+
+        // //result 1-4
+        // await this.initResultWin();
+        // bottomContainer.addChild(this.resultWinContainer);
+
+        // await this.initResultLose();
+        // bottomContainer.addChild(this.resultLoseContainer);
+
+        // await this.initResultDraw();
+        // bottomContainer.addChild(this.resultDrawContainer);
+
+        // await this.initResultNoBet();
+        // bottomContainer.addChild(this.resultNoBetContainer);
+
+        // await this.initWaitingBattleResult();
+        // bottomContainer.addChild(this.waitingBattleResultContainer);
+    
+        this.app.stage.addChild(bottomContainer)
+    }
+
+    initBeforeChoose = async () => {
+        this.beforeChooseContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(393));
+
+        //title
+        const bgTitle = await Assets.load(title_bg);
+        const titleBg = Sprite.from(bgTitle);
+        titleBg.width = this.calcLength(590);
+        titleBg.height = this.calcLength(94);
+        titleBg.x = this.calcLength(80);
+        this.beforeChooseContainer.addChild(titleBg);
+
+
+        //bullish btn
+        const btnImg = await Assets.load(btn_img);
+        const bullishBtnIcon = Sprite.from(btnImg);
+        bullishBtnIcon.width = this.calcLength(173);
+        bullishBtnIcon.height = this.calcLength(153);
+        bullishBtnIcon.x = this.calcLength(88);
+        bullishBtnIcon.y = this.calcLength(39);
+        bullishBtnIcon.eventMode = 'static';
+        bullishBtnIcon.cursor = 'pointer';
+        bullishBtnIcon.on('pointerdown', () => {
             if(this.data.selection){
                 return;
             }
             this.makeChoice('bullish');
         })
-        this.beforeChooseContainer.addChild(animBullish);
+        this.beforeChooseContainer.addChild(bullishBtnIcon);
 
-        //bearish-btn
-        // const sheet2 = await Assets.load(`${window.location.origin}/images/bearish.json`);
-        const animBearish = new AnimatedSprite(sheet.animations['bearishRun']);
-        animBearish.animationSpeed = 0.05;
-        animBearish.play();
-        animBearish.scale = this.app.screen.width / 1500;
-        animBearish.anchor.set(0.5, 1);
-        animBearish.x = this.calcLength(495);
-        animBearish.y = this.calcLength(228);
-        animBearish.zIndex = 2;
-        animBearish.eventMode = 'static';
-        animBearish.cursor = 'pointer';
-        animBearish.on('pointerdown', () => {
+
+        const bullishImg = await Assets.load(bullish_img);
+        const bullishBtn = Sprite.from(bullishImg);
+        bullishBtn.width = this.calcLength(287);
+        bullishBtn.height = this.calcLength(83);
+        bullishBtn.x = this.calcLength(31);
+        bullishBtn.y = this.calcLength(193);
+        bullishBtn.eventMode = 'static';
+        bullishBtn.cursor = 'pointer';
+        bullishBtn.on('pointerdown', () => {
+            if(this.data.selection){
+                return;
+            }
+            this.makeChoice('bullish');
+        })
+        this.beforeChooseContainer.addChild(bullishBtn);
+
+
+        //bearish btn
+        const bearishBtnIcon = Sprite.from(btnImg);
+        bearishBtnIcon.width = this.calcLength(173);
+        bearishBtnIcon.height = this.calcLength(153);
+        bearishBtnIcon.x = this.calcLength(496);
+        bearishBtnIcon.y = this.calcLength(39);
+        bearishBtnIcon.eventMode = 'static';
+        bearishBtnIcon.cursor = 'pointer';
+        bearishBtnIcon.on('pointerdown', () => {
             if(this.data.selection){
                 return;
             }
             this.makeChoice('bearish');
         })
-        this.beforeChooseContainer.addChild(animBearish);
+        this.beforeChooseContainer.addChild(bearishBtnIcon);
+
+
+        const bearishImg = await Assets.load(bearish_img);
+        const bearishBtn = Sprite.from(bearishImg);
+        bearishBtn.width = this.calcLength(287);
+        bearishBtn.height = this.calcLength(83);
+        bearishBtn.x = this.calcLength(437);
+        bearishBtn.y = this.calcLength(193);
+        bearishBtn.eventMode = 'static';
+        bearishBtn.cursor = 'pointer';
+        bearishBtn.on('pointerdown', () => {
+            if(this.data.selection){
+                return;
+            }
+            this.makeChoice('bearish');
+        })
+        this.beforeChooseContainer.addChild(bearishBtn);
         
-        this.beforeChooseContainer.visible = false;
+        // this.beforeChooseContainer.visible = false;
     }
 
     initAfterChoosen = async () => {
@@ -1070,11 +1164,11 @@ export class BattleStageUI extends Stage {
     }
 
     initResultWin = async () => {
-        this.resultWinContainer.boundsArea = new Rectangle(0, 0, this.calcLength(670), this.calcLength(280));
-        this.resultWinContainer.x = this.calcLength(40);
+        this.resultWinContainer.boundsArea = new Rectangle(0, 0, this.calcLength(673), this.calcLength(283));
+        this.resultWinContainer.x = this.calcLength(38);
 
         //bg
-        const sheet = await Assets.load(`${window.location.origin}/images/battle-win.json`);
+        const sheet = await Assets.load(`${window.location.origin}/img/battle-win.json`);
         const anim = new AnimatedSprite(sheet.animations['run']);
         anim.label = 'winanim'
         anim.animationSpeed = 0.1666;
@@ -1085,188 +1179,109 @@ export class BattleStageUI extends Stage {
         this.resultWinContainer.addChild(anim);
 
         //avatar
-        const imgWin = await Assets.load(img_win);
+        const imgWin = await Assets.load(win_avatar);
         const winAvatar = Sprite.from(imgWin);
-        winAvatar.width = this.calcLength(152);
-        winAvatar.height = this.calcLength(152);
-        winAvatar.x = this.calcLength(143);
-        winAvatar.y = this.calcLength(54);
+        winAvatar.width = this.calcLength(200);
+        winAvatar.height = this.calcLength(200);
+        winAvatar.x = this.calcLength(76);
+        winAvatar.y = this.calcLength(31);
         this.resultWinContainer.addChild(winAvatar);
 
         const winText = new BitmapText({
             text: "You Win!",
             style:  new TextStyle({
-                fill: '#FFDC7D',
-                stroke: '#000000',
-                strokeThickness: 3,
-                fontFamily: 'SourceCodePro-Medium',
-                fontSize: this.calcLength(36),
+                fill: '#FDEF55',
+                fontFamily: 'Gagalin',
+                fontSize: this.calcLength(48),
                 letterSpacing: 0
             })
         });
-        winText.x = this.calcLength(349);
-        winText.y = this.calcLength(60);
+        winText.x = this.calcLength(344);
+        winText.y = this.calcLength(83);
         this.resultWinContainer.addChild(winText);
-
-        //coinIcon
-        // const imgCoin = await Assets.load(img_coin);
-        // const coinIcon = Sprite.from(imgCoin);
-        // coinIcon.width = this.calcLength(48);
-        // coinIcon.height = this.calcLength(48);
-        // coinIcon.x = this.calcLength(349);
-        // coinIcon.y = this.calcLength(144);
-        // this.resultWinContainer.addChild(coinIcon);
 
         //coinText
         this.winCoinGraph.style =  new TextStyle({
-            fill: '#FFFFFF',
-            stroke: '#000000',
-            strokeThickness: 1,
-            fontFamily: 'SourceCodePro-Semibold-stroke',
-            fontSize: this.calcLength(30),
+            fill: '#FDEF55',
+            fontFamily: 'LogoSC LongZhuTi',
+            fontSize: this.calcLength(32),
             letterSpacing: 0
         })
-        this.winCoinGraph.x = this.calcLength(349);
-        this.winCoinGraph.y = this.calcLength(150);
+        this.winCoinGraph.x = this.calcLength(344);
+        this.winCoinGraph.y = this.calcLength(161);
         this.resultWinContainer.addChild(this.winCoinGraph);
 
         this.resultWinContainer.visible = false;
     }
 
     initResultLose = async () => {
-        this.resultLoseContainer.boundsArea = new Rectangle(0, 0, this.calcLength(670), this.calcLength(280));
-        let mask = new Graphics()
-        .rect(0, 0, this.calcLength(670), this.calcLength(280))
-        .fill(0xffffff).stroke({ width: 4, color: 0xffd900 })
-        this.resultLoseContainer.mask = mask
-        this.resultLoseContainer.addChild(mask)
-        this.resultLoseContainer.x = this.calcLength(40);
+        this.resultLoseContainer.boundsArea = new Rectangle(0, 0, this.calcLength(673), this.calcLength(283));
+        this.resultLoseContainer.x = this.calcLength(38);
 
         //bg
-        const bgResultNoBet = await Assets.load(bg_result_no_bet);
-        const bg = Sprite.from(bgResultNoBet);
-        bg.width = this.calcLength(670);
-        bg.height = this.calcLength(280);
-        this.resultLoseContainer.addChild(bg);
-
-        //line
-        this.loseLineContainer.x = 0;
-        this.loseLineContainer.y = this.calcLength(-240);
-        this.loseLineContainer.width = this.calcLength(670);
-        this.loseLineContainer.height = this.calcLength(280);
-        const bgLoseLineShort = await Assets.load(bg_lose_line_short);
-        const lineShort = Sprite.from(bgLoseLineShort);
-        lineShort.width = this.calcLength(408);
-        lineShort.height = this.calcLength(148);
-        lineShort.x = this.calcLength(131);
-        this.loseLineContainer.addChild(lineShort);
-        const bgLoseLineLong = await Assets.load(bg_lose_line_long);
-        const lineLong = Sprite.from(bgLoseLineLong);
-        lineLong.width = this.calcLength(624);
-        lineLong.height = this.calcLength(240);
-        lineLong.x = this.calcLength(23);
-        this.loseLineContainer.addChild(lineLong);
-        this.resultLoseContainer.addChild(this.loseLineContainer);
-        
+        const sheet = await Assets.load(`${window.location.origin}/img/battle-lose.json`);
+        const anim = new AnimatedSprite(sheet.animations['run']);
+        anim.label = 'winanim'
+        anim.animationSpeed = 0.1666;
+        anim.stop();
+        anim.scale = this.app.screen.width / 1500;
+        anim.x = 0
+        anim.y = 0
+        this.resultLoseContainer.addChild(anim);
 
         //avatar
-        const imgLose = await Assets.load(img_lose);
-        const winAvatar = Sprite.from(imgLose);
-        winAvatar.width = this.calcLength(152);
-        winAvatar.height = this.calcLength(152);
-        winAvatar.x = this.calcLength(143);
-        winAvatar.y = this.calcLength(54);
-        this.resultLoseContainer.addChild(winAvatar);
+        const imgLose = await Assets.load(lose_avatar);
+        const loseAvatar = Sprite.from(imgLose);
+        loseAvatar.width = this.calcLength(200);
+        loseAvatar.height = this.calcLength(200);
+        loseAvatar.x = this.calcLength(76);
+        loseAvatar.y = this.calcLength(31);
+        this.resultLoseContainer.addChild(loseAvatar);
 
-        const winText = new BitmapText({
-            text: "You Lose : (",
+        const loseText = new BitmapText({
+            text: "YOU lose",
             style:  new TextStyle({
-                fill: '#FF6861',
-                fontFamily: 'SourceCodePro-Medium',
-                fontSize: this.calcLength(36),
+                fill: '#272622',
+                fontFamily: 'Gagalin',
+                fontSize: this.calcLength(48),
                 letterSpacing: 0
             })
         });
-        winText.x = this.calcLength(349);
-        winText.y = this.calcLength(60);
-        this.resultLoseContainer.addChild(winText);
-
-        //coinIcon
-        // const imgCoin = await Assets.load(img_coin);
-        // const coinIcon = Sprite.from(imgCoin);
-        // coinIcon.width = this.calcLength(48);
-        // coinIcon.height = this.calcLength(48);
-        // coinIcon.x = this.calcLength(349);
-        // coinIcon.y = this.calcLength(144);
-        // this.resultLoseContainer.addChild(coinIcon);
+        loseText.x = this.calcLength(344);
+        loseText.y = this.calcLength(83);
+        this.resultLoseContainer.addChild(loseText);
 
         //coinText
         const coinText = new BitmapText({
             text: "- 100", //+ 0
             style: new TextStyle({
-                fill: '#FFFFFF',
-                fontFamily: 'SourceCodePro-Semibold',
-                fontSize: this.calcLength(28),
+                fill: '#FDB155',
+                fontFamily: 'LogoSC LongZhuTi',
+                fontSize: this.calcLength(32),
                 letterSpacing: 0
             })
         });
-        coinText.x = this.calcLength(349);
-        coinText.y = this.calcLength(150);
+        coinText.x = this.calcLength(344);
+        coinText.y = this.calcLength(161);
         this.resultLoseContainer.addChild(coinText);
 
         this.resultLoseContainer.visible = false;
-
-        this.playLoseAnim();
     }
 
     initResultDraw = async () => {
-        this.resultDrawContainer.boundsArea = new Rectangle(0, 0, this.calcLength(670), this.calcLength(280));
-        this.resultDrawContainer.x = this.calcLength(40);
+        this.resultDrawContainer.boundsArea = new Rectangle(0, 0, this.calcLength(673), this.calcLength(283));
+        this.resultDrawContainer.x = this.calcLength(38);
 
         //bg
-        const bgResultDraw = await Assets.load(bg_result_draw);
-        const bg = Sprite.from(bgResultDraw);
-        bg.width = this.calcLength(670);
-        bg.height = this.calcLength(280);
-        this.resultDrawContainer.addChild(bg);
-
-        //info
-        const infoText = new BitmapText({
-            text: "It's a draw!",
-            style:  new TextStyle({
-                fill: 'rgba(255,255,255,1)',
-                fontFamily: 'SourceCodePro-Semibold',
-                fontSize: this.calcLength(36),
-                letterSpacing: 4
-            })
-        });
-        infoText.x = this.calcLength(335);
-        infoText.y = this.calcLength(89);
-        infoText.anchor.set(0.5, 0.5);
-        this.resultDrawContainer.addChild(infoText);
-
-        //coinIcon
-        // const imgCoin = await Assets.load(img_coin);
-        // const coinIcon = Sprite.from(imgCoin);
-        // coinIcon.width = this.calcLength(48);
-        // coinIcon.height = this.calcLength(48);
-        // coinIcon.x = this.calcLength(276);
-        // coinIcon.y = this.calcLength(144);
-        // this.resultDrawContainer.addChild(coinIcon);
-
-        //coinText
-        const coinText = new BitmapText({
-            text: "+ 0",//+ 100
-            style:  new TextStyle({
-                fill: '#FFFFFF',
-                fontFamily: 'SourceCodePro-Semibold',
-                fontSize: this.calcLength(28),
-                letterSpacing: 0
-            })
-        });
-        coinText.x = this.calcLength(276);
-        coinText.y = this.calcLength(150);
-        this.resultDrawContainer.addChild(coinText);
+        const sheet = await Assets.load(`${window.location.origin}/img/battle-draw.json`);
+        const anim = new AnimatedSprite(sheet.animations['run']);
+        anim.label = 'winanim'
+        anim.animationSpeed = 0.1666;
+        anim.stop();
+        anim.scale = this.app.screen.width / 1500;
+        anim.x = 0
+        anim.y = 0
+        this.resultDrawContainer.addChild(anim);
 
         this.resultDrawContainer.visible = false;
     }
