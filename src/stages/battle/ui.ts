@@ -46,6 +46,7 @@ import bullish_img from '../../assets/img/battle/bullish.png';
 import bearish_img from '../../assets/img/battle/bearish.png';
 import win_avatar from '../../assets/img/battle/win-avatar.png';
 import lose_avatar from '../../assets/img/battle/lose-avatar.png';
+import after_choose_bg from '../../assets/img/battle/after-choose-bg.png';
 
 
 
@@ -102,7 +103,7 @@ export class BattleStageUI extends Stage {
         text: "You did not place a bet",
     })
     resultCountDownGraph = new BitmapText({
-        text: "2s",
+        text: "Result in 2s",
     })
 
     //result
@@ -169,7 +170,7 @@ export class BattleStageUI extends Stage {
         // await this.initLoadingBoard();
         // this.initClock();
         // this.initMail();
-        // this.initEarlyBouns();
+        this.initEarlyBouns();
         // this.initInfoCard();
         // this.initFireWall();
         // this.initStrikeChannelContainer()
@@ -755,44 +756,52 @@ export class BattleStageUI extends Stage {
     }
 
     initLoadingBoard = async () => {
-        this.loadingBoardContainer.boundsArea = new Rectangle(0, 0, this.calcLength(670), this.calcLength(280));
-        this.loadingBoardContainer.x = this.calcLength(40);
+        this.loadingBoardContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(393));
 
-        //resultBullishContainer-bg
-        const bgResultBullish = await Assets.load(bg_after_choose);
-        const bg = Sprite.from(bgResultBullish);
-        bg.width = this.calcLength(670);
-        bg.height = this.calcLength(280);
-        this.loadingBoardContainer.addChild(bg);
+        //title
+        const bgTitle = await Assets.load(title_bg);
+        const titleBg = Sprite.from(bgTitle);
+        titleBg.width = this.calcLength(590);
+        titleBg.height = this.calcLength(94);
+        titleBg.x = this.calcLength(80);
+        this.loadingBoardContainer.addChild(titleBg);
 
-        //info
-        const titleText = new BitmapText({
-            text: "WAITING",
+        const title = new BitmapText({
+            text: 'WAITING',
             style:  new TextStyle({
-                fill: '#000000',
-                fontFamily: 'SourceCodePro-Semibold-stroke',
-                fontSize: this.calcLength(28),
-                letterSpacing: 6,
+                fill: '#60483A',
+                fontFamily: 'Gagalin',
+                fontSize: this.calcLength(48),
             })
-        });
-        titleText.x = this.calcLength(335);
-        titleText.y = this.calcLength(55);
-        titleText.anchor.set(0.5, 0.5);
-        this.loadingBoardContainer.addChild(titleText);
+        })
+        title.x = this.calcLength(375);
+        title.y = this.calcLength(36);
+        title.anchor.set(0.5, 0.5);
+        this.loadingBoardContainer.addChild(title);
+
+
+        //bg
+        const bgAfterChoose = await Assets.load(after_choose_bg);
+        const infoBg = Sprite.from(bgAfterChoose);
+        infoBg.width = this.calcLength(590);
+        infoBg.height = this.calcLength(132);
+        infoBg.x = this.calcLength(80);
+        infoBg.y = this.calcLength(125);
+        this.loadingBoardContainer.addChild(infoBg);
+
 
         //tip
         const tipText = new BitmapText({
             text: "Battle is about to begin",
             style:  new TextStyle({
-                fill: 'rgba(255,255,255,0.60)',
-                fontFamily: 'SourceCodePro-Semibold',
-                fontSize: this.calcLength(36),
-                letterSpacing: 1
+                fill: '#282722',
+                fontFamily: 'Gagalin',
+                fontSize: this.calcLength(48),
             })
         });
-        tipText.x = this.calcLength(335);
-        tipText.y = this.calcLength(154);
-        tipText.anchor.set(0.5, 0);
+        tipText.x = this.calcLength(375);
+        tipText.y = this.calcLength(182);
+        tipText.anchor.set(0.5, 0.5);
         this.loadingBoardContainer.addChild(tipText);
 
         this.loadingBoardContainer.visible = true;
@@ -807,13 +816,13 @@ export class BattleStageUI extends Stage {
         await this.initBeforeChoose();
         bottomContainer.addChild(this.beforeChooseContainer);
 
-        // //Loading
-        // await this.initLoadingBoard();
-        // bottomContainer.addChild(this.loadingBoardContainer);
+        // Loading
+        await this.initLoadingBoard();
+        bottomContainer.addChild(this.loadingBoardContainer);
 
-        // //YOUR CHOICE 1-3
-        // await this.initAfterChoosen();
-        // bottomContainer.addChild(this.afterChooseContainer);
+        // YOUR CHOICE 1-3
+        await this.initAfterChoosen();
+        bottomContainer.addChild(this.afterChooseContainer);
 
         // //result 1-3
         // await this.initResultBullish();
@@ -852,6 +861,19 @@ export class BattleStageUI extends Stage {
         titleBg.height = this.calcLength(94);
         titleBg.x = this.calcLength(80);
         this.beforeChooseContainer.addChild(titleBg);
+
+        const title = new BitmapText({
+            text: 'PLACE YOUR BET',
+            style:  new TextStyle({
+                fill: '#60483A',
+                fontFamily: 'Gagalin',
+                fontSize: this.calcLength(48),
+            })
+        })
+        title.x = this.calcLength(375);
+        title.y = this.calcLength(36);
+        title.anchor.set(0.5, 0.5);
+        this.beforeChooseContainer.addChild(title);
 
 
         //bullish btn
@@ -922,67 +944,61 @@ export class BattleStageUI extends Stage {
         })
         this.beforeChooseContainer.addChild(bearishBtn);
         
-        // this.beforeChooseContainer.visible = false;
+        this.beforeChooseContainer.visible = false;
     }
 
     initAfterChoosen = async () => {
-        this.afterChooseContainer.boundsArea = new Rectangle(0, 0, this.calcLength(670), this.calcLength(280));
-        this.afterChooseContainer.x = this.calcLength(40);
-
-        //bg
-        const bgAfterChoose = await Assets.load(bg_after_choose);
-        const bg1 = Sprite.from(bgAfterChoose);
-        bg1.width = this.calcLength(670);
-        bg1.height = this.calcLength(280);
-        this.afterChooseContainer.addChild(bg1);
+        this.afterChooseContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(393));
 
         //title
-        this.yourChoiceTitleGraph.x = this.calcLength(335);
-        this.yourChoiceTitleGraph.y = this.calcLength(55);
+        const bgTitle = await Assets.load(title_bg);
+        const titleBg = Sprite.from(bgTitle);
+        titleBg.width = this.calcLength(590);
+        titleBg.height = this.calcLength(94);
+        titleBg.x = this.calcLength(80);
+        this.afterChooseContainer.addChild(titleBg);
+
+        this.yourChoiceTitleGraph.x = this.calcLength(375);
+        this.yourChoiceTitleGraph.y = this.calcLength(36);
         this.yourChoiceTitleGraph.anchor.set(0.5, 0.5);
         this.yourChoiceTitleGraph.style =  new TextStyle({
-            fill: '#000000',
-            stroke: 'rgba(0,0,0,1)',
-            strokeThickness: 1,
-            fontFamily: 'SourceCodePro-Medium-stroke',
-            fontSize: this.calcLength(28),
-            letterSpacing: 6,
+            fill: '#60483A',
+            fontFamily: 'Gagalin',
+            fontSize: this.calcLength(48),
         })
         this.afterChooseContainer.addChild(this.yourChoiceTitleGraph);
 
+
+
+        //bg
+        const bgAfterChoose = await Assets.load(after_choose_bg);
+        const infoBg = Sprite.from(bgAfterChoose);
+        infoBg.width = this.calcLength(590);
+        infoBg.height = this.calcLength(132);
+        infoBg.x = this.calcLength(80);
+        infoBg.y = this.calcLength(125);
+        this.afterChooseContainer.addChild(infoBg);
+
+
         //info
-        this.yourChoiceInfoGraph.x = this.calcLength(335);
-        this.yourChoiceInfoGraph.y = this.calcLength(155);
+        this.yourChoiceInfoGraph.x = this.calcLength(375);
+        this.yourChoiceInfoGraph.y = this.calcLength(162);
         this.yourChoiceInfoGraph.anchor.set(0.5, 0.5);
         this.yourChoiceInfoGraph.style =  new TextStyle({
-            fill: '#FFFFFF',
-            fontFamily: 'SourceCodePro-Semibold',
-            fontSize: this.calcLength(34),
+            fill: '#282722',
+            fontFamily: 'Gagalin',
+            fontSize: this.calcLength(48),
         })
         this.afterChooseContainer.addChild(this.yourChoiceInfoGraph);
 
-        //result
-        const resultText = new BitmapText({
-            text: "Result in",
-            style:  new TextStyle({
-                fill: 'rgba(255,255,255,0.40)',
-                fontFamily: 'SourceCodePro-Medium',
-                fontSize: this.calcLength(24),
-                letterSpacing: 1
-            })
-        });
-        resultText.x = this.calcLength(240); //238 400
-        resultText.y = this.calcLength(184);
-        this.afterChooseContainer.addChild(resultText);
-
         //result-countDown
-        this.resultCountDownGraph.x = this.calcLength(404);
-        this.resultCountDownGraph.y = this.calcLength(184);
+        this.resultCountDownGraph.x = this.calcLength(375);
+        this.resultCountDownGraph.y = this.calcLength(193);
+        this.resultCountDownGraph.anchor.set(0.5, 0);
         this.resultCountDownGraph.style =  new TextStyle({
-            fill: '#FFFFFF',
-            fontFamily: 'SourceCodePro-Medium',
-            fontSize: this.calcLength(24),
-            letterSpacing: 1
+            fill: '#3F3027',
+            fontFamily: 'LogoSC LongZhuTi',
+            fontSize: this.calcLength(32),
         })
         this.afterChooseContainer.addChild(this.resultCountDownGraph);
 

@@ -295,7 +295,7 @@ export class BattleStage extends BattleStageUI {
         
 
         this.updateCountDown(step);
-        this.resultCountDownGraph.text = Math.max(5 - step, 0) + 's'
+        this.resultCountDownGraph.text = 'Result in' + Math.max(5 - step, 0) + 's'
 
         //mail - battle Invitation notice
         this.data.state = store.getState()?.moduleSlice;
