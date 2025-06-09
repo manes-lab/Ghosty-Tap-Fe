@@ -225,10 +225,7 @@
         font-weight: 400;
         line-height: normal;
         &.disabled{
-            background-image: url('../../../assets/images/common/btn-gray.png');
-            -webkit-animation: none;
-            animation: none;
-            color:rgba(255,255,255,0.4);
+            background-image: url('../../../assets/img/common/disabled-btn-bg.png');
         }
     }
     .tip{

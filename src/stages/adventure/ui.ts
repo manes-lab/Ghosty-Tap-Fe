@@ -75,17 +75,9 @@ export class AdventureStageUI extends Stage {
 
     //markContainer
     markGraphics: Text[] = [];
-    oneContainer: Container = new Container()
-    twoContainer: Container = new Container()
-    threeContainer: Container = new Container()
     clockGraph = new BitmapText({
         text: "",
     })
-    // clockContainer: Container = new Container()
-    // clockZeroContainer: Container = new Container()
-    // clockOneContainer: Container = new Container()
-    // clockTwoContainer: Container = new Container()
-    // clockThreeContainer: Container = new Container()
 
     //bottomContainer
     //bottom-before choose
@@ -166,26 +158,6 @@ export class AdventureStageUI extends Stage {
     }
 
     public async load(elementId: string, preference: "webgl" | "webgpu" | undefined)  {
-        // await super.load(elementId, preference)
-        // await this.app.init({ background: '#000000', resizeTo: document.body, preference })
-        // this.app.ticker.maxFPS = 120
-        // document.getElementById(elementId)!.appendChild(this.app.canvas);
-        
-        // this.mainContainer.addChild(this.line)
-        // await this.initMainContainer();
-        // await this.initBarsGraph()
-        // await this.initBottom();
-        
-        // this.initMenu();
-        // this.initMark();
-        // this.initClock();
-        // this.initCoinReduce();
-        // this.initEarlyBouns();
-        // this.initInfoCard();
-        // this.initFireWall();
-        // this.initStrikeChannelContainer()
-        // this.initFlyingCoins()
-
         await super.load(elementId, preference)
         await this.app.init({ background: '#C0A373', resizeTo: document.getElementById("ghosty-page"), preference })
         this.app.ticker.maxFPS = 120
@@ -198,6 +170,7 @@ export class AdventureStageUI extends Stage {
         this.initStrikeChannelContainer()
         this.initInfoCard();
         this.initEarlyBouns();
+        // this.initCoinReduce();
         this.initFlyingCoins();
         this.initFireWall();
     }

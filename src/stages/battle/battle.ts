@@ -35,8 +35,8 @@ export class BattleStage extends BattleStageUI {
         ready: false,
         antagonistReady: false,
         gameStoped: true,
-        toClockCount: this.clockZeroContainer,
-        curClockCount: this.clockZeroContainer,
+        // toClockCount: this.clockZeroContainer,
+        // curClockCount: this.clockZeroContainer,
         toState: this.beforeChooseContainer,
         curState: this.beforeChooseContainer,
         myAvatarIndex: 1,
@@ -77,94 +77,95 @@ export class BattleStage extends BattleStageUI {
     }
 
     load = async (elementId: string, preference: "webgl" | "webgpu" | undefined) => {
-        // const bars_res = await api.get_battle_bars({
-        //     battle_id: this.data.gameId
-        // });
-        // this.data.preparedBars = bars_res.data;
+        const bars_res = await api.get_battle_bars({
+            battle_id: this.data.gameId
+        });
+        this.data.preparedBars = bars_res.data;
 
-        // this.data.popupBars = this.data.preparedBars[0]
-        // for (let i = 0; i < 4; i ++) {
-        //     this.data.popupBars.push([0, 0, 0, 0, 0])
-        // }
-        // this.initConnect();
+        this.data.popupBars = this.data.preparedBars[0]
+        for (let i = 0; i < 4; i ++) {
+            this.data.popupBars.push([0, 0, 0, 0, 0])
+        }
+        this.initConnect();
         await super.load(elementId, preference)
-        // this.initMenuInfo();
+        this.initMenuInfo();
 
-        // this.app.ticker.add(() => {
-        //     if (this.data.toState != this.data.curState) {
-        //         this.data.toState.visible = true
-        //         this.data.curState.visible = false
-        //         this.data.curState = this.data.toState
-        //     }
-        //     if(this.data.toClockCount){
-        //         if (this.data.toClockCount != this.data.curClockCount) {
-        //             this.data.toClockCount.visible = true
-        //             this.data.curClockCount.visible = false
-        //             this.data.curClockCount = this.data.toClockCount
-        //         }
-        //     }else{
-        //         this.data.curClockCount.visible = false
-        //     }
+        this.app.ticker.add(() => {
+            if (this.data.toState != this.data.curState) {
+                this.data.toState.visible = true
+                this.data.curState.visible = false
+                this.data.curState = this.data.toState
+            }
+            // if(this.data.toClockCount){
+            //     if (this.data.toClockCount != this.data.curClockCount) {
+            //         this.data.toClockCount.visible = true
+            //         this.data.curClockCount.visible = false
+            //         this.data.curClockCount = this.data.toClockCount
+            //     }
+            // }else{
+            //     this.data.curClockCount.visible = false
+            // }
             
-        // })
+        })
         
-        // let checkReady = () => {
-        //     if (this.data.ready && this.data.antagonistReady) {
-        //         this.app.ticker.remove(checkReady)
+        let checkReady = () => {
+            if (this.data.ready && this.data.antagonistReady) {
+                this.app.ticker.remove(checkReady)
                 
-        //         this.data.gameStoped = false
-        //         this.events["load"]();
-        //         this.clockContainer.visible = true
-        //         let step = 5
-        //         let loadingCountDown = () => {
-        //             console.log(step)
-        //             this.clockContainer.visible = true;
-        //             switch (step) {
-        //                 case 5:
-        //                     this.data.toClockCount = this.clockFiveContainer;
-        //                     break
-        //                 case 4:
-        //                     this.data.toClockCount = this.clockFourContainer;
-        //                     break
-        //                 case 3:
-        //                     this.data.toClockCount = this.clockThreeContainer;
-        //                     break
-        //                 case 2:
-        //                     this.data.toClockCount = this.clockTwoContainer;
-        //                     break
-        //                 case 1:
-        //                     this.data.toClockCount = this.clockOneContainer;
-        //                     break
-        //                 default:
-        //                     this.data.toClockCount = null;
-        //                     this.clockContainer.visible = false;
-        //                     this.loadingBoardContainer.visible = false
-        //                     this.beforeChooseContainer.visible = true
-        //                     // this.tick()
-        //                     this.data.interval = setInterval(this.tick, 1000)
-        //                     break
-        //             }
-        //             if (step > 0) {
-        //                 step -= 1
-        //                 setTimeout(loadingCountDown, 1000)
-        //             }
-        //         }
-        //         loadingCountDown()
-        //     }
-        // }
-        this.events["load"](); //----test
-        // this.app.ticker.add(checkReady)
-        // this.data.ready = true
-        // Pomelo.readyForBattle(this.data.gameId)
+                this.data.gameStoped = false
+                this.events["load"]();
+                this.clockContainer.visible = true
+                let step = 5
+                let loadingCountDown = () => {
+                    console.log(step)
+                    this.countdownNum.visible = true;
+                    switch (step) {
+                        case 5:
+                            this.countdownNum.text = "5";
+                            break
+                        case 4:
+                             this.countdownNum.text = "4";
+                            break
+                        case 3:
+                             this.countdownNum.text = "3";
+                            break
+                        case 2:
+                             this.countdownNum.text = "2";
+                            break
+                        case 1:
+                             this.countdownNum.text = "1";
+                            break
+                        default:
+                            // this.data.toClockCount = null;
+                            this.markContainer.visible = true;
+                            this.countdownNum.visible = false;
+                            this.loadingBoardContainer.visible = false
+                            this.beforeChooseContainer.visible = true
+                            // this.tick()
+                            this.data.interval = setInterval(this.tick, 1000)
+                            break
+                    }
+                    if (step > 0) {
+                        step -= 1
+                        setTimeout(loadingCountDown, 1000)
+                    }
+                }
+                loadingCountDown()
+            }
+        }
+        // this.events["load"](); //----test
+        this.app.ticker.add(checkReady)
+        this.data.ready = true
+        Pomelo.readyForBattle(this.data.gameId)
     }
     
 
     destroy = async () => {
-        // this.data.gameStoped = true
-        // clearInterval(this.data.interval)
-        // Pomelo.leaveBattle(this.data.gameId)
+        this.data.gameStoped = true
+        clearInterval(this.data.interval)
+        Pomelo.leaveBattle(this.data.gameId)
         // Pomelo.leaveSpace();
-        // await super.destroy()
+        await super.destroy()
     }
 
     tick = () => {
@@ -295,11 +296,11 @@ export class BattleStage extends BattleStageUI {
         
 
         this.updateCountDown(step);
-        this.resultCountDownGraph.text = 'Result in' + Math.max(5 - step, 0) + 's'
+        this.resultCountDownGraph.text = 'Result in ' + Math.max(5 - step, 0) + 's'
 
         //mail - battle Invitation notice
         this.data.state = store.getState()?.moduleSlice;
-        this.mailContainer.getChildByLabel('mailMessage').visible = Boolean(this.data.state.hasNewInvitation);
+        // this.mailContainer.getChildByLabel('mailMessage').visible = Boolean(this.data.state.hasNewInvitation);
         this.data.curStep += 1
         if (this.data.curStep >= 10) {
             this.data.curStep = 0
@@ -324,45 +325,45 @@ export class BattleStage extends BattleStageUI {
 
         
 
-        api.get_user_status({
-            user_id: this.data.address,
-        }).then((res) => {
-            this.data.myAvatarIndex = 1  //res.data.user.avatar
-        })
+        // api.get_user_status({
+        //     user_id: this.data.address,
+        // }).then((res) => {
+        //     this.data.myAvatarIndex = 1  //res.data.user.avatar
+        // })
 
 
-        api.get_user_status({
-            user_id: this.data.userId
-        }).then(async (res) => {
-            if(res.data?.user){
-                const userName = res.data?.user?.user_id?.slice(-6) || ''
-                const text = this.bannerContainer.getChildByLabel('antagonistName') as Text;
-                text.text = userName.length > 10 ? (userName.slice(0, 7) + '...') : userName;
+        // api.get_user_status({
+        //     user_id: this.data.userId
+        // }).then(async (res) => {
+        //     if(res.data?.user){
+        //         const userName = res.data?.user?.user_id?.slice(-6) || ''
+        //         const text = this.bannerContainer.getChildByLabel('antagonistName') as Text;
+        //         text.text = userName.length > 10 ? (userName.slice(0, 7) + '...') : userName;
 
 
-                //antagonist avatar
-                const antagonistAvatarImg = await Assets.load(`${window.location.origin}/img/avatar${res.data?.user?.avatar}.png`);
-                const antagonistAvatar = Sprite.from(antagonistAvatarImg);
-                antagonistAvatar.width = this.calcLength(80);
-                antagonistAvatar.height = this.calcLength(80);
-                antagonistAvatar.x = this.calcLength(630);
-                antagonistAvatar.y = this.calcLength(28);
-                this.bannerContainer.addChild(antagonistAvatar);
-            }
-        }).catch(async () => {
-            const text = this.bannerContainer.getChildByLabel('antagonistName') as Text;
-            text.text = this.data.userId
+        //         //antagonist avatar
+        //         const antagonistAvatarImg = await Assets.load(`${window.location.origin}/img/avatar${res.data?.user?.avatar}.png`);
+        //         const antagonistAvatar = Sprite.from(antagonistAvatarImg);
+        //         antagonistAvatar.width = this.calcLength(80);
+        //         antagonistAvatar.height = this.calcLength(80);
+        //         antagonistAvatar.x = this.calcLength(630);
+        //         antagonistAvatar.y = this.calcLength(28);
+        //         this.bannerContainer.addChild(antagonistAvatar);
+        //     }
+        // }).catch(async () => {
+        //     const text = this.bannerContainer.getChildByLabel('antagonistName') as Text;
+        //     text.text = this.data.userId
 
 
-            //antagonist avatar
-            const antagonistAvatarImg = await Assets.load(`${window.location.origin}/img/avatar1.png`);
-            const antagonistAvatar = Sprite.from(antagonistAvatarImg);
-            antagonistAvatar.width = this.calcLength(80);
-            antagonistAvatar.height = this.calcLength(80);
-            antagonistAvatar.x = this.calcLength(630);
-            antagonistAvatar.y = this.calcLength(28);
-            this.bannerContainer.addChild(antagonistAvatar);
-        })
+        //     //antagonist avatar
+        //     const antagonistAvatarImg = await Assets.load(`${window.location.origin}/img/avatar1.png`);
+        //     const antagonistAvatar = Sprite.from(antagonistAvatarImg);
+        //     antagonistAvatar.width = this.calcLength(80);
+        //     antagonistAvatar.height = this.calcLength(80);
+        //     antagonistAvatar.x = this.calcLength(630);
+        //     antagonistAvatar.y = this.calcLength(28);
+        //     this.bannerContainer.addChild(antagonistAvatar);
+        // })
     }
 
     initConnect = async () => {
@@ -472,27 +473,16 @@ export class BattleStage extends BattleStageUI {
     updateCountDown = (step:number) => {
         if(step < 3){
             if(step == 0){
-                this.data.toClockCount = this.clockThreeContainer;
-                // this.clockThreeContainer.visible = true;
+                this.clockGraph.text = '3'
             }else if(step == 1){
-                this.data.toClockCount = this.clockTwoContainer;
-                // this.clockThreeContainer.visible = false;
-                // this.clockTwoContainer.visible = true;
+                this.clockGraph.text = '2'
             }else if(step == 2){
-                this.data.toClockCount = this.clockOneContainer;
-                // this.clockTwoContainer.visible = false;
-                // this.clockOneContainer.visible = true;
+                this.clockGraph.text = '1'
             }
-            this.clockContainer.visible = true;
         }else{
             if(step == 3){
-                this.data.toClockCount = this.clockZeroContainer;
-                // this.clockOneContainer.visible = false;
-                // this.clockZeroContainer.visible = true;
+                this.clockGraph.text = '3'
             }else{
-                this.data.toClockCount = null;
-                // this.clockZeroContainer.visible = false;
-                this.clockContainer.visible = false;
             }
         }
     }
@@ -601,37 +591,21 @@ export class BattleStage extends BattleStageUI {
                 selection: -1,
                 title: "YOUR CHOICE",
                 info: "Bearish",
-                style: new TextStyle({
-                    fill: '#FF3A66',
-                    fontFamily: 'SourceCodePro-Semibold',
-                    fontSize: this.calcLength(34),
-                })
             },
             "nobet" : {
                 selection: 0,
                 title: "NO BET",
                 info: "You did not place a bet",
-                style: new TextStyle({
-                    fill: '#FFFFFF',
-                    fontFamily: 'SourceCodePro-Semibold',
-                    fontSize: this.calcLength(34),
-                })
             },
             "bullish" : {
                 selection: 1,
                 title: "YOUR CHOICE",
                 info: "Bullish",
-                style: new TextStyle({
-                    fill: '#73FF4E',
-                    fontFamily: 'SourceCodePro-Semibold',
-                    fontSize: this.calcLength(34),
-                })
             },
         }
         this.data.selection = choiceMap[choose]['selection'];
         this.yourChoiceTitleGraph.text = choiceMap[choose]['title'];
         this.yourChoiceInfoGraph.text = choiceMap[choose]['info'];
-        this.yourChoiceInfoGraph.style = choiceMap[choose]['style'];
         this.data.toState = this.afterChooseContainer;
     }
 
@@ -904,9 +878,9 @@ export class BattleStage extends BattleStageUI {
     addBlock = (win: boolean) => {
         const block = new Block(this.app, win, this.winFireAsset, this.particlesAsset)
         const count = this.strikeChannelContainer.children.length
-        if (count == 2 && this.clockContainer.y == (this.app.screen.height - this.calcLength(280 + 40 + 102))) {
-            this.clockContainer.y -= this.calcLength(114 - 2)
-        }
+        // if (count == 2 && this.clockContainer.y == (this.app.screen.height - this.calcLength(280 + 40 + 102))) {
+        //     this.clockContainer.y -= this.calcLength(114 - 2)
+        // }
         const lastBlock = this.strikeChannelContainer.children[0] as Block | undefined
         let toX = - (this.calcLength(24 + 100))
         if (lastBlock) {

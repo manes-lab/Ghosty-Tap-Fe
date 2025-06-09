@@ -1,7 +1,7 @@
 import {Container, Assets, Sprite, Graphics, GraphicsContext, Text, Rectangle, AnimatedSprite, RenderContainer, Bounds, BitmapFont, BitmapText, TextStyle, CLEAR } from 'pixi.js';
 import { Stage } from '../base';
 
-import img_clock from '../../assets/images/battle/ic-clock.png';
+// import img_clock from '../../assets/images/battle/ic-clock.png';
 import clock_img_0 from '../../assets/images/battle/ic-0.png';
 import clock_img_1 from '../../assets/images/battle/ic-1.png';
 import clock_img_2 from '../../assets/images/battle/ic-2.png';
@@ -47,6 +47,8 @@ import bearish_img from '../../assets/img/battle/bearish.png';
 import win_avatar from '../../assets/img/battle/win-avatar.png';
 import lose_avatar from '../../assets/img/battle/lose-avatar.png';
 import after_choose_bg from '../../assets/img/battle/after-choose-bg.png';
+import early_bouns_img from '../../assets/img/adventure/early-bouns.png';
+import img_clock from '../../assets/img/battle/clock.png';
 
 
 
@@ -70,14 +72,15 @@ export class BattleStageUI extends Stage {
     barGraphics: Graphics[] = [];
 
     //markContainer
+    markContainer: Container = new Container()
     markGraphics: Text[] = [];
     clockContainer: Container = new Container()
-    clockZeroContainer: Container = new Container()
-    clockOneContainer: Container = new Container()
-    clockTwoContainer: Container = new Container()
-    clockThreeContainer: Container = new Container()
-    clockFourContainer: Container = new Container()
-    clockFiveContainer: Container = new Container()
+    clockGraph = new BitmapText({
+        text: "",
+    })
+    countdownNum = new BitmapText({
+        text: "",
+    })
 
     //bottomContainer
     //bottom-before choose
@@ -118,9 +121,7 @@ export class BattleStageUI extends Stage {
     resultBearishContainer: Container = new Container();
     resultNeutralContainer: Container = new Container();
     //bottom-result-coin
-    winCoinGraph = new BitmapText({
-        text: "",
-    })
+    winCoinGraph = new Text()
     resultWinContainer: Container = new Container();
     resultLoseContainer: Container = new Container();
     resultDrawContainer: Container = new Container();
@@ -167,13 +168,12 @@ export class BattleStageUI extends Stage {
         
         await this.initMenu();
         await this.initMark();
-        // await this.initLoadingBoard();
-        // this.initClock();
+        await this.initCountdown();
         // this.initMail();
-        this.initEarlyBouns();
-        // this.initInfoCard();
-        // this.initFireWall();
-        // this.initStrikeChannelContainer()
+        await this.initEarlyBouns();
+        this.initInfoCard();
+        this.initFireWall();
+        this.initStrikeChannelContainer()
     }
     
 
@@ -473,11 +473,10 @@ export class BattleStageUI extends Stage {
 
     initMark = async () => {
         const h = this.app.screen.height - this.calcLength(312 + 407 + 100 + 100);
-        const markContainer: Container = new Container()
-        markContainer.x = this.calcLength(90);
-        markContainer.y = this.calcLength(312 + 100);
-        markContainer.height = h;
-        markContainer.boundsArea = new Rectangle(0, 0, this.calcLength(570), h);
+        this.markContainer.x = this.calcLength(90);
+        this.markContainer.y = this.calcLength(312 + 100);
+        this.markContainer.height = h;
+        this.markContainer.boundsArea = new Rectangle(0, 0, this.calcLength(570), h);
 
 
         //Mark-line
@@ -485,7 +484,7 @@ export class BattleStageUI extends Stage {
             const graphic = new Graphics().rect(0, 0, this.calcLength(480), 1).fill(0x75695F);
             graphic.x = this.calcLength(0);
             graphic.y = this.calcLength(14) + this.klineContainer.height / 10 * i;
-            markContainer.addChild(graphic)
+            this.markContainer.addChild(graphic)
         }
 
 
@@ -505,11 +504,12 @@ export class BattleStageUI extends Stage {
             graphic.zIndex = 10
             graphic.alpha = 0.4
             marks.push(graphic);
-            markContainer.addChild(graphic)
+            this.markContainer.addChild(graphic)
         }
         this.markGraphics = marks;
 
-        this.app.stage.addChild(markContainer);
+        this.markContainer.visible = false;
+        this.app.stage.addChild(this.markContainer);
     }
 
     initBarsGraph = async () => {
@@ -552,107 +552,18 @@ export class BattleStageUI extends Stage {
         this.app.stage.addChild( this.mailContainer);
     }
 
-    initClock = async () => {
-        this.clockContainer.x = this.app.screen.width / 2 - this.calcLength(50);
-        this.clockContainer.y = this.app.screen.height - this.calcLength(280 + 40 + 102);
-        this.clockContainer.boundsArea = new Rectangle(0, 0, this.calcLength(100), this.calcLength(100));
-        this.clockContainer.zIndex = 10
+    initCountdown = async () => {
+        this.countdownNum.style = {
+            fill: `#CAAD95`,
+            fontSize: this.calcLength(100),
+            fontFamily: 'Gagalin',
+        }
+        this.countdownNum.x = this.calcLength(375);
+        this.countdownNum.y = this.calcLength(312) + (this.app.screen.height - this.calcLength(312 + 407)) / 2;
+        this.countdownNum.anchor.set(0.5, 0.5);
+        this.countdownNum.zIndex = 20;
 
-        const imgClock = await Assets.load(img_clock);
-        const clock = Sprite.from(imgClock);
-        clock.anchor.set(0.5, 0.5); // 设置锚点为中心
-        clock.x = this.calcLength(50);
-        clock.y = this.calcLength(50);
-        clock.width = this.calcLength(100);
-        clock.height = this.calcLength(100);
-        this.clockContainer.addChild(clock);
-        // this.clockContainer.visible = false;
-        this.app.stage.addChild(this.clockContainer)
-
-
-        const maxRotation = Math.PI / 45; // 180/45 = 4
-        const minRotation = -maxRotation;
-        const frames = 0.08 * this.app.ticker.FPS
-        const swingSpeed = maxRotation / frames * 1.5
-        let swingDirection = -1;
-        this.app.ticker.add(() => {
-            clock.rotation += swingDirection * swingSpeed;
-            if (clock.rotation >= maxRotation) {
-                swingDirection = -1;
-            } else if (clock.rotation <= minRotation) {
-                swingDirection = 1;
-            }
-        })
-
-        const imgClock0 = await Assets.load(clock_img_0);
-        const zero = Sprite.from(imgClock0);
-        zero.width = this.calcLength(38);
-        zero.height = this.calcLength(30);
-        zero.x = this.calcLength(50);
-        zero.y = this.calcLength(41);
-        zero.anchor.set(0.5, 0);
-        this.clockZeroContainer.addChild(zero);
-        this.clockZeroContainer.visible = false;
-        this.clockContainer.addChild(this.clockZeroContainer);
-
-
-        const imgClock1 = await Assets.load(clock_img_1);
-        const one = Sprite.from(imgClock1);
-        one.width = this.calcLength(38);
-        one.height = this.calcLength(30);
-        one.x = this.calcLength(50);
-        one.y = this.calcLength(41);
-        one.anchor.set(0.5, 0);
-        this.clockOneContainer.addChild(one);
-        this.clockOneContainer.visible = false;
-        this.clockContainer.addChild(this.clockOneContainer);
-
-
-        const imgClock2 = await Assets.load(clock_img_2);
-        const two = Sprite.from(imgClock2);
-        two.width = this.calcLength(38);
-        two.height = this.calcLength(30);
-        two.x = this.calcLength(50);
-        two.y = this.calcLength(41);
-        two.anchor.set(0.5, 0);
-        this.clockTwoContainer.addChild(two);
-        this.clockTwoContainer.visible = false;
-        this.clockContainer.addChild(this.clockTwoContainer);
-
-        const imgClock3 = await Assets.load(clock_img_3);
-        const three = Sprite.from(imgClock3);
-        three.width = this.calcLength(38);
-        three.height = this.calcLength(30);
-        three.x = this.calcLength(50);
-        three.y = this.calcLength(41);
-        three.anchor.set(0.5, 0);
-        this.clockThreeContainer.addChild(three);
-        this.clockThreeContainer.visible = false;
-        this.clockContainer.addChild(this.clockThreeContainer);
-
-        const imgClock4 = await Assets.load(clock_img_4);
-        const four = Sprite.from(imgClock4);
-        four.width = this.calcLength(38);
-        four.height = this.calcLength(30);
-        four.x = this.calcLength(50);
-        four.y = this.calcLength(41);
-        four.anchor.set(0.5, 0);
-        this.clockFourContainer.addChild(four);
-        this.clockFourContainer.visible = false;
-        this.clockContainer.addChild(this.clockFourContainer);
-
-        const imgClock5 = await Assets.load(clock_img_5);
-        const five = Sprite.from(imgClock5);
-        five.width = this.calcLength(38);
-        five.height = this.calcLength(30);
-        five.x = this.calcLength(50);
-        five.y = this.calcLength(41);
-        five.anchor.set(0.5, 0);
-        this.clockFiveContainer.addChild(five);
-        this.clockFiveContainer.visible = false;
-        this.clockContainer.addChild(this.clockFiveContainer);
-
-        this.clockContainer.visible = false;
+        this.app.stage.addChild(this.countdownNum);
     }
 
     initStrikeChannelContainer = async () => {
@@ -672,7 +583,7 @@ export class BattleStageUI extends Stage {
         anim.label = "anim"
         anim.animationSpeed = 0.1666;
         anim.stop()
-        anim.scale = this.app.screen.width / 1500;
+        anim.scale = this.app.screen.width / 750;
         anim.x = 0
         anim.y = this.calcLength(102);
         this.strikeContainer.addChild(anim);
@@ -695,7 +606,7 @@ export class BattleStageUI extends Stage {
         firewallLeftAnim.label = "left"
         firewallLeftAnim.animationSpeed = 0.15;
         firewallLeftAnim.stop();
-        firewallLeftAnim.scale = this.app.screen.width / 1500;
+        firewallLeftAnim.scale = this.app.screen.width / 750;
         firewallLeftAnim.x = 0
         firewallLeftAnim.y = 0;
         this.fireWallContainer.addChild(firewallLeftAnim);
@@ -705,7 +616,7 @@ export class BattleStageUI extends Stage {
         firewallRightAnim.animationSpeed = 0.15;
         firewallRightAnim.stop();
         firewallRightAnim.anchor.set(1, 0)
-        firewallRightAnim.scale = this.app.screen.width / 1500;
+        firewallRightAnim.scale = this.app.screen.width / 750;
         firewallRightAnim.x = this.app.screen.width
         firewallRightAnim.y = 0;
         this.fireWallContainer.addChild(firewallRightAnim);
@@ -718,15 +629,18 @@ export class BattleStageUI extends Stage {
 
     initEarlyBouns = async () => {
         this.earlyBounsContainer.boundsArea = new Rectangle(0, 0, this.calcLength(290), this.calcLength(150));
-        this.earlyBounsContainer.x = this.calcLength(70 + 145);
-        this.earlyBounsContainer.y = this.app.screen.height - this.calcLength(280 + 40) + this.calcLength(128);
-        this.earlyBounsContainer.zIndex = 1;
+        this.earlyBounsContainer.x = this.calcLength(4 + 145);
+        // this.earlyBounsContainer.x = this.calcLength(400 + 145);
+        this.earlyBounsContainer.y = this.app.screen.height - this.calcLength(500);
+        this.earlyBounsContainer.width = this.calcLength(290);
+        this.earlyBounsContainer.height = this.calcLength(150);
+        this.earlyBounsContainer.zIndex = 11;
 
         //bg
-        const early_bouns_img = await Assets.load(early_bouns);
-        const bg = Sprite.from(early_bouns_img);
-        bg.width = this.calcLength(290);
-        bg.height = this.calcLength(150);
+        const imgEarlyBouns = await Assets.load(early_bouns_img);
+        const bg = Sprite.from(imgEarlyBouns);
+        bg.width = this.calcLength(272);
+        bg.height = this.calcLength(263);
         this.earlyBounsContainer.addChild(bg);
 
 
@@ -734,25 +648,67 @@ export class BattleStageUI extends Stage {
         const coins = new BitmapText({
             text: '+1000',
             style:  new TextStyle({
-                fill: '#FFDC7D',
+                fill: '#E78712',
                 stroke: '#000000',
-                strokeThickness: 1,
-                fontFamily: 'SourceCodePro-Semibold-stroke',
-                fontSize: this.calcLength(34),
+                fontFamily: 'Gagalin',
+                fontSize: this.calcLength(40),
             })
         })
         coins.label = "coins"
-        coins.x = this.calcLength(126);
-        coins.y = this.calcLength(52);
+        coins.x = this.calcLength(125);
+        coins.y = this.calcLength(130);
         coins.anchor.set(0.5, 0.5);
-        coins.rotation = -Math.PI / 18;
+        coins.rotation = -Math.PI / 8;
         this.earlyBounsContainer.addChild(coins);
         this.earlyBounsContainer.pivot.set(this.earlyBounsContainer.width / 2, this.earlyBounsContainer.height / 2);
-        this.earlyBounsContainer.scale = 0;
 
         this.earlyBounsContainer.visible = false;
-
         this.app.stage.addChild(this.earlyBounsContainer);
+    }
+
+    initBottom = async () => {
+        const bottomContainer: Container = new Container()
+        bottomContainer.y = this.app.screen.height - this.calcLength(393);
+        bottomContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(393));
+
+        // Loading
+        await this.initLoadingBoard();
+        bottomContainer.addChild(this.loadingBoardContainer);
+
+
+        await this.initStrikeContainer();
+        await this.initBeforeChoose();
+        bottomContainer.addChild(this.beforeChooseContainer);
+
+        // YOUR CHOICE 1-3
+        await this.initAfterChoosen();
+        bottomContainer.addChild(this.afterChooseContainer);
+
+        //result 1-3
+        await this.initResultBullish();
+        bottomContainer.addChild(this.resultBullishContainer);
+        await this.initResultBearish();
+        bottomContainer.addChild(this.resultBearishContainer);
+        await this.initResultNeutral();
+        bottomContainer.addChild(this.resultNeutralContainer);
+
+        // //result 1-4
+        await this.initResultWin();
+        bottomContainer.addChild(this.resultWinContainer);
+
+        await this.initResultLose();
+        bottomContainer.addChild(this.resultLoseContainer);
+
+        await this.initResultDraw();
+        bottomContainer.addChild(this.resultDrawContainer);
+
+        await this.initResultNoBet();
+        bottomContainer.addChild(this.resultNoBetContainer);
+
+        await this.initWaitingBattleResult();
+        bottomContainer.addChild(this.waitingBattleResultContainer);
+    
+        this.app.stage.addChild(bottomContainer)
     }
 
     initLoadingBoard = async () => {
@@ -807,50 +763,6 @@ export class BattleStageUI extends Stage {
         this.loadingBoardContainer.visible = true;
     }
 
-    initBottom = async () => {
-        const bottomContainer: Container = new Container()
-        bottomContainer.y = this.app.screen.height - this.calcLength(393);
-        bottomContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(393));
-
-        // await this.initStrikeContainer();
-        await this.initBeforeChoose();
-        bottomContainer.addChild(this.beforeChooseContainer);
-
-        // Loading
-        await this.initLoadingBoard();
-        bottomContainer.addChild(this.loadingBoardContainer);
-
-        // YOUR CHOICE 1-3
-        await this.initAfterChoosen();
-        bottomContainer.addChild(this.afterChooseContainer);
-
-        // //result 1-3
-        // await this.initResultBullish();
-        // bottomContainer.addChild(this.resultBullishContainer);
-        // await this.initResultBearish();
-        // bottomContainer.addChild(this.resultBearishContainer);
-        // await this.initResultNeutral();
-        // bottomContainer.addChild(this.resultNeutralContainer);
-
-        // //result 1-4
-        // await this.initResultWin();
-        // bottomContainer.addChild(this.resultWinContainer);
-
-        // await this.initResultLose();
-        // bottomContainer.addChild(this.resultLoseContainer);
-
-        // await this.initResultDraw();
-        // bottomContainer.addChild(this.resultDrawContainer);
-
-        // await this.initResultNoBet();
-        // bottomContainer.addChild(this.resultNoBetContainer);
-
-        // await this.initWaitingBattleResult();
-        // bottomContainer.addChild(this.waitingBattleResultContainer);
-    
-        this.app.stage.addChild(bottomContainer)
-    }
-
     initBeforeChoose = async () => {
         this.beforeChooseContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(393));
 
@@ -874,6 +786,9 @@ export class BattleStageUI extends Stage {
         title.y = this.calcLength(36);
         title.anchor.set(0.5, 0.5);
         this.beforeChooseContainer.addChild(title);
+
+
+        await this.initClock()
 
 
         //bullish btn
@@ -945,6 +860,53 @@ export class BattleStageUI extends Stage {
         this.beforeChooseContainer.addChild(bearishBtn);
         
         this.beforeChooseContainer.visible = false;
+    }
+
+    initClock = async () => {
+        const clockContainer: Container = new Container();
+        clockContainer.x = this.app.screen.width / 2 - this.calcLength(40);
+         clockContainer.y = this.calcLength(101);
+        clockContainer.boundsArea = new Rectangle(0, 0, this.calcLength(79), this.calcLength(110));
+        clockContainer.zIndex = 11
+
+        const imgClock = await Assets.load(img_clock);
+        const clock = Sprite.from(imgClock);
+        clock.anchor.set(0.5, 0.5); 
+        clock.x = this.calcLength(40);
+        clock.y = this.calcLength(55);
+        clock.width = this.calcLength(79);
+        clock.height = this.calcLength(110);
+        clockContainer.addChild(clock);
+        // clockContainer.visible = false;
+
+
+        const maxRotation = Math.PI / 45; // 180/45 = 4
+        const minRotation = -maxRotation;
+        const frames = 0.08 * this.app.ticker.FPS
+        const swingSpeed = maxRotation / frames * 1.5
+        let swingDirection = -1;
+        this.app.ticker.add(() => {
+            clock.rotation += swingDirection * swingSpeed;
+            if (clock.rotation >= maxRotation) {
+                swingDirection = -1;
+            } else if (clock.rotation <= minRotation) {
+                swingDirection = 1;
+            }
+        })
+
+
+        this.clockGraph.style = {
+            fill: '#3F3027',
+            fontSize: this.calcLength(35),
+            fontFamily: "LogoSC LongZhuTi",
+            align: 'center'
+        }
+        this.clockGraph.x = this.calcLength(40);
+        this.clockGraph.y = this.calcLength(70);
+        this.clockGraph.anchor.set(0.5, 0.5);
+        clockContainer.addChild(this.clockGraph);
+
+        this.beforeChooseContainer.addChild(clockContainer);
     }
 
     initAfterChoosen = async () => {
@@ -1189,7 +1151,7 @@ export class BattleStageUI extends Stage {
         anim.label = 'winanim'
         anim.animationSpeed = 0.1666;
         anim.stop();
-        anim.scale = this.app.screen.width / 1500;
+        anim.scale = this.app.screen.width / 750;
         anim.x = 0
         anim.y = 0
         this.resultWinContainer.addChild(anim);
@@ -1203,28 +1165,28 @@ export class BattleStageUI extends Stage {
         winAvatar.y = this.calcLength(31);
         this.resultWinContainer.addChild(winAvatar);
 
-        const winText = new BitmapText({
-            text: "You Win!",
-            style:  new TextStyle({
-                fill: '#FDEF55',
-                fontFamily: 'Gagalin',
-                fontSize: this.calcLength(48),
-                letterSpacing: 0
-            })
+
+        const winText = new Text("You Win!", {
+            fill: '#272622',
+            stroke: '#FDEF55',
+            strokeThickness: 4,
+            fontFamily: 'Gagalin',
+            fontSize: this.calcLength(48),
         });
         winText.x = this.calcLength(344);
-        winText.y = this.calcLength(83);
+        winText.y = this.calcLength(76);
         this.resultWinContainer.addChild(winText);
 
         //coinText
-        this.winCoinGraph.style =  new TextStyle({
-            fill: '#FDEF55',
+        this.winCoinGraph =  new Text("",{
+            fill: '#272622',
             fontFamily: 'LogoSC LongZhuTi',
             fontSize: this.calcLength(32),
-            letterSpacing: 0
+            stroke: '#FDEF55',
+            strokeThickness: 3,
         })
         this.winCoinGraph.x = this.calcLength(344);
-        this.winCoinGraph.y = this.calcLength(161);
+        this.winCoinGraph.y = this.calcLength(140);
         this.resultWinContainer.addChild(this.winCoinGraph);
 
         this.resultWinContainer.visible = false;
@@ -1240,7 +1202,7 @@ export class BattleStageUI extends Stage {
         anim.label = 'winanim'
         anim.animationSpeed = 0.1666;
         anim.stop();
-        anim.scale = this.app.screen.width / 1500;
+        anim.scale = this.app.screen.width / 750;
         anim.x = 0
         anim.y = 0
         this.resultLoseContainer.addChild(anim);
@@ -1254,31 +1216,27 @@ export class BattleStageUI extends Stage {
         loseAvatar.y = this.calcLength(31);
         this.resultLoseContainer.addChild(loseAvatar);
 
-        const loseText = new BitmapText({
-            text: "YOU lose",
-            style:  new TextStyle({
-                fill: '#272622',
-                fontFamily: 'Gagalin',
-                fontSize: this.calcLength(48),
-                letterSpacing: 0
-            })
+        const loseText = new Text("YOU lose", {
+            fill: '#272622',
+            fontFamily: 'Gagalin',
+            fontSize: this.calcLength(48),
+            stroke: '#7BB4C7',
+            strokeThickness: 4,
         });
         loseText.x = this.calcLength(344);
-        loseText.y = this.calcLength(83);
+        loseText.y = this.calcLength(76);
         this.resultLoseContainer.addChild(loseText);
 
         //coinText
-        const coinText = new BitmapText({
-            text: "- 100", //+ 0
-            style: new TextStyle({
-                fill: '#FDB155',
-                fontFamily: 'LogoSC LongZhuTi',
-                fontSize: this.calcLength(32),
-                letterSpacing: 0
-            })
+        const coinText = new Text('-100', {
+            fill: '#272622',
+            fontFamily: 'LogoSC LongZhuTi',
+            fontSize: this.calcLength(32),
+            stroke: '#7BB4C7',
+            strokeThickness: 3,
         });
         coinText.x = this.calcLength(344);
-        coinText.y = this.calcLength(161);
+        coinText.y = this.calcLength(140);
         this.resultLoseContainer.addChild(coinText);
 
         this.resultLoseContainer.visible = false;
@@ -1294,7 +1252,7 @@ export class BattleStageUI extends Stage {
         anim.label = 'winanim'
         anim.animationSpeed = 0.1666;
         anim.stop();
-        anim.scale = this.app.screen.width / 1500;
+        anim.scale = this.app.screen.width / 750;
         anim.x = 0
         anim.y = 0
         this.resultDrawContainer.addChild(anim);
@@ -1355,45 +1313,49 @@ export class BattleStageUI extends Stage {
     }
 
     initWaitingBattleResult = async () => {
-        this.waitingBattleResultContainer.boundsArea = new Rectangle(0, 0, this.calcLength(670), this.calcLength(280));
-        this.waitingBattleResultContainer.x = this.calcLength(40);
-
-        //bg
-        const bgAfterChoose = await Assets.load(bg_after_choose);
-        const bg1 = Sprite.from(bgAfterChoose);
-        bg1.width = this.calcLength(670);
-        bg1.height = this.calcLength(280);
-        this.waitingBattleResultContainer.addChild(bg1);
+        this.waitingBattleResultContainer.boundsArea = new Rectangle(0, 0, this.calcLength(750), this.calcLength(393));
 
         //title
-        const waitingBattleResultTitle = new BitmapText({
-            text: "WAITING",
+        const bgTitle = await Assets.load(title_bg);
+        const titleBg = Sprite.from(bgTitle);
+        titleBg.width = this.calcLength(590);
+        titleBg.height = this.calcLength(94);
+        titleBg.x = this.calcLength(80);
+        this.waitingBattleResultContainer.addChild(titleBg);
+
+        const title = new BitmapText({
+            text: 'WAITING',
             style:  new TextStyle({
-                fill: '#000000',
-                stroke: 'rgba(0,0,0,1)',
-                strokeThickness: 1,
-                fontFamily: 'SourceCodePro-Semibold-stroke',
-                fontSize: this.calcLength(28),
-                letterSpacing: 6,
+                fill: '#60483A',
+                fontFamily: 'Gagalin',
+                fontSize: this.calcLength(48),
             })
-        });
-        waitingBattleResultTitle.x = this.calcLength(335);
-        waitingBattleResultTitle.y = this.calcLength(55);
-        waitingBattleResultTitle.anchor.set(0.5, 0.5);
-        this.waitingBattleResultContainer.addChild(waitingBattleResultTitle);
+        })
+        title.x = this.calcLength(375);
+        title.y = this.calcLength(36);
+        title.anchor.set(0.5, 0.5);
+        this.waitingBattleResultContainer.addChild(title);
+
+        //bg
+        const bgAfterChoose = await Assets.load(after_choose_bg);
+        const infoBg = Sprite.from(bgAfterChoose);
+        infoBg.width = this.calcLength(590);
+        infoBg.height = this.calcLength(132);
+        infoBg.x = this.calcLength(80);
+        infoBg.y = this.calcLength(125);
+        this.waitingBattleResultContainer.addChild(infoBg);
 
         //info
         const waitingBattleResultTip = new BitmapText({
             text: "Waiting for tegen to finish the game",
             style:  new TextStyle({
-                fill: '#AF9A78',
-                fontFamily: 'SourceCodePro-Medium',
-                fontSize: this.calcLength(24),
-                letterSpacing: 1
+                fill: '#282722',
+                fontFamily: 'Gagalin',
+                fontSize: this.calcLength(30),
             })
         });
-        waitingBattleResultTip.x = this.calcLength(335);
-        waitingBattleResultTip.y = this.calcLength(171);
+        waitingBattleResultTip.x = this.calcLength(375);
+        waitingBattleResultTip.y = this.calcLength(186);
         waitingBattleResultTip.anchor.set(0.5, 0.5);
         this.waitingBattleResultContainer.addChild(waitingBattleResultTip);
 

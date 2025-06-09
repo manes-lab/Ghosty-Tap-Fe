@@ -5,7 +5,8 @@
     width:100%;
     height:100%;
     z-index: 99;
-    background: #E5D2B2;
+    background: url("../../../assets/img/battle/bg.png") no-repeat center center;
+    background-size: cover;
 
     .start-battle-content{
         position: absolute;
@@ -14,13 +15,13 @@
         transform: translateY(-50%);
         width:100%;
         .battle-title{
-            font-family: SourceCodePro-BoldIt;
-            font-size: 1.8rem;
-            color: #322314;
+            font-family: "LogoSC LongZhuTi";
+            font-size: 1.6rem;
+            color: #3F3027;
             letter-spacing: 0;
             text-align: center;
-            font-weight: 700;
-            font-style: italic;
+            font-weight: 400;
+            line-height: 2.4rem;;
         }
         .battle-animation{
             margin-top:6rem;
@@ -28,7 +29,7 @@
             position: relative;
             .left-user{
                 height: 20rem;
-                background: url('../../../assets/images/battle/start/left-1.png') no-repeat left center;
+                background: url('../../../assets/img/battle/start/left-1.png') no-repeat left center;
                 background-size: auto 20rem;
                 -webkit-animation: LeftUserShow 0.6s ease both;
                 animation: LeftUserShow 0.6s ease both;
@@ -36,7 +37,7 @@
                 position: relative;
                 .left-user-img{
                     height: 20rem;
-                    background: url('../../../assets/images/battle/start/left-2.png') no-repeat left center;
+                    background: url('../../../assets/img/battle/start/left-2.png') no-repeat left center;
                     background-size: auto 20rem;
                     -webkit-animation: LeftUserShoot 0.2s ease infinite;
                     animation: LeftUserShoot 0.2s ease infinite;
@@ -49,7 +50,7 @@
             }
             .right-user{
                 height: 20rem;
-                background: url('../../../assets/images/battle/start/right-1.png') no-repeat right center;
+                background: url('../../../assets/img/battle/start/right-1.png') no-repeat right center;
                 background-size: auto 20rem;
                 -webkit-animation: RightUserShow 0.6s ease both;
                 animation: RightUserShow 0.6s ease both ;
@@ -57,7 +58,7 @@
                 position: relative;
                 .right-user-img{
                     height: 20rem;
-                    background: url('../../../assets/images/battle/start/right-2.png') no-repeat right center;
+                    background: url('../../../assets/img/battle/start/right-2.png') no-repeat right center;
                     background-size: auto 20rem;
                     -webkit-animation: RightUserShoot 0.2s ease infinite;
                     animation: RightUserShoot 0.2s ease infinite;
@@ -111,7 +112,7 @@
                 height:100%;
                 transform: translateZ(6000px);
                 
-                background: url('../../../assets/images/battle/start/lightning.png') no-repeat center center;
+                background: url('../../../assets/img/battle/start/lightning.png') no-repeat center center;
                 background-size: 5.2rem;
                 -webkit-animation: LightningShow 0.3s ease forwards;
                 animation: LightningShow 0.3s ease forwards;
@@ -184,15 +185,15 @@
     @keyframes LeftUserShow{
         0%{
             transform: translateX(-28rem);
-            background-image: url('../../../assets/images/battle/start/left-1.png')
+            background-image: url('../../../assets/img/battle/start/left-1.png')
         }
         50%,83.3%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/left-1.png')
+            background-image: url('../../../assets/img/battle/start/left-1.png')
         }
         83.4%, 99.9999%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/left-2.png')
+            background-image: url('../../../assets/img/battle/start/left-2.png')
         }
         100%{
             transform: translateX(0);
@@ -202,15 +203,15 @@
     @-webkit-keyframes LeftUserShow{
         0%{
             -webkit-transform: translateX(-28rem);
-            background-image: url('../../../assets/images/battle/start/left-1.png')
+            background-image: url('../../../assets/img/battle/start/left-1.png')
         }
         50%,83.3%{
             -webkit-transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/left-1.png')
+            background-image: url('../../../assets/img/battle/start/left-1.png')
         }
         83.4%, 99.9999%{
             -webkit-transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/left-2.png')
+            background-image: url('../../../assets/img/battle/start/left-2.png')
         }
         100%{
             -webkit-transform: translateX(0);
@@ -222,40 +223,40 @@
     @keyframes LeftUserHide{
         0%,20%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/left-2.png')
+            background-image: url('../../../assets/img/battle/start/left-2.png')
         }
         20.1%,40%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/left-1.png')
+            background-image: url('../../../assets/img/battle/start/left-1.png')
         }
         100%{
             transform: translateX(-28rem);
-            background-image: url('../../../assets/images/battle/start/left-1.png')
+            background-image: url('../../../assets/img/battle/start/left-1.png')
         }
     }
     @-webkit-keyframes LeftUserHide{
         0%,20%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/left-2.png')
+            background-image: url('../../../assets/img/battle/start/left-2.png')
         }
         20.1%,40%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/left-1.png')
+            background-image: url('../../../assets/img/battle/start/left-1.png')
         }
         100%{
             transform: translateX(-28rem);
-            background-image: url('../../../assets/images/battle/start/left-1.png')
+            background-image: url('../../../assets/img/battle/start/left-1.png')
         }
     }
 
     @keyframes LeftUserShoot{
         0%,100%{
             opacity: 1;
-            background-image: url('../../../assets/images/battle/start/left-2.png')
+            background-image: url('../../../assets/img/battle/start/left-2.png')
         }
         50%{ 
             opacity: 1;
-            background-image: url('../../../assets/images/battle/start/left-3.png')
+            background-image: url('../../../assets/img/battle/start/left-3.png')
         }
     }
 
@@ -264,15 +265,15 @@
     @keyframes RightUserShow{
         0%{
             transform: translateX(28rem);
-            background-image: url('../../../assets/images/battle/start/right-1.png')
+            background-image: url('../../../assets/img/battle/start/right-1.png')
         }
         50%,83.3%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/right-1.png')
+            background-image: url('../../../assets/img/battle/start/right-1.png')
         }
         83.4%, 99.9999%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/right-2.png')
+            background-image: url('../../../assets/img/battle/start/right-2.png')
         }
         100%{
             transform: translateX(0);
@@ -282,15 +283,15 @@
     @-webkit-keyframes RightUserShow{
         0%{
             -webkit-transform: translateX(28rem);
-            background-image: url('../../../assets/images/battle/start/right-1.png')
+            background-image: url('../../../assets/img/battle/start/right-1.png')
         }
         50%,83.3%{
             -webkit-transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/right-1.png')
+            background-image: url('../../../assets/img/battle/start/right-1.png')
         }
         83.4%, 99.9999%{
             -webkit-transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/right-2.png')
+            background-image: url('../../../assets/img/battle/start/right-2.png')
         }
         100%{
             -webkit-transform: translateX(0);
@@ -300,40 +301,40 @@
     @keyframes rightUserHide{
         0%,20%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/right-2.png')
+            background-image: url('../../../assets/img/battle/start/right-2.png')
         }
         20.1%,40%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/right-1.png')
+            background-image: url('../../../assets/img/battle/start/right-1.png')
         }
         100%{
             transform: translateX(28rem);
-            background-image: url('../../../assets/images/battle/start/right-1.png')
+            background-image: url('../../../assets/img/battle/start/right-1.png')
         }
     }
     @-webkit-keyframes RightUserHide{
         0%,20%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/right-2.png')
+            background-image: url('../../../assets/img/battle/start/right-2.png')
         }
         20.1%,40%{
             transform: translateX(0);
-            background-image: url('../../../assets/images/battle/start/right-1.png')
+            background-image: url('../../../assets/img/battle/start/right-1.png')
         }
         100%{
             transform: translateX(28rem);
-            background-image: url('../../../assets/images/battle/start/right-1.png')
+            background-image: url('../../../assets/img/battle/start/right-1.png')
         }
     }
 
     @keyframes RightUserShoot{
         0%,100%{
             opacity: 1;
-            background-image: url('../../../assets/images/battle/start/right-2.png')
+            background-image: url('../../../assets/img/battle/start/right-2.png')
         }
         50%{ 
             opacity: 1;
-            background-image: url('../../../assets/images/battle/start/right-3.png')
+            background-image: url('../../../assets/img/battle/start/right-3.png')
         }
     }
 }
