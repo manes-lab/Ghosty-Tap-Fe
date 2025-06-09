@@ -105,7 +105,7 @@ const BattleHistory: React.FC<{
           <div>Result</div>
         </div>
         <InfiniteScroll
-          height={'27.5rem'}
+          height={'40rem'}
           dataLength={list.length}
           next={fetchData}
           hasMore={!isEnd}

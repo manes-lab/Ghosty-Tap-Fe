@@ -14,10 +14,11 @@
         bottom:0;
         left:0;
         width:100%;
-        height: 35rem;
-        padding: 1.5rem 0 0!important;
-        background: #1D1D1D;
-        clip-path: polygon(0 0.6rem, 0.6rem 0.6rem, 0.6rem 0, calc(100% - 0.6rem) 0, calc(100% - 0.6rem) 0.6rem, 100% 0.6rem, 100% 100%, 0 100%);
+        height: calc(40rem + 11.5rem);
+        padding: 2rem 0 0!important;
+        border-radius: 1.5rem 1.5rem 0px 0px;
+        border: 1px solid #60483A;
+        background: #BD8D64;
         -webkit-animation:  Show2 0.6s ease both;
         animation:  Show2 0.6s ease both;
         &.hide{
@@ -25,47 +26,46 @@
             animation:  Hide2 0.6s ease both;
         }
         .head{
-            margin: 0 2rem;
-            padding-bottom:1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            font-family: SourceCodePro-Semibold;
-            font-size: 1.5rem;
-            color: #FFFFFF;
+            margin: 0 1.8rem;
+            padding-bottom:1.3rem;
+            border-bottom: 1px solid #A0704D;
+            font-family: Gagalin;
+            font-size: 2.4rem;
+            color: #3F3027;
             letter-spacing: 0;
-            font-weight: 600;
+            font-weight: 400;
         }
         .list{
             // height: 27.5rem;
             // overflow-y: auto;
             .list-head{
-                padding:2rem 2rem 1.5rem;
+                padding:1.7rem 1.8rem 2rem;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                font-family: SourceCodePro-Regular;
-                font-size: 1.2rem;
-                color: rgba(255,255,255,0.4);
+                font-family: "LogoSC LongZhuTi";
+                font-size: 1.6rem;
+                color: #60483A;
                 letter-spacing: 0;
                 text-align: center;
                 line-height: 1.5rem;
                 font-weight: 400;
             }
             .infinite-scroll-component{
-                padding:0 2rem 8rem;
+                padding:0 1.8rem 8rem;
             }
             .item{
                 margin-bottom:1rem;
                 padding: 1.8rem 1.5rem;
-                background: #2E2E2E;
-                clip-path: polygon(0.5rem 0.5rem, 0.5rem 0, calc(100% - 0.5rem) 0, calc(100% - 0.5rem) 0.5rem, 100% 0.5rem, 100% calc(100% - 0.5rem), calc(100% - 0.5rem) calc(100% - 0.5rem),calc(100% - 0.5rem) 100%,  0.5rem 100%, 0.5rem calc(100% - 0.5rem), 0 calc(100% - 0.5rem), 0 0.5rem);
+                border-radius: 1rem;
+                background: #CD9F77;
                 display: flex;
                 align-items: center;
                 cursor: pointer;
-                font-family: SourceCodePro-Regular;
-                font-size: 1.3rem;
-                color: #FFFFFF;
+                font-family: "LogoSC LongZhuTi";
+                font-size: 1.4rem;
+                color: #3F3027;
                 letter-spacing: 0;
-                line-height: 1.6rem;
                 font-weight: 400;
                 .user{
                     width: 27%;
@@ -81,8 +81,8 @@
                         background-size: cover;
                     }
                     .name{
-                        margin-left:1.2rem;
-                        width: 5.5rem;
+                        margin-left:1rem;
+                        width: 6rem;
                     }
                 }
                 .date{
@@ -91,15 +91,15 @@
                 }
                 .coins{
                     width: 23%;
-                    padding-right:2rem;
-                    background: url("../../../assets/images/common/ic-coin.png") no-repeat right center;
-                    background-size: 1.5rem;
-                    font-family: SourceCodePro-Regular;
-                    font-size: 1.3rem;
-                    color: #FFFFFF;
+                    padding-right:2.5rem;
+                    background: url("../../../assets/img/common/coin.png") no-repeat right center;
+                    background-size: 2rem;
+                    font-family: "LogoSC LongZhuTi";
+                    font-size: 1.4rem;
+                    color: #3F3027;
                     letter-spacing: 0;
                     text-align: right;
-                    line-height: 1.6rem;
+                    line-height: 2rem;
                     font-weight: 400;
                     display: flex;
                     align-items: center;
@@ -110,9 +110,9 @@
             }
             .no-more, .scroll-loading{
                 padding:1.7rem 0;
-                font-family: SourceCodePro-Regular;
+                font-family: "LogoSC LongZhuTi";
                 font-size: 1.2rem;
-                color: #666666;
+                color: #3F3027;
                 letter-spacing: 0;
                 text-align: center;
                 line-height: 1.6rem;
@@ -150,9 +150,9 @@
             background: url('../../../assets/images/common/no-data.png') no-repeat center 3.6rem;
             background-size: 6rem;
             border-radius: 24px;
-            font-family: SourceCodePro-Regular;
+           font-family: "LogoSC LongZhuTi";
             font-size: 1.2rem;
-            color: #666666;
+            color: #3F3027;
             letter-spacing: 0;
             text-align: center;
             line-height: 1.6rem;

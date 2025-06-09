@@ -164,7 +164,7 @@ export class BattleStage extends BattleStageUI {
         this.data.gameStoped = true
         clearInterval(this.data.interval)
         Pomelo.leaveBattle(this.data.gameId)
-        // Pomelo.leaveSpace();
+        Pomelo.leaveSpace(this.data.address);
         await super.destroy()
     }
 
@@ -385,7 +385,7 @@ export class BattleStage extends BattleStageUI {
             }
         })
         Pomelo.addListener('battleStep', (msg: any) => {
-            console.log(msg)
+            console.log(msg, '-----battleStep----')
             if (msg.battle_id != this.data.gameId) {
                 return
             }

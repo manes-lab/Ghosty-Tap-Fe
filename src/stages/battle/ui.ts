@@ -692,7 +692,7 @@ export class BattleStageUI extends Stage {
         await this.initResultNeutral();
         bottomContainer.addChild(this.resultNeutralContainer);
 
-        // //result 1-4
+        //result 1-4
         await this.initResultWin();
         bottomContainer.addChild(this.resultWinContainer);
 
