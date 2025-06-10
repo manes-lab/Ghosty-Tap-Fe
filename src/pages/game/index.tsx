@@ -118,7 +118,7 @@ const Game: React.FC = () => {
       newStage = new SquareStage(options)
     }
     newStage!.on("changeModule", (module:string, args:any) => {
-      if(module == 'mail-box' || module == 'leaderboard'){
+      if(module == 'leaderboard'){
         message.open({
           type: 'info',
           content: 'Coming soon ',

@@ -151,17 +151,8 @@ const Home: React.FC = () => {
 
       const slushUrl = `https://my.slush.app/approve-connection?requestId=${payload.requestId}&appUrl=${encodeURIComponent(payload.appUrl)}&appName=${encodeURIComponent(payload.appName)}&hash=${Base64.encode(JSON.stringify(payload))}`;
 
-      // window.location.href = `https://my.slush.app/dapp-request#${Base64.encode(JSON.stringify(payload))}`
       window.open(slushUrl, '_blank');
     }
-
-    window.addEventListener('message', (event) => {
-      // 👇 验证来源，确保安全
-      // if (event.origin !== 'https://my.slush.app') return;
-  
-      // 👇 接收回传数据（钱包地址、签名等）
-      console.log('Connected wallet info:', event.data);
-    }, { once: true });
   };
 
   const logout = () => {

@@ -33,9 +33,12 @@ const MailBox: React.FC<{
     // <>Battled Walting Declined View</>
   }
 
-  // useEffect(() => {
-  //   // fetchData();
-  // },[])
+  const [canClose, setCanClose] = useState(false);
+  useEffect(() => {
+    fetchData();
+    const timer = setTimeout(() => setCanClose(true), 600); 
+    return () => clearTimeout(timer);
+  },[])
 
   useEffect(() => {
     (async () => {
@@ -90,6 +93,8 @@ const MailBox: React.FC<{
   }
 
   const close = () => {
+    if (!canClose) return; 
+
     document.getElementById('mail-box-mask')?.classList.add('hide');
     document.getElementById('mail-box-module')?.classList.add('hide');
     setTimeout(()=>{
@@ -138,7 +143,7 @@ const MailBox: React.FC<{
 
       <div className="list">
         <InfiniteScroll
-          height={'27.5rem'}
+          height={'40rem'}
           dataLength={list.length}
           next={fetchData}
           hasMore={!isEnd}

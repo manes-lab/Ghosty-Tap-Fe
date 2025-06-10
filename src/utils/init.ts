@@ -13,10 +13,11 @@ export async function init() {
 
 export async function initUser(account:string, token:string) {
     if (account && token) {
-        await Pomelo.enterSquare({
+        const res = await Pomelo.enterSquare({
             user_id: account,
             token
         });
+        console.log(res, account , token, '----enterSquare----');
 
         // api.get_user_status({
         //     user_id: account,

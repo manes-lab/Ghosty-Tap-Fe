@@ -222,6 +222,7 @@ export class ZenStage extends ZenStageUI {
         let lastX = this.klineContainer.width - (bars.length - 1) * this.data.barWidth
         let lastY = this.klineContainer.height / 2
         
+        
         for (let i = 0; i < bars.length; i++) {
             this.barGraphics[i]?.removeChildren();
             const bar = bars[i]

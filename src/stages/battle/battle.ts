@@ -678,20 +678,39 @@ export class BattleStage extends BattleStageUI {
         for (let i = 0; i < 10; i++) {
             if (me) {
                 let myResultColor = colorArr[this.data.battleResults[i] || 0];
-                let myResultContext = new GraphicsContext();
-                myResultContext.poly(points);
-                myResultContext.fillStyle = myResultColor;
-                myResultContext.fill();//.rect(0, 0 ,w, h)
-                this.myBattleResultsGraphics[i].context = myResultContext;
-                this.myBattleResultsGraphics[i].x = this.calcLength(14 * i);
+                // let myResultContext = new GraphicsContext();
+                // myResultContext.poly(points);
+                // myResultContext.fillStyle = myResultColor;
+                // myResultContext.fill();//.rect(0, 0 ,w, h)
+                // this.myBattleResultsGraphics[i].context = myResultContext;
+
+                this.myBattleResultsGraphics[i]?.clear();
+                this.myBattleResultsGraphics[i]
+                .beginFill(myResultColor)
+                .lineStyle(1, 0x60483A)
+                .drawRoundedRect(0, 0, this.calcLength(10),this.calcLength(10), this.calcLength(10))
+                .endFill();
+
+            
+                this.myBattleResultsGraphics[i].x = this.calcLength(12 * i);
             } else {
                 let antagonistResultColor = colorArr[this.data.antagonistResults[i] || 0];
-                let antagonistResultContext = new GraphicsContext();
-                antagonistResultContext.poly(points);
-                antagonistResultContext.fillStyle = antagonistResultColor;
-                antagonistResultContext.fill();
-                this.antagonistBattleResultsGraphics[i].context = antagonistResultContext;
-                this.antagonistBattleResultsGraphics[i].x = this.calcLength(14 * i);
+                // let antagonistResultContext = new GraphicsContext();
+                // antagonistResultContext.poly(points);
+                // antagonistResultContext.fillStyle = antagonistResultColor;
+                // antagonistResultContext.fill();
+                // this.antagonistBattleResultsGraphics[i].context = antagonistResultContext;
+                // this.antagonistBattleResultsGraphics[i].x = this.calcLength(14 * i);
+
+
+                this.antagonistBattleResultsGraphics[i]?.clear();
+                this.antagonistBattleResultsGraphics[i]
+                .beginFill(antagonistResultColor)
+                .lineStyle(1, 0x60483A)
+                .drawRoundedRect(0, 0, this.calcLength(10),this.calcLength(10), this.calcLength(10))
+                .endFill();
+
+                this.antagonistBattleResultsGraphics[i].x = this.calcLength(12 * i);
             }
         }
     }
@@ -700,10 +719,13 @@ export class BattleStage extends BattleStageUI {
         this.klineContainer.x = 0;
 
         let bars = this.getDisplayBars()
-        let lastX = this.klineContainer.width - (bars.length - 1) * this.data.barWidth;
+        let lastX = this.klineContainer.width - (bars.length - 1) * (this.data.barWidth + this.calcLength(2)) - this.calcLength(2);
         let lastY = this.klineContainer.height / 2
+ this.klineContainer.removeChildren();
         
         for (let i = 0; i < bars.length; i++) {
+            // this.barGraphics[i]?.clear();
+            // this.barGraphics[i]?.removeChildren();
             const bar = bars[i]
             const curPrice = bar[CLOSE]
             const lastPrice = i > 0 ? bars[i - 1][CLOSE] : bar[OPEN]
@@ -719,7 +741,28 @@ export class BattleStage extends BattleStageUI {
                 color = 0x689966;
                 offsetY = -h
             }
+
+
+            // const x = 0
+            // let y = 0
+            // if(curPrice < lastPrice){
+            //     y = h;
+            // }
+
+
             i == 0 && (lastY = (this.data.max - bar[OPEN]) / this.data.maxmin * this.klineContainer.height);
+
+            // console.log(this.barGraphics, i, '---this.barGraphics---');
+
+            this.barGraphics[i] = new Graphics();
+             this.barGraphics[i].lineStyle(2, color)
+            this.barGraphics[i].beginFill(color)
+            this.barGraphics[i].drawRoundedRect(offsetX, offsetY, w, Math.max(1, h), 6)
+            this.barGraphics[i].endFill();
+            this.klineContainer.addChild(this.barGraphics[i]);
+
+
+
 
             // if (h >= 11) {
             //     const cutSize = 5;
@@ -744,26 +787,16 @@ export class BattleStage extends BattleStageUI {
             //         {x: x, y: y - cutSize},
             //     ];
 
-            //     let barContext = new GraphicsContext();
-            //     barContext.poly(points);
-            //     barContext.fill(color);
-            //     this.barGraphics[i].context = barContext;
+                // let barContext = new GraphicsContext();
+                // barContext.poly(points);
+                // barContext.fill(color);
+                // this.barGraphics[i].context = barContext;
             // } else {
             //     let barContext = new GraphicsContext().rect(offsetX, offsetY, w, Math.max(1, h)).fill(color)
             //     this.barGraphics[i].context = barContext
             // }
-            // this.barGraphics[i].x = lastX
-            // this.barGraphics[i].y = lastY
-
-
             this.barGraphics[i].x = lastX
             this.barGraphics[i].y = lastY
-            this.barGraphics[i]
-            .beginFill(color)
-            // .lineStyle(2, 0x60483A)
-            .drawRoundedRect(offsetX, offsetY, w, h, 6)
-            .endFill();
-
             
             
             lastX = lastX + w + this.calcLength(2);
@@ -822,13 +855,13 @@ export class BattleStage extends BattleStageUI {
         const toY = this.data.lastPos.y
         this.line.zIndex = 10
 
-        let color = toY > fromY ? 0x689966 : 0xBB5656;
+        let color = toY > fromY ? 0xBB5656 : 0x689966;
 
-        this.startCircle.circle(fromX, fromY, 8).fill(color).stroke({ width: 2, color: 0xBD916C });
+        this.startCircle.circle(fromX, fromY, 6).fill(color).stroke({ width: 1, color: 0xBD916C });
         this.startCircle.zIndex = 11;
         this.topContainer.addChild(this.startCircle);
 
-        this.endCircle.circle(toX, toY, 8).fill(color).stroke({ width: 2, color: 0xBD916C });
+        this.endCircle.circle(toX, toY, 6).fill(color).stroke({ width: 1, color: 0xBD916C });
         this.endCircle.zIndex = 11;
         this.topContainer.addChild(this.endCircle);
 

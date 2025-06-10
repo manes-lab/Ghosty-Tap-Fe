@@ -76,10 +76,10 @@ export class BattleStageUI extends Stage {
     markGraphics: Text[] = [];
     clockContainer: Container = new Container()
     clockGraph = new BitmapText({
-        text: "",
+        text: "3",
     })
     countdownNum = new BitmapText({
-        text: "",
+        text: "5",
     })
 
     //bottomContainer
@@ -268,7 +268,7 @@ export class BattleStageUI extends Stage {
         rewards.x = this.calcLength(160 - 50);
         rewards.y = this.calcLength(33);
         rewards.label = 'rewards'
-        rewards.anchor.set(0, 0.5);
+        rewards.anchor.set(0.5, 0.5);
         this.rewardsContainer.addChild(rewards);
 
         //coin-icon
@@ -461,12 +461,12 @@ export class BattleStageUI extends Stage {
         this.klineContainer.y = 0;
         this.klineContainer.height = h;
         this.klineContainer.boundsArea = new Rectangle(0, 0, this.calcLength(480), h);
-        let mask = new Graphics()
-        // Add the rectangular area to show
-        .rect(this.calcLength(7),0,this.calcLength(480),h)
-        .fill(0xffffff).stroke({ width: 4, color: 0xffd900 })
-        this.topContainer.mask = mask
-        this.topContainer.addChild(mask)
+        // let mask = new Graphics()
+        // // Add the rectangular area to show
+        // .rect(this.calcLength(7),0,this.calcLength(480),h)
+        // .fill(0xffffff).stroke({ width: 4, color: 0xffd900 })
+        // this.topContainer.mask = mask
+        // this.topContainer.addChild(mask)
         this.topContainer.addChild(this.klineContainer)
         this.app.stage.addChild(this.topContainer)
     }
@@ -495,10 +495,10 @@ export class BattleStageUI extends Stage {
                 text: '',
                 style:{
                     fill: `#CAAD95`,
-                    fontSize: this.calcLength(18),
+                    fontSize: this.calcLength(17),
                     fontFamily: 'LogoSC LongZhuTi',
                 },
-                x:  this.calcLength(490),
+                x:  this.calcLength(486),
                 y:  this.klineContainer.height / 10 * i
             })
             graphic.zIndex = 10
@@ -568,7 +568,7 @@ export class BattleStageUI extends Stage {
 
     initStrikeChannelContainer = async () => {
         this.strikeChannelContainer.x = this.calcLength(40)
-        this.strikeChannelContainer.y = this.app.screen.height - this.calcLength(280 + 40 + 82);
+        this.strikeChannelContainer.y = this.app.screen.height - this.calcLength(520 + 20);
         this.winFireAsset = await Assets.load(`${window.location.origin}/img/win_fire.json`)
         this.particlesAsset = await Assets.load(`${window.location.origin}/img/particles.json`)
 
@@ -1440,14 +1440,14 @@ export class BattleStageUI extends Stage {
         this.openInfoContainer.addChild(openBorder);
         this.openInfoContainer.addChild(openTitle);
         this.openInfoContainer.addChild(this.openValueGraph);
-        this.openInfoContainer.zIndex = 12;
+        this.openInfoContainer.zIndex = 20;
         this.openInfoContainer.visible = false;
         this.topContainer.addChild(this.openInfoContainer);
 
         this.closeInfoContainer.addChild(closeBorder);
         this.closeInfoContainer.addChild(closeTitle);
         this.closeInfoContainer.addChild(this.closeValueGraph);
-        this.closeInfoContainer.zIndex = 12;
+        this.closeInfoContainer.zIndex = 20;
         this.closeInfoContainer.visible = false;
         this.topContainer.addChild(this.closeInfoContainer);
 
