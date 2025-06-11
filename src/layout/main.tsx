@@ -149,12 +149,6 @@ export const MainLayout : React.FC<propsType> = (props) => {
                     message: rawMessageBytes,
                 });
 
-                // const isValid = await verifyPersonalMessageSignature(rawMessageBytes, signedResult.signature, {
-                //     address:  account
-                // });
-                // console.log("isValid:",isValid);
-
-
                 const res = await api.get_user_token({
                     address: account,
                     signature: signedResult.signature,
@@ -194,7 +188,7 @@ export const MainLayout : React.FC<propsType> = (props) => {
         });
         if(res.success){
         }
-      }
+    }
 
     const getUserIdByCode = async (code: string) => {
         const res = await api.get_user_info_by_code({

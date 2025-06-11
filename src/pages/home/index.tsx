@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useWallets, ConnectButton, useCurrentAccount, useDisconnectWallet  } from '@mysten/dapp-kit';
+import { useWallets, ConnectButton, useCurrentAccount, useDisconnectWallet, useSignPersonalMessage  } from '@mysten/dapp-kit';
 import './style.scss';
 import { useNavigate } from 'react-router-dom';
 import { toggleConnectModal, show, updateModule } from '../../redux/slice';
@@ -8,6 +8,7 @@ import { message } from 'antd';
 import api from '../../axios';
 import { Base64 } from 'js-base64';
 import { formatNumber, isMobile } from '../../utils/util';
+import { initUser } from '../../utils/init.ts';
 import LoadingModule from '../../components/loadingModule';
 // import InviteSuccessModule from '../../components/inviteSuccessModule';
 
@@ -15,6 +16,7 @@ import LoadingModule from '../../components/loadingModule';
 
 const Home: React.FC = () => {
   const wallets = useWallets();
+  const signPersonalMessage = useSignPersonalMessage();
   const currentAccount = useCurrentAccount();
   const { mutate: disconnect } = useDisconnectWallet({
     onSuccess: () => {
@@ -37,9 +39,14 @@ const Home: React.FC = () => {
   // const [inviteRewards, setInviteRewards] = useState(0);
   // const [inviteUserInfo, setInviteUserInfo] = useState({});
 
+  const [userToken, setUserToken] = useState("");
   const [list, setList] = useState([]);
   const [totalCoin, setTotalCoin] = useState(0);
   let init = true;
+
+  useEffect(() => {
+   setUserToken(localStorage.getItem("ghosty-tap-"+currentAccount?.address) || "");
+  },[currentAccount])
   
 
   useEffect(() => {
@@ -115,13 +122,24 @@ const Home: React.FC = () => {
   }
 
   const jumpPage = (path:string) => {
-      message.open({
-        type: 'info',
-        content: 'Coming soon ',
-        className: 'q-toast-message',
-        duration: 5,
-      });
+    if(!currentAccount?.address){
+      login();
       return;
+    }
+
+    if(!userToken){
+      sign();
+      return;
+    }
+
+
+    message.open({
+      type: 'info',
+      content: 'Coming soon ',
+      className: 'q-toast-message',
+      duration: 5,
+    });
+    return;
     // navigate(path)
   }
 
@@ -165,8 +183,41 @@ const Home: React.FC = () => {
   };
 
   const logout = () => {
-    localStorage.removeItem("ghosty-tap-"+currentAccount.address);
+    localStorage.removeItem("ghosty-tap-"+currentAccount?.address);
+    setUserToken('');
     disconnect();
+  }
+
+  const sign =  async () => {
+    if(!currentAccount?.address){
+      login();
+      return;
+    }
+    const account = currentAccount?.address || "";
+    let token = '';
+
+    const message = `Sign in with Sui Wallet`;
+    const rawMessageBytes = new TextEncoder().encode(message);
+    console.log(rawMessageBytes, '----rawMessageBytes----');
+    const signedResult = await signPersonalMessage.mutateAsync({
+        message: rawMessageBytes,
+    });
+
+    console.log(signedResult, '-----signedResult----');
+
+    const res = await api.get_user_token({
+        address: account,
+        signature: signedResult.signature,
+        message: message,
+        publicKey: currentAccount?.publicKey
+    })
+    if(res?.success){
+      token = res.data?.token || '';
+      localStorage.setItem("ghosty-tap-"+account, token);
+      setUserToken(token);
+    }
+
+    await initUser(account, token);
   }
 
 
@@ -215,12 +266,11 @@ const Home: React.FC = () => {
 
     <div className="btns" ref={btnsRef}>
       {
-        currentAccount?.address ? <>
+        (currentAccount?.address && userToken)  ? <>
           <div className="start-btn zen-mode" onClick={() => {onStart('zen')}}></div>
           <div className="start-btn adventure-mode" onClick={() => {onStart('adventure')}}></div>
         </> : <>
-          <div className="login-btn" onClick={login}></div>
-          {/* <ConnectButton/> */}
+          {currentAccount?.address ? <div className="login-btn" onClick={sign}>Sign</div> : <div className="login-btn" onClick={login}></div>}
         </>
       }
     </div>
