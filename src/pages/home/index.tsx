@@ -16,7 +16,7 @@ import LoadingModule from '../../components/loadingModule';
 
 const Home: React.FC = () => {
   const wallets = useWallets();
-  const signPersonalMessage = useSignPersonalMessage();
+  // const signPersonalMessage = useSignPersonalMessage();
   const currentAccount = useCurrentAccount();
   const { mutate: disconnect } = useDisconnectWallet({
     onSuccess: () => {
@@ -39,14 +39,14 @@ const Home: React.FC = () => {
   // const [inviteRewards, setInviteRewards] = useState(0);
   // const [inviteUserInfo, setInviteUserInfo] = useState({});
 
-  const [userToken, setUserToken] = useState("");
+  // const [userToken, setUserToken] = useState("");
   const [list, setList] = useState([]);
   const [totalCoin, setTotalCoin] = useState(0);
   let init = true;
 
-  useEffect(() => {
-   setUserToken(localStorage.getItem("ghosty-tap-"+currentAccount?.address) || "");
-  },[currentAccount])
+  // useEffect(() => {
+  //  setUserToken(localStorage.getItem("ghosty-tap-"+currentAccount?.address) || "");
+  // },[currentAccount])
   
 
   useEffect(() => {
@@ -127,10 +127,10 @@ const Home: React.FC = () => {
       return;
     }
 
-    if(!userToken){
-      sign();
-      return;
-    }
+    // if(!userToken){
+    //   sign();
+    //   return;
+    // }
 
 
     message.open({
@@ -184,41 +184,41 @@ const Home: React.FC = () => {
 
   const logout = () => {
     localStorage.removeItem("ghosty-tap-"+currentAccount?.address);
-    setUserToken('');
+    // setUserToken('');
     disconnect();
   }
 
-  const sign =  async () => {
-    if(!currentAccount?.address){
-      login();
-      return;
-    }
-    const account = currentAccount?.address || "";
-    let token = '';
+  // const sign =  async () => {
+  //   if(!currentAccount?.address){
+  //     login();
+  //     return;
+  //   }
+  //   const account = currentAccount?.address || "";
+  //   let token = '';
 
-    const message = `Sign in with Sui Wallet`;
-    const rawMessageBytes = new TextEncoder().encode(message);
-    console.log(rawMessageBytes, '----rawMessageBytes----');
-    const signedResult = await signPersonalMessage.mutateAsync({
-        message: rawMessageBytes,
-    });
+  //   const message = `Sign in with Sui Wallet`;
+  //   const rawMessageBytes = new TextEncoder().encode(message);
+  //   console.log(rawMessageBytes, '----rawMessageBytes----');
+  //   const signedResult = await signPersonalMessage.mutateAsync({
+  //       message: rawMessageBytes,
+  //   });
 
-    console.log(signedResult, '-----signedResult----');
+  //   console.log(signedResult, '-----signedResult----');
 
-    const res = await api.get_user_token({
-        address: account,
-        signature: signedResult.signature,
-        message: message,
-        publicKey: currentAccount?.publicKey
-    })
-    if(res?.success){
-      token = res.data?.token || '';
-      localStorage.setItem("ghosty-tap-"+account, token);
-      setUserToken(token);
-    }
+  //   const res = await api.get_user_token({
+  //       address: account,
+  //       signature: signedResult.signature,
+  //       message: message,
+  //       publicKey: currentAccount?.publicKey
+  //   })
+  //   if(res?.success){
+  //     token = res.data?.token || '';
+  //     localStorage.setItem("ghosty-tap-"+account, token);
+  //     setUserToken(token);
+  //   }
 
-    await initUser(account, token);
-  }
+  //   await initUser(account, token);
+  // }
 
 
   return <div className="index-page">
@@ -266,11 +266,12 @@ const Home: React.FC = () => {
 
     <div className="btns" ref={btnsRef}>
       {
-        (currentAccount?.address && userToken)  ? <>
+        currentAccount?.address  ? <>
           <div className="start-btn zen-mode" onClick={() => {onStart('zen')}}></div>
           <div className="start-btn adventure-mode" onClick={() => {onStart('adventure')}}></div>
         </> : <>
-          {currentAccount?.address ? <div className="login-btn" onClick={sign}>Sign</div> : <div className="login-btn" onClick={login}></div>}
+          <div className="login-btn" onClick={login}></div>
+          {/* {currentAccount?.address ? <div className="login-btn" onClick={sign}>Sign</div> : <div className="login-btn" onClick={login}></div>} */}
         </>
       }
     </div>
