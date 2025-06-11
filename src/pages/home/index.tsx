@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useWallets, ConnectButton, useCurrentAccount, useDisconnectWallet  } from '@mysten/dapp-kit';
+import { useWallets, ConnectButton, useCurrentAccount, useDisconnectWallet, useSignPersonalMessage } from '@mysten/dapp-kit';
 import './style.scss';
 import { useNavigate } from 'react-router-dom';
 import { toggleConnectModal, show, updateModule } from '../../redux/slice';
@@ -8,6 +8,7 @@ import { message } from 'antd';
 import api from '../../axios';
 import { Base64 } from 'js-base64';
 import { formatNumber, isMobile } from '../../utils/util';
+import { initUser } from '../../utils/init.ts';
 import LoadingModule from '../../components/loadingModule';
 // import InviteSuccessModule from '../../components/inviteSuccessModule';
 
@@ -16,6 +17,7 @@ import LoadingModule from '../../components/loadingModule';
 const Home: React.FC = () => {
   const wallets = useWallets();
   const currentAccount = useCurrentAccount();
+  const signPersonalMessage = useSignPersonalMessage();
   const { mutate: disconnect } = useDisconnectWallet({
     onSuccess: () => {
       console.log('disconnect success');
@@ -38,8 +40,13 @@ const Home: React.FC = () => {
   // const [inviteUserInfo, setInviteUserInfo] = useState({});
 
   const [list, setList] = useState([]);
+  const [userToken, setUserToken] = useState(localStorage.getItem("ghosty-tap-"+currentAccount?.address) || "");
   const [totalCoin, setTotalCoin] = useState(0);
   let init = true;
+
+  const token = useMemo(() => {
+    return userToken || localStorage.getItem("ghosty-tap-"+currentAccount?.address) || "";
+  }, [currentAccount, userToken]);
   
 
   useEffect(() => {
@@ -157,7 +164,40 @@ const Home: React.FC = () => {
 
   const logout = () => {
     localStorage.removeItem("ghosty-tap-"+currentAccount.address);
+    setUserToken('');
     disconnect();
+  }
+
+  const sign =  async () => {
+    if(!currentAccount?.address){
+      login();
+      return;
+    }
+    const account = currentAccount?.address || "";
+    let uToken = '';
+
+    const message = `Sign in with Sui Wallet`;
+    const rawMessageBytes = new TextEncoder().encode(message);
+    console.log(rawMessageBytes, '----rawMessageBytes----');
+    const signedResult = await signPersonalMessage.mutateAsync({
+        message: rawMessageBytes,
+    });
+
+    console.log(signedResult, '-----signedResult----');
+
+    const res = await api.get_user_token({
+        address: account,
+        signature: signedResult.signature,
+        message: message,
+        publicKey: currentAccount?.publicKey
+    })
+    if(res?.success){
+      uToken = res.data?.token || '';
+      localStorage.setItem("ghosty-tap-"+account, userToken);
+      setUserToken(uToken);
+    }
+
+    await initUser(account, uToken);
   }
 
 
@@ -195,7 +235,7 @@ const Home: React.FC = () => {
     <div className="page-entry" ref={entryRef}>
       <div className="entry entry-leaderboard" onClick={() => {jumpPage('/leaderboard')}}>Ranking</div>
       <div className="entry entry-battle"  onClick={() => {onStart('square')}}>Battle</div>
-      <div className="entry entry-battle"  onClick={() => {onStart('battle')}}>Battle2</div>
+      <div className="entry entry-battle"  onClick={() => {test()}}>Battle2</div>
       {/* onClick={() => {onStart('square')}} */}
       <div className="entry entry-profile" onClick={() => {jumpPage(`/user/${currentAccount?.address}`)}}>Profile</div>
       <div className="entry entry-invite" onClick={() => {jumpPage('/invite')}}>Invite</div>
@@ -207,12 +247,11 @@ const Home: React.FC = () => {
 
     <div className="btns" ref={btnsRef}>
       {
-        currentAccount?.address ? <>
+        currentAccount?.address && token ? <>
           <div className="start-btn zen-mode" onClick={() => {onStart('zen')}}></div>
           <div className="start-btn adventure-mode" onClick={() => {onStart('adventure')}}></div>
         </> : <>
-          <div className="login-btn" onClick={login}></div>
-          {/* <ConnectButton/> */}
+          {currentAccount?.address ? <div className="login-btn" onClick={sign}>Sign</div> : <div className="login-btn" onClick={login}></div>}
         </>
       }
     </div>

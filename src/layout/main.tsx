@@ -124,9 +124,9 @@ export const MainLayout : React.FC<propsType> = (props) => {
             //     params.user && toProfile(params.user)
             // }
 
-            if (location.pathname != "/") {
-                navigate("/")
-            }
+            // if (location.pathname != "/") {
+            //     navigate("/")
+            // }
         })()
         return () => {
             Pomelo.leaveSquare(currentAccount?.address || '')
@@ -135,31 +135,36 @@ export const MainLayout : React.FC<propsType> = (props) => {
 
 
     useEffect(() => {
+        console.log(currentAccount, currentAccount?.address, currentAccount?.publicKey, '----currentAccount----');
         const account = currentAccount?.address || "";
         dispatch(updateAddress(account));
 
         let token = localStorage.getItem("ghosty-tap-"+account) || "";
         (async () => {
+            console.log(account , token, '----account && token----');
             if(account && !token){
-                const message = `Sign in with Sui Wallet`;
-                const rawMessageBytes = new TextEncoder().encode(message);
 
-                const signedResult = await signPersonalMessage.mutateAsync({
-                    message: rawMessageBytes,
-                });
+                // const message = `Sign in with Sui Wallet`;
+                // const rawMessageBytes = new TextEncoder().encode(message);
+                // console.log(rawMessageBytes, '----rawMessageBytes----');
+                // const signedResult = await signPersonalMessage.mutateAsync({
+                //     message: rawMessageBytes,
+                // });
 
-                const res = await api.get_user_token({
-                    address: account,
-                    signature: signedResult.signature,
-                    message: message,
-                    publicKey: currentAccount?.publicKey
-                })
-                if(res?.success){
-                    token = res.data?.token || ''
-                    localStorage.setItem("ghosty-tap-"+account, token);
-                }
+                // console.log(signedResult, '-----signedResult----');
 
-                await initUser(account, token);
+                // const res = await api.get_user_token({
+                //     address: account,
+                //     signature: signedResult.signature,
+                //     message: message,
+                //     publicKey: currentAccount?.publicKey
+                // })
+                // if(res?.success){
+                //     token = res.data?.token || ''
+                //     localStorage.setItem("ghosty-tap-"+account, token);
+                // }
+
+                // await initUser(account, token);
                 
             }else{
                 await initUser(account, token);
